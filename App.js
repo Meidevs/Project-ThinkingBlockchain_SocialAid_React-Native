@@ -21,12 +21,12 @@ import AddSocialScreen from './screens/AddSocialScreen';
 import SocialNowScreen from './screens/SocialNowScreen';
 import MyinfoScreen from './screens/MyinfoScreen';
 import SearchScreen from './screens/SearchScreen';
+import DetailsScreen from './screens/DetailsScreen';
 
 const AuthStack = createStackNavigator()
-const Drawer = createDrawerNavigator();
 const Tabs = createBottomTabNavigator();
 const MainStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
+const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
 function LeftTitle() {
@@ -34,23 +34,39 @@ function LeftTitle() {
     <AntDesign name="form" size={24} />
   );
 }
-
+const NowStackScreen = () => {
+  return (
+    <NowStack.Navigator>
+      <NowStack.Screen name='SocialNowScreen' component={SocialNowScreen} />
+    </NowStack.Navigator>
+  )
+}
 const MainStackScreen = () => {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen
+    <MainStack.Navigator>
+      <MainStack.Screen
         name='Main'
         component={MainScreen}
+        options={({ navigation }) => ({
+          headerTitle: null,
+          headerLeft: null,
+          headerRight: () =>
+            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+              <Octicons name='search' size={24} />
+            </TouchableOpacity>
+        })}
       />
-      <Drawer.Screen name='Search' component={SearchScreen} />
-    </Drawer.Navigator >
+      <MainStack.Screen name='Search' component={SearchScreen} />
+      <MainStack.Screen name='Details' component={DetailsScreen} />
+    </MainStack.Navigator >
   )
 }
 
 function MainTabs() {
   return (
     <Tabs.Navigator
-      initialRouteName="Main">
+      initialRouteName="Main"
+      drawerPosition="right">
       <Tabs.Screen
         name='Main'
         component={MainStackScreen}
@@ -71,7 +87,7 @@ function MainTabs() {
         }} />
       <Tabs.Screen
         name='Now'
-        component={SocialNowScreen}
+        component={NowStackScreen}
         options={{
           tabBarLabel: 'Now',
           tabBarIcon: ({ color, size }) => (

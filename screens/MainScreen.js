@@ -1,12 +1,110 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import {
+    View,
+    TouchableOpacity,
+    TextInput,
+    StatusBar,
+    StyleSheet,
+    Text,
+    SafeAreaView,
+    ScrollView
+} from 'react-native';
 // import { TextInput } from 'react-native-gesture-handler';
 
-function MainScreen({navigation}) {
+function MainScreen({ navigation }) {
     return (
-    <View>
-        <Text>Main Screen</Text>
-    </View>
+        <View>
+            <StatusBar
+                barStyle="dark-content"
+                // dark-content, light-content and default
+                hidden={false}
+                //To hide statusBar
+                backgroundColor="#00BCD4"
+                //Background color of statusBar
+                translucent={false}
+                //allowing light, but not detailed shapes
+                networkActivityIndicatorVisible={true}
+            />
+            <SafeAreaView>
+                <ScrollView>
+                    <View>
+                        <Text>BANNER</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+                    <View>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                        <Text>Content1</Text>
+                    </View>
+
+                </ScrollView>
+            </SafeAreaView>
+        </View>
     )
 }
 
