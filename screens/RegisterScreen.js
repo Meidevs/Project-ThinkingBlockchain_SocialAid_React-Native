@@ -5,7 +5,7 @@ function RegisterScrenn({navigation}) {
     return (
     <View>
         <Text>Hi</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity onPress={() => navigation.goBack('Login')}>
             <Text>Go to Login</Text>
         </TouchableOpacity>
     </View>

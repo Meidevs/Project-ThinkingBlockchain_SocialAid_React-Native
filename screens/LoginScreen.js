@@ -20,10 +20,10 @@ function LoginScreen({navigation}) {
                 </TouchableOpacity>
             </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+        <TouchableOpacity onPress={() => navigation.replace('MainTabs')}>
             <Text>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <TouchableOpacity onPress={() => navigation.push('Register')}>
             <Text>Register</Text>
         </TouchableOpacity>
     </View>
