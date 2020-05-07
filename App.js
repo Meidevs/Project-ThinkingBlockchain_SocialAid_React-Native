@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, TouchableOpacity, useWindowDimensions, Button } from 'react-native';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -19,7 +20,7 @@ import MainScreen from './screens/MainScreen';
 import AddSocialScreen from './screens/AddSocialScreen';
 import SocialNowScreen from './screens/SocialNowScreen';
 import MyinfoScreen from './screens/MyinfoScreen';
-
+import SearchScreen from './screens/SearchScreen';
 
 const AuthStack = createStackNavigator()
 const Drawer = createDrawerNavigator();
@@ -28,31 +29,21 @@ const MainStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
-// function SearchDrawer() {
-//   const dimensions = useWindowDimensions();
-//   return (
-//     <Drawer.Navigator
-//       drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
-//       drawerContent={props => <CustomDrawerContent {...props} />}
-//       drawerPosition='right'
-//     >
-//       <Drawer.Screen
-//         name='D'
-//         component={MainScreen}
-//       />
-//     </Drawer.Navigator>
-//   )
-// }
+function LeftTitle() {
+  return (
+    <AntDesign name="form" size={24} />
+  );
+}
 
 const MainStackScreen = () => {
   return (
-  <MainStack.Navigator>
-    <MainStack.Screen 
-      name='Main' 
-      component={MainScreen} 
-      options = {{
-        title : ' My Main '}}/>
-  </MainStack.Navigator>
+    <Drawer.Navigator>
+      <Drawer.Screen
+        name='Main'
+        component={MainScreen}
+      />
+      <Drawer.Screen name='Search' component={SearchScreen} />
+    </Drawer.Navigator >
   )
 }
 
@@ -105,9 +96,9 @@ function App() {
     <NavigationContainer>
       <AuthStack.Navigator
         initialRouteName="Login">
-        <AuthStack.Screen name='Login' component={LoginScreen} options={{ title : 'Sign In', headerShown:false}}/>
-        <AuthStack.Screen name='Register' component={RegisterScreen} options={{ title : 'Create Account'}}/>
-        <AuthStack.Screen name='MainTabs' component={MainTabs} options={{ headerShown:false}}/>
+        <AuthStack.Screen name='Login' component={LoginScreen} options={{ title: 'Sign In', headerShown: false }} />
+        <AuthStack.Screen name='Register' component={RegisterScreen} options={{ title: 'Create Account' }} />
+        <AuthStack.Screen name='MainTabs' component={MainTabs} options={{ headerShown: false }} />
       </AuthStack.Navigator>
     </NavigationContainer>
   );
