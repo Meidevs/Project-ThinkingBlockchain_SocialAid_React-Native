@@ -37,7 +37,16 @@ function LeftTitle() {
 const NowStackScreen = () => {
   return (
     <NowStack.Navigator>
-      <NowStack.Screen name='SocialNowScreen' component={SocialNowScreen} />
+      <NowStack.Screen
+        name='SocialNowScreen'
+        component={SocialNowScreen}
+        options={({ navigation }) => ({
+          headerTitle: null,
+          headerLeft: null,
+          headerRight: () =>
+            <Octicons name='bell' size={24} />
+        })}
+      />
     </NowStack.Navigator>
   )
 }

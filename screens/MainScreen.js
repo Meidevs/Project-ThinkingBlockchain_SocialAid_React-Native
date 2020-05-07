@@ -9,7 +9,6 @@ import {
     SafeAreaView,
     ScrollView
 } from 'react-native';
-// import { TextInput } from 'react-native-gesture-handler';
 
 function MainScreen({ navigation }) {
     return (
