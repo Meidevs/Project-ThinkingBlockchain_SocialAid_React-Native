@@ -25,12 +25,14 @@ const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
 function getTabBarVisible(route) {
-  console.log(route)
-  const routeIndex = route.state.index;
-  if (routeIndex !== 0) {
-    return false;
+  if (route.state == undefined) {
+    return true;
+  } else {
+    if (route.state.index !== 0) {
+      return false;
+    }
+    return true;
   }
-  return true;
 }
 const NowStackScreen = () => {
   return (
