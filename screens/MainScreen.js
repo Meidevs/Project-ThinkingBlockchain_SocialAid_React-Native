@@ -7,28 +7,45 @@ import {
     Text,
     SafeAreaView,
     ScrollView,
-    Image,
+    RefreshControl
 } from 'react-native';
+import Constants from 'expo-constants';
+
 const { width, height } = Dimensions.get('window');
 import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
 
+
+
 class MainScreen extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
+            refreshing: false,
             uri: ['../assets/images/BANNER.png'],
-            dataSet : [
-                {code : '1', name : '금계', shorttxt : '사랑해요', longtxt : '우리의 희망!', symbol : null},
-                {code : '2', name : '치킨', shorttxt : '치킨 사먹자', longtxt : '우리의 퓨쳐!', symbol : null},
-                {code : '3', name : '자동차', shorttxt : '나의 사랑 자동차', longtxt : '우리의 아이스크림!', symbol : null},
-                {code : '4', name : '목돈', shorttxt : '부자됩시다', longtxt : '우리의 예아!!', symbol : null},
+            dataSet: [
+                { code: '1', name: '금계', shorttxt: '사랑해요', longtxt: '우리의 희망!', symbol: null },
+                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '우리의 퓨쳐!', symbol: null },
+                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '우리의 아이스크림!', symbol: null },
+                { code: '4', name: '목돈', shorttxt: '부자됩시다', longtxt: '우리의 예아!!', symbol: null },
             ]
         }
     }
+
+    _onRefresh = () => {
+        this.setState({ refreshing: true });
+        this.wait(2000).then(() => {
+            this.setState({ refreshing : false, })
+        })
+    }
+    wait = (timeout) => {
+        return new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
+    }
     render() {
         return (
-
             <SafeAreaView style={styles.container}>
                 <StatusBar
                     barStyle="dark-content"
@@ -41,7 +58,12 @@ class MainScreen extends React.Component {
                     //allowing light, but not detailed shapes
                     networkActivityIndicatorVisible={true}
                 />
-                <ScrollView style={styles.scrollview}>
+                <ScrollView
+                    style={styles.scrollview}
+                    refreshControl={
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} />
+                    }
+                >
                     <View style={styles.TopContainer}>
                         <View style={styles.title}>
                             <Text style={styles.titletxt}>계모임</Text>
@@ -55,7 +77,7 @@ class MainScreen extends React.Component {
                             <Text style={styles.titletxt}>신규 계모임 상품</Text>
                         </View>
                         <View style={styles.grouplist}>
-                            <ListUp data={this.state.dataSet} navigation={this.props.navigation}/>
+                            <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
                         </View>
                     </View>
                 </ScrollView>
@@ -72,25 +94,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     TopContainer: {
-        height : 200,
-        backgroundColor : 'pink'
+        height: 200,
+        backgroundColor: 'pink'
     },
     title: {
-        flexDirection : 'row',
-        alignItems : 'center',
-        padding : 15, //
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 15, //
     },
-    titletxt : {
-        fontSize : 20,
-        fontWeight : 'bold'
+    titletxt: {
+        fontSize: 20,
+        fontWeight: 'bold'
     },
-    banner : {
-        width : width,
-        height : 100,
-        padding : 15
-    }, 
+    banner: {
+        width: width,
+        height: 100,
+        padding: 15
+    },
     BottomContainer: {
-        backgroundColor : 'red'
+        backgroundColor: 'red'
     },
     bannerImage: {
 

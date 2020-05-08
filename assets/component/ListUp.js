@@ -19,7 +19,12 @@ class ListUp extends React.Component {
     }
 
     _renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Details')}>
+        <TouchableOpacity
+            onPress={() =>
+                this.props.navigation.navigate('Details', {
+                    item,
+                })
+            }>
             <View>
                 <Text>No.{item.code}</Text>
                 <Text>{item.name}</Text>

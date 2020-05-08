@@ -24,10 +24,13 @@ const MainStack = createStackNavigator();
 const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
-function LeftTitle() {
-  return (
-    <AntDesign name="form" size={24} />
-  );
+function getTabBarVisible(route) {
+  console.log(route)
+  const routeIndex = route.state.index;
+  if (routeIndex !== 0) {
+    return false;
+  }
+  return true;
 }
 const NowStackScreen = () => {
   return (
@@ -60,8 +63,13 @@ const MainStackScreen = () => {
             </TouchableOpacity>
         })}
       />
-      <MainStack.Screen name='Search' component={SearchScreen} />
-      <MainStack.Screen name='Details' component={DetailsScreen} />
+      <MainStack.Screen
+        name='Search'
+        component={SearchScreen}
+         />
+      <MainStack.Screen
+        name='Details'
+        component={DetailsScreen} />
     </MainStack.Navigator >
   )
 }
@@ -74,12 +82,13 @@ function MainTabs() {
       <Tabs.Screen
         name='Main'
         component={MainStackScreen}
-        options={{
+        options={({ route }) => ({
           tabBarLabel: 'Main',
           tabBarIcon: ({ color, size }) => (
             <Entypo name="home" color={color} size={size} />
           ),
-        }} />
+          tabBarVisible: getTabBarVisible(route)
+        })}/>
       <Tabs.Screen
         name='Add'
         component={AddSocialScreen}
