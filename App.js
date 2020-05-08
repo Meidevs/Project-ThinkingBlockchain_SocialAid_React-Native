@@ -4,12 +4,7 @@ import { View, Text, TouchableOpacity, useWindowDimensions, Button } from 'react
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
