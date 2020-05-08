@@ -14,12 +14,11 @@ import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
 
 class MainScreen extends React.Component {
-    
     constructor(props) {
         super(props)
         this.state = {
             uri: ['../assets/images/BANNER.png'],
-            data : [
+            dataSet : [
                 {code : '1', name : '금계', shorttxt : '사랑해요', longtxt : '우리의 희망!', symbol : null},
                 {code : '2', name : '치킨', shorttxt : '치킨 사먹자', longtxt : '우리의 퓨쳐!', symbol : null},
                 {code : '3', name : '자동차', shorttxt : '나의 사랑 자동차', longtxt : '우리의 아이스크림!', symbol : null},
@@ -56,7 +55,7 @@ class MainScreen extends React.Component {
                             <Text style={styles.titletxt}>신규 계모임 상품</Text>
                         </View>
                         <View style={styles.grouplist}>
-                            <ListUp {...this.state} />
+                            <ListUp data={this.state.dataSet} navigation={this.props.navigation}/>
                         </View>
                     </View>
                 </ScrollView>

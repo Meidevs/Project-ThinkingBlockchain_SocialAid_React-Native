@@ -23,12 +23,12 @@ class SwiperComponent extends React.Component {
             if (timer === uri.length) {
                 this.setState({timer : 0})
             } 
-        }, 1000)
+        }, 2000)
     }
 
-    componentWillMount() {
-        clearInterval(this.interval)
-    }
+    // componentWillMount() {
+    //     clearInterval(this.interval)
+    // }
     render() {
         const { timer } = this.state;
         return (

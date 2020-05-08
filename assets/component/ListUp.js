@@ -6,19 +6,20 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 
-import Swiper from 'react-native-swiper'
+//https://stackoverflow.com/questions/58243680/react-native-another-virtualizedlist-backed-container
 
 class ListUp extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: props.data
+            content: props.data
         }
     }
 
     _renderItem = ({ item }) => (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Details')}>
             <View>
                 <Text>No.{item.code}</Text>
                 <Text>{item.name}</Text>
@@ -32,7 +33,7 @@ class ListUp extends React.Component {
     render() {
         return (
             <View>
-                <FlatList data={this.state.data} renderItem={this._renderItem} />
+                <FlatList data={this.state.content} renderItem={this._renderItem} />
             </View>
         )
     }

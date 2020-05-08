@@ -9,19 +9,21 @@ import {
     ScrollView
 } from 'react-native';
 
-function DetailsScreen({ navigation }) {
-    return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scrollview}>
-                <View style={styles.TopContainer}>
-                    <Text>Hi1</Text>
-                </View>
-                <View style={styles.BottomContainer}>
-                    <Text>Hi2</Text>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    )
+class DetailsScreen extends React.Component {
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <ScrollView style={styles.scrollview}>
+                    <View style={styles.TopContainer}>
+                        <Text>Hi1</Text>
+                    </View>
+                    <View style={styles.BottomContainer}>
+                        <Text>Hi2</Text>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        )
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -30,13 +32,13 @@ const styles = StyleSheet.create({
     scrollview: {
         backgroundColor: '#FFFFFF',
     },
-    TopContainer : {
-        backgroundColor : '#284678',
-        height : 300
+    TopContainer: {
+        backgroundColor: '#284678',
+        height: 300
     },
-    BottomContainer : {
-        backgroundColor : '#FFFFFF',
-        height : 600
+    BottomContainer: {
+        backgroundColor: '#FFFFFF',
+        height: 600
     },
 })
 
