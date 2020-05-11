@@ -17,6 +17,8 @@ import SocialNowScreen from './screens/SocialNowScreen';
 import MyinfoScreen from './screens/MyinfoScreen';
 import SearchScreen from './screens/SearchScreen';
 import DetailsScreen from './screens/DetailsScreen';
+import AlarmSetScreen from './screens/AlarmSetScreen';
+
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator();
@@ -34,17 +36,59 @@ function getTabBarVisible(route) {
     return true;
   }
 }
+const MyinfoStackScreen = () => {
+  return (
+    <MyinfoStack.Navigator>
+      <MyinfoStack.Screen
+        name='Myinfo'
+        component={MyinfoScreen}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0, 
+            shadowOpacity: 0, 
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+          headerLeft: null,
+          headerRight: () =>
+            <Octicons name='bell' size={24} style={{marginRight : 20, }}  />
+        })}
+      />
+      <MyinfoStack.Screen
+        name='Alarm'
+        component={AlarmSetScreen}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0, 
+            shadowOpacity: 0, 
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+        })}
+      />
+    </MyinfoStack.Navigator>
+  )
+}
+
 const NowStackScreen = () => {
   return (
     <NowStack.Navigator>
       <NowStack.Screen
-        name='SocialNowScreen'
+        name='SocialNow'
         component={SocialNowScreen}
         options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#7A8CAB',
+            elevation: 0, 
+            shadowOpacity: 0, 
+            borderBottomWidth: 0,
+          },
           headerTitle: null,
           headerLeft: null,
           headerRight: () =>
-            <Octicons name='bell' size={24} />
+            <Octicons name='bell' size={24} style={{marginRight : 20, }} />
         })}
       />
     </NowStack.Navigator>
@@ -103,21 +147,23 @@ function MainTabs() {
       <Tabs.Screen
         name='Now'
         component={NowStackScreen}
-        options={{
+        options={({ route }) => ({
           tabBarLabel: 'Now',
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="barschart" color={color} size={size} />
           ),
-        }} />
+          tabBarVisible: getTabBarVisible(route)
+        })} />
       <Tabs.Screen
         name='Myinfo'
-        component={MyinfoScreen}
-        options={{
+        component={MyinfoStackScreen}
+        options={({ route }) => ({ 
           tabBarLabel: 'Myinfo',
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="user" size={24} color="black" />
           ),
-        }} />
+          tabBarVisible: getTabBarVisible(route)
+        })} />
     </Tabs.Navigator>
   )
 }

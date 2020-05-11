@@ -6,12 +6,43 @@ import {
     StatusBar,
     StyleSheet,
     SafeAreaView,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
 
 class SocialNowScreen extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            styles: [
+                { isSelect: true, },
+                { isSelect: false, }
+            ]
+        }
+    }
+
+    switchBtn = (num) => {
+        if (num == 0) {
+            this.state.styles[0].isSelect = true;
+            this.state.styles[1].isSelect = false;
+            this.setState({
+                styles: [
+                    { isSelect: this.state.styles[0].isSelect },
+                    { isSelect: this.state.styles[1].isSelect },
+                ]
+            })
+        } else if (num == 1) {
+            this.state.styles[0].isSelect = false;
+            this.state.styles[1].isSelect = true;
+            this.setState({
+                styles: [
+                    { isSelect: this.state.styles[0].isSelect },
+                    { isSelect: this.state.styles[1].isSelect },
+                ]
+            })
+        }
+    }
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -100,16 +131,16 @@ class SocialNowScreen extends React.Component {
                         <View style={styles.BottomMiddleContent}>
                             <View style={styles.BottomSecondBox}>
                                 <View style={styles.BottomTitleBox}>
-                                    <View style={{flexDirection : 'column', flex : 4,}}>
+                                    <View style={{ flexDirection: 'column', flex: 4, }}>
                                         <Text style={styles.BottomContentTxt}>상환 내역</Text>
                                     </View>
-                                    <View style={{flexDirection : 'column', flex : 1,}}>
+                                    <View style={{ flexDirection: 'column', flex: 1, }}>
                                         <View style={styles.BottomTitleBox}>
-                                            <TouchableOpacity>
-                                                <Text>월간</Text>
+                                            <TouchableOpacity onPress={() => this.switchBtn(0)}>
+                                                <Text style={this.state.styles[0].isSelect ? styles.txtPressed : styles.txtNotPressed}>월간</Text>
                                             </TouchableOpacity>
-                                            <TouchableOpacity>
-                                                <Text>연간</Text>
+                                            <TouchableOpacity onPress={() => this.switchBtn(1)}>
+                                                <Text style={this.state.styles[1].isSelect ? styles.txtPressed : styles.txtNotPressed}>연간</Text>
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -121,7 +152,7 @@ class SocialNowScreen extends React.Component {
                                     </View>
                                 </View>
                                 <View style={styles.BottomGraphBox}>
-                                    
+
                                 </View>
                             </View>
                         </View>
@@ -235,19 +266,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    BottomSubDetailBox : {
-        flex : 1,
+    BottomSubDetailBox: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginTop : 20,
+        marginTop: 20,
     },
-    SubDetailTxt : {
-        fontSize : 10,
-        fontWeight : '800'
+    SubDetailTxt: {
+        fontSize: 10,
+        fontWeight: '800'
     },
-    BottomGraphBox : {
-        flex : 10,
+    BottomGraphBox: {
+        flex: 10,
     },
     BottomLowerContent: {
         flex: 3,
@@ -258,6 +289,16 @@ const styles = StyleSheet.create({
     BottomContentTxt: {
         fontSize: 15,
         fontWeight: '800',
+    },
+    txtNotPressed: {
+        fontSize: 15,
+        color: 'gray',
+        fontWeight: '800'
+    },
+    txtPressed: {
+        fontSize: 15,
+        color: 'black',
+        fontWeight: '800'
     }
 })
 export default SocialNowScreen;
