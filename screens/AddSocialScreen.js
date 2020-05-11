@@ -14,6 +14,13 @@ const { width, height } = Dimensions.get('window');
 import DatePicker from '../assets/component/datePicker';
 
 class AddSocialScreen extends React.Component {
+
+    sDateCallBack = (dataFromChild) => {
+        console.log(dataFromChild)
+    }
+    eDateCallBack = (dataFromChild) => {
+        console.log(dataFromChild)
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -49,11 +56,11 @@ class AddSocialScreen extends React.Component {
                         </View>
                         <View style={styles.Content}>
                             <Text>시작 일</Text>
-                            <DatePicker />
+                            <DatePicker scallback={this.sDateCallBack} />
                         </View>
                         <View style={styles.Content}>
                             <Text>종료 일</Text>
-                            <TextInput></TextInput>
+                            <DatePicker ecallback={this.eDateCallBack} />
                         </View>
                         <View style={styles.Content}>
                             <Text>기간</Text>
