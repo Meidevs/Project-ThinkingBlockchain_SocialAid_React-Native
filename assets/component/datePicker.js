@@ -30,13 +30,12 @@ class DatePicker extends React.Component {
             year: yArray,
             month: mArray,
             day: dArray,
-            yNum: numYear,
-            mNum: 1,
-            dNum: 1,
+            yNum: '년도',
+            mNum: '달',
+            dNum: '일',
         }
     }
     onChangeRefreshYear = (itemValue) => {
-        console.log(itemValue)
         var yArray = new Array();
         var mArray = new Array();
         var dArray = new Array();
@@ -54,13 +53,9 @@ class DatePicker extends React.Component {
             dArray.push(i)
         }
         this.setState({ year: yArray, month: mArray, day: dArray, yNum: itemValue, mNum: 1, dNum: 1 });
-        if (this.props.scallback != undefined) {
-            this.props.scallback({yNum: itemValue, mNum: 1, dNum: 1});
-        } else {
-            this.props.ecallback({yNum: itemValue, mNum: 1, dNum: 1});
-
-        }
+        this.props.callback({ yNum: itemValue, mNum: 1, dNum: 1 });
     }
+
     onChangeRefreshMonth = (itemValue) => {
         var date = new Date();
         var numYear = parseInt(date.getFullYear());
@@ -82,16 +77,11 @@ class DatePicker extends React.Component {
         for (var i = 1; i <= 12; i++) {
             mArray.push(i)
         }
-        for (var i = 0; i <= pageYear[parseInt(itemValue) - 1]; i++) {
+        for (var i = 1; i <= pageYear[parseInt(itemValue) - 1]; i++) {
             dArray.push(i)
         }
         this.setState({ year: yArray, month: mArray, day: dArray, yNum: sYear, mNum: itemValue, dNum: 1 });
-        if (this.props.scallback != undefined) {
-            this.props.scallback({yNum: sYear, mNum: itemValue, dNum: 1});
-        } else {
-            this.props.ecallback({yNum: sYear, mNum: itemValue, dNum: 1});
-
-        }
+        this.props.callback({ yNum: sYear, mNum: itemValue, dNum: 1 });
     }
     onChangeRefreshDay = (itemValue) => {
         var date = new Date();
@@ -115,16 +105,11 @@ class DatePicker extends React.Component {
         for (var i = 1; i <= 12; i++) {
             mArray.push(i)
         }
-        for (var i = 0; i <= pageYear[parseInt(sMonth) - 1]; i++) {
+        for (var i = 1; i <= pageYear[parseInt(sMonth) - 1]; i++) {
             dArray.push(i)
         }
         this.setState({ year: yArray, month: mArray, day: dArray, yNum: sYear, mNum: sMonth, dNum: itemValue });
-        if (this.props.scallback != undefined) {
-            this.props.scallback({yNum: sYear, mNum: sMonth, dNum: itemValue});
-        } else {
-            this.props.ecallback({yNum: sYear, mNum: sMonth, dNum: itemValue});
-
-        }
+        this.props.callback({ yNum: sYear, mNum: sMonth, dNum: itemValue });
     }
 
     render() {
@@ -141,6 +126,8 @@ class DatePicker extends React.Component {
                         onValueChange={(itemValue, itemIndex) =>
                             this.onChangeRefreshYear(itemValue)
                         }>
+                            <Picker.Item label='년도' value='달' />
+
                         {this.state.year.map((data, i) => (
                             <Picker.Item label={JSON.stringify(data)} value={JSON.stringify(data)} />
                         ))
@@ -158,6 +145,7 @@ class DatePicker extends React.Component {
                         onValueChange={(itemValue, itemIndex) =>
                             this.onChangeRefreshMonth(itemValue)
                         }>
+                        <Picker.Item label='달' value='달' />
                         {this.state.month.map((data, i) => (
                             <Picker.Item label={JSON.stringify(data)} value={JSON.stringify(data)} />
                         ))
@@ -175,6 +163,7 @@ class DatePicker extends React.Component {
                         onValueChange={(itemValue, itemIndex) =>
                             this.onChangeRefreshDay(itemValue)
                         }>
+                            <Picker.Item label='일' value='일' />
                         {this.state.day.map((data, i) => (
                             <Picker.Item label={JSON.stringify(data)} value={JSON.stringify(data)} />
                         ))
@@ -192,8 +181,8 @@ const styles = StyleSheet.create({
     },
     date: {
         flexDirection: 'row',
-        justifyContent : 'center',
-        alignItems : 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 
