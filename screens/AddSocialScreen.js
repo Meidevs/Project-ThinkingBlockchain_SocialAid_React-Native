@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         width: width * 0.9,
         paddingBottom: 10,
-        backgroundColor: 'white'
     },
     SubTxtTitle: {
         fontSize: 13,

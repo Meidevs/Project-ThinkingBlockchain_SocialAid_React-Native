@@ -25,9 +25,50 @@ class SocialNowScreen extends React.Component {
                     //allowing light, but not detailed shapes
                     networkActivityIndicatorVisible={true}
                 />
-                <ScrollView style={styles.scrollview}>
+                <ScrollView nestedScrollEnabled={true} style={styles.scrollview}>
                     <View style={styles.TopContainer}>
-                        <Text>Hi1</Text>
+                        <View style={styles.TopContentUpper}>
+                            <View>
+                                <Text>
+                                    계 현황
+                                </Text>
+                            </View>
+                            <View>
+                                <Text>
+                                    전체 계모임 금액
+                                </Text>
+                            </View>
+                            <View>
+                                <Text>
+                                    예상 수익률
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.TopContentDowner}>
+                            <ScrollView nestedScrollEnabled={true} horizontal={true} style={{paddingVertical: 10}}>
+                                <View style={styles.SubDetails}>
+                                    <Text>1</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>2</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>1</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>3</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>4</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>5</Text>
+                                </View>
+                                <View style={styles.SubDetails}>
+                                    <Text>6</Text>
+                                </View>
+                            </ScrollView>
+                        </View>
                     </View>
                     <View style={styles.BottomContainer}>
                         <Text>Hi2</Text>
@@ -42,11 +83,26 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     scrollview: {
+        flexGrow: 1,
         backgroundColor: '#FFFFFF',
     },
     TopContainer: {
+        flex : 1,
         backgroundColor: '#284678',
-        height: 300
+        height: 300,
+    },
+    TopContentUpper : {
+        flex : 2,
+        backgroundColor : 'red'
+    },
+    TopContentDowner : {
+        flex : 1,
+    },
+    SubDetails : {
+        backgroundColor : 'white',
+        width : 100,
+        height : 80,
+        margin : 10,
     },
     BottomContainer: {
         backgroundColor: '#FFFFFF',
