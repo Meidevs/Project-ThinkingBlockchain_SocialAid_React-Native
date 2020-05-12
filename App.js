@@ -20,6 +20,8 @@ import DetailsScreen from './screens/DetailsScreen';
 import AlarmSetScreen from './screens/AlarmSetScreen';
 import NowDetailsScreen from './screens/NowDetailsScreen';
 import NowShowDetailsScreen from './screens/NowShowDetailsScreen';
+import NoticeScreen from './screens/NoticeScreen';
+
 
 
 const AuthStack = createStackNavigator()
@@ -60,6 +62,19 @@ const MyinfoStackScreen = () => {
       <MyinfoStack.Screen
         name='Alarm'
         component={AlarmSetScreen}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+        })}
+      />
+      <MyinfoStack.Screen
+        name='Notice'
+        component={NoticeScreen}
         options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: '#F2F2F2',

@@ -64,7 +64,7 @@ class MyinfoScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.BottomContent}>
-                        <TouchableOpacity style={styles.BottomContentBox}>
+                        <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Notice')}>
                             <Text style={styles.BottomContentTxt}>공지사항</Text>
                         </TouchableOpacity>
                     </View>
