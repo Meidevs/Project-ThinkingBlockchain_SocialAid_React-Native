@@ -1,24 +1,32 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
-
+import {
+    View,
+    Text,
+    TextInput,
+    Dimensions,
+    TouchableOpacity,
+    StatusBar,
+    StyleSheet,
+} from 'react-native';
+import { Octicons } from '@expo/vector-icons';
+const { width, height } = Dimensions.get('window');
 import ListUp from '../assets/component/ListUp';
 
 class RegisterScrenn extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            uri: ['../assets/images/BANNER.png'],
-            dataSet : [
-                {code : '1', name : '금계', shorttxt : '사랑해요', longtxt : '우리의 희망!', symbol : null},
-                {code : '2', name : '치킨', shorttxt : '치킨 사먹자', longtxt : '우리의 퓨쳐!', symbol : null},
-                {code : '3', name : '자동차', shorttxt : '나의 사랑 자동차', longtxt : '우리의 아이스크림!', symbol : null},
-                {code : '4', name : '목돈', shorttxt : '부자됩시다', longtxt : '우리의 예아!!', symbol : null},
+            dataSet: [
+                { code: '1', name: '금계', shorttxt: '사랑해요', longtxt: '우리의 희망!', symbol: null },
+                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '우리의 퓨쳐!', symbol: null },
+                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '우리의 아이스크림!', symbol: null },
+                { code: '4', name: '목돈', shorttxt: '부자됩시다', longtxt: '우리의 예아!!', symbol: null },
             ]
         }
     }
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <StatusBar
                     barStyle="dark-content"
                     // dark-content, light-content and default
@@ -30,11 +38,72 @@ class RegisterScrenn extends React.Component {
                     //allowing light, but not detailed shapes
                     networkActivityIndicatorVisible={true}
                 />
-                <Text>Hi</Text>
-                <ListUp data={this.state.dataSet} navigation={this.props.navigation}/>
+                {/* <ListUp data={this.state.dataSet} navigation={this.props.navigation}/> */}
+                <View style={styles.TopTitle}>
+                    <View style={styles.TopContent}>
+                        <Text style={styles.TopContentTxt}>어떤 상품을</Text>
+                        <Text style={styles.TopContentTxt}>찾으시나요?</Text>
+                    </View>
+                    <View style={styles.SearchFrom}>
+                        <View style={styles.SearchIconArea}>
+                            <Octicons name='search' size={15} />
+                        </View>
+                        <View style={styles.SearchArea}>
+                            <View style={styles.Cates}>
+                                <Text>카테고리</Text>
+                            </View>
+                            <View style={styles.Owners}>
+                                <Text>계주명</Text>
+                            </View>
+                            <View style={styles.InputArea}>
+                                <TextInput></TextInput>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.ContentArea}>
+
+                    </View>
+                </View>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    TopTitle: {
+        flex: 1,
+        padding: 15,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+    },
+    TopContent: {
+        flexDirection: 'column',
+        marginBottom: 15,
+    },
+    TopContentTxt: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    SearchFrom: {
+        width: width * 0.9,
+        flexDirection: 'row',
+        backgroundColor: 'white'
+    },
+    SearchIconArea: {
+        padding: 10,
+    },
+    SearchArea: {
+        flex: 1,
+        padding: 10,
+        borderBottomWidth: 1,
+        borderColor: '#2D67C4',
+        flexDirection: 'row',
+    },
+    ContentArea: {
+    }
+})
 
 export default RegisterScrenn;

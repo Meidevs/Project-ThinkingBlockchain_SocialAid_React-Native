@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: '#7A8CAB',
         borderRadius: 10,
+        elevation : 3,
     },
     WalletSector_1: {
         flex: 1,
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         padding: 10,
+        
     },
     WalletTxt: {
         fontSize: 12,
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+        elevation : 3,
     },
     BottomContentBtn: {
         flexDirection: 'row',

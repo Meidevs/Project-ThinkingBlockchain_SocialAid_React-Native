@@ -15,8 +15,6 @@ const { width, height } = Dimensions.get('window');
 import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
 
-
-
 class MainScreen extends React.Component {
 
     constructor(props) {
@@ -74,7 +72,7 @@ class MainScreen extends React.Component {
                     </View>
                     <View style={styles.BottomContainer}>
                         <View style={styles.title}>
-                            <Text style={styles.titletxt}>신규 계모임 상품</Text>
+                            <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
                         <View style={styles.grouplist}>
                             <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
@@ -94,28 +92,39 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     TopContainer: {
-        height: 200,
-        backgroundColor: 'pink'
+        flexDirection : 'column',
+        alignItems : 'flex-start',
+        justifyContent : 'center',
+        height: 150,
     },
     title: {
+        flex : 1,
         flexDirection: 'row',
-        alignItems: 'center',
-        padding: 15, //
+        justifyContent :'flex-start',
+        paddingTop : 15,
+        paddingLeft : 15,
+        paddingRight : 15, //
     },
     titletxt: {
         fontSize: 20,
         fontWeight: 'bold'
     },
     banner: {
+        flex : 2,
         width: width,
-        height: 100,
-        padding: 15
+        paddingBottom : 15,
+        paddingRight : 15,
+        paddingLeft : 15,
     },
     BottomContainer: {
-        backgroundColor: 'red'
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
+    TitleSubTxt: {
+        fontSize: 15,
+        fontWeight: 'bold'
     },
     bannerImage: {
-
     }
 })
 

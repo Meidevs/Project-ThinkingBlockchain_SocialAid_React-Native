@@ -45,14 +45,14 @@ const MyinfoStackScreen = () => {
         options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: '#F2F2F2',
-            elevation: 0, 
-            shadowOpacity: 0, 
+            elevation: 0,
+            shadowOpacity: 0,
             borderBottomWidth: 0,
           },
           headerTitle: null,
           headerLeft: null,
           headerRight: () =>
-            <Octicons name='bell' size={24} style={{marginRight : 20, }}  />
+            <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
         })}
       />
       <MyinfoStack.Screen
@@ -61,8 +61,8 @@ const MyinfoStackScreen = () => {
         options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: '#F2F2F2',
-            elevation: 0, 
-            shadowOpacity: 0, 
+            elevation: 0,
+            shadowOpacity: 0,
             borderBottomWidth: 0,
           },
           headerTitle: null,
@@ -81,14 +81,14 @@ const NowStackScreen = () => {
         options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: '#7A8CAB',
-            elevation: 0, 
-            shadowOpacity: 0, 
+            elevation: 0,
+            shadowOpacity: 0,
             borderBottomWidth: 0,
           },
           headerTitle: null,
           headerLeft: null,
           headerRight: () =>
-            <Octicons name='bell' size={24} style={{marginRight : 20, }} />
+            <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
         })}
       />
     </NowStack.Navigator>
@@ -101,18 +101,36 @@ const MainStackScreen = () => {
         name='Main'
         component={MainScreen}
         options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
           headerTitle: null,
           headerLeft: null,
           headerRight: () =>
-            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-              <Octicons name='search' size={24} />
-            </TouchableOpacity>
+            <View style={{flexDirection : 'row',}}>
+              <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{padding : 10,}}>
+                <Octicons name='search' size={20} />
+              </TouchableOpacity>
+              <Octicons name='bell' size={20} style={{ padding : 10, }} />
+            </View>
         })}
       />
       <MainStack.Screen
         name='Search'
         component={SearchScreen}
-         />
+        options={{
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+        }}
+      />
       <MainStack.Screen
         name='Details'
         component={DetailsScreen} />
@@ -131,17 +149,17 @@ function MainTabs() {
         options={({ route }) => ({
           tabBarLabel: 'Main',
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" color={color} size={size} />
+            <Entypo name="home" color={color} size={24} />
           ),
           tabBarVisible: getTabBarVisible(route)
-        })}/>
+        })} />
       <Tabs.Screen
         name='Add'
         component={AddSocialScreen}
         options={{
           tabBarLabel: 'Add',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="form" color={color} size={size} />
+            <AntDesign name="form" color={color} size={24} />
           ),
         }} />
       <Tabs.Screen
@@ -150,14 +168,14 @@ function MainTabs() {
         options={({ route }) => ({
           tabBarLabel: 'Now',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="barschart" color={color} size={size} />
+            <AntDesign name="barschart" color={color} size={24} />
           ),
           tabBarVisible: getTabBarVisible(route)
         })} />
       <Tabs.Screen
         name='Myinfo'
         component={MyinfoStackScreen}
-        options={({ route }) => ({ 
+        options={({ route }) => ({
           tabBarLabel: 'Myinfo',
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="user" size={24} color="black" />

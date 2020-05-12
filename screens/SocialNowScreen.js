@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         alignItems: 'center',
+        elevation: 3,
     },
     SubContent: {
         padding: 5,
@@ -240,6 +241,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+        elevation: 3,
     },
     FirstBoxBtn: {
         flexDirection: 'row',
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
         margin: 10,
         flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     BottomSecondBox: {
         width: width * 0.9,
@@ -259,6 +261,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#FFFFFF',
         padding: 10,
+        elevation: 3,
     },
     BottomTitleBox: {
         flex: 1,
