@@ -18,6 +18,7 @@ import MyinfoScreen from './screens/MyinfoScreen';
 import SearchScreen from './screens/SearchScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import AlarmSetScreen from './screens/AlarmSetScreen';
+import NowDetailsScreen from './screens/NowDetailsScreen';
 
 
 const AuthStack = createStackNavigator()
@@ -91,6 +92,21 @@ const NowStackScreen = () => {
             <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
         })}
       />
+      <NowStack.Screen 
+        name='NowDetails'
+        component={NowDetailsScreen}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+          // headerLeft: null,
+          // headerRight: null
+        })}
+      />
     </NowStack.Navigator>
   )
 }
@@ -102,7 +118,7 @@ const MainStackScreen = () => {
         component={MainScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#FFFFFF',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,

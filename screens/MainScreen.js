@@ -71,10 +71,10 @@ class MainScreen extends React.Component {
                         </View>
                     </View>
                     <View style={styles.BottomContainer}>
-                        <View style={styles.title}>
+                        <View style={styles.SubTitle}>
                             <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
-                        <View style={styles.grouplist}>
+                        <View style={styles.GroupList}>
                             <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
                         </View>
                     </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     title: {
         flex : 1,
         flexDirection: 'row',
-        justifyContent :'flex-start',
+        alignItems : 'flex-start',
         paddingTop : 15,
         paddingLeft : 15,
         paddingRight : 15, //
@@ -117,8 +117,18 @@ const styles = StyleSheet.create({
         paddingLeft : 15,
     },
     BottomContainer: {
+        width : width,
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+    },
+    SubTitle : {
+        width : width,
+        flexDirection : 'row',
+        justifyContent : 'flex-start',
+        alignItems : 'center',
+        paddingTop : 15,
+        paddingLeft : 15,
+        paddingRight : 15,
     },
     TitleSubTxt: {
         fontSize: 15,

@@ -18,6 +18,18 @@ class SocialNowScreen extends React.Component {
             styles: [
                 { isSelect: true, },
                 { isSelect: false, }
+            ],
+            dataSet: [
+                {
+                    month: [
+                        12, 5, 8, 21, 30, 18, 15, 12, 2, 35, 20, 20
+                    ]
+                },
+                {
+                    year: [
+                        202, 347, 198
+                    ]
+                }
             ]
         }
     }
@@ -120,7 +132,7 @@ class SocialNowScreen extends React.Component {
                     </View>
                     <View style={styles.BottomContainer}>
                         <View style={styles.BottomUpperContent}>
-                            <TouchableOpacity style={styles.BottomFirstBox}>
+                            <TouchableOpacity style={styles.BottomFirstBox} onPress={() => this.props.navigation.navigate('NowDetails')}>
                                 <Text style={styles.BottomContentTxt}>계모임 현황</Text>
                                 <View style={styles.FirstBoxBtn}>
                                     <Text style={styles.BottomContentTxt}>총 X 건</Text>
@@ -148,11 +160,30 @@ class SocialNowScreen extends React.Component {
                                 <View style={styles.BottomSubDetailBox}>
                                     <View>
                                         <Text style={styles.SubDetailTxt}>x 월 수령액</Text>
-                                        <Text style={styles.SubDetailTxt}>xxxx STC</Text>
+                                        <Text style={{ color: '#2D67C4', fontSize: 12, fontWeight: '800' }}>xxxx STC</Text>
                                     </View>
                                 </View>
                                 <View style={styles.BottomGraphBox}>
-
+                                    {this.state.styles[0].isSelect ?
+                                        (
+                                                <View style={styles.MonthlyGraph}>
+                                                    {this.state.dataSet[0].month.map((data, i) => (
+                                                        <View style={{ flexDirection: 'column', flex: 1, }}>
+                                                            <View style={{ height: data * 2, backgroundColor: '#BBCEEC', margin: 5, }}>
+                                                            </View>
+                                                            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                                <Text style={{ fontSize: 8, color: '#BBCEEC' }}>
+                                                                    {i}
+                                                                </Text>
+                                                            </View>
+                                                        </View>
+                                                    ))}
+                                                </View>
+                                        ) : (
+                                            <View style={styles.YearGraph}>
+                                            </View>
+                                        )
+                                    }
                                 </View>
                             </View>
                         </View>
@@ -277,7 +308,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     SubDetailTxt: {
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: '800'
     },
     BottomGraphBox: {
@@ -302,6 +333,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: 'black',
         fontWeight: '800'
+    },
+    MonthlyGraph: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
     }
 })
 export default SocialNowScreen;

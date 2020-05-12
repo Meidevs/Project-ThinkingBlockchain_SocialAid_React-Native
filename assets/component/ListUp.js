@@ -39,7 +39,9 @@ class ListUp extends React.Component {
                 <Text>{item.longtxt}</Text>
             </View>
             <View style={styles.RightSection}>
-                <Text>{item.image}</Text>
+                <View style={styles.Circle}>
+                    <Text>{item.image}</Text>
+                </View>
             </View>
         </TouchableOpacity>
     );
@@ -70,7 +72,14 @@ const styles = StyleSheet.create({
     },
     RightSection: {
         flex: 1,
-        backgroundColor: 'black'
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+    Circle : {
+        width : 60,
+        height : 60,
+        borderWidth : 1,
+        borderRadius : 60,
     }
 })
 export default ListUp;

@@ -4,13 +4,14 @@ import {
     Text,
     TextInput,
     Dimensions,
-    TouchableOpacity,
+    Button,
     StatusBar,
     StyleSheet,
 } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
 const { width, height } = Dimensions.get('window');
 import ListUp from '../assets/component/ListUp';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class RegisterScrenn extends React.Component {
     constructor(props) {
@@ -56,7 +57,12 @@ class RegisterScrenn extends React.Component {
                                 <Text>계주명</Text>
                             </View>
                             <View style={styles.InputArea}>
-                                <TextInput></TextInput>
+                                <TextInput placeholder={'검색어를 입력해주세요'}/>
+                            </View>
+                            <View style={styles.InputArea}>
+                                <TouchableOpacity>
+                                    <Text>검색</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -103,6 +109,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     ContentArea: {
+    },
+    Cates : {
+        marginRight : 10,
+    },
+    Owners : {
+        marginRight : 10,
+    },
+    InputArea : {
+        marginRight : 10,
     }
 })
 
