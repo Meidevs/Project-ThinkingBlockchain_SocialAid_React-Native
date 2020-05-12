@@ -4,9 +4,11 @@ import {
     Text,
     TouchableOpacity,
     StatusBar,
-    Button,
+    Dimensions,
     StyleSheet
 } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+const { width, height } = Dimensions.get('window');
 
 class RegisterScrenn extends React.Component {
     constructor(props) {
@@ -75,12 +77,146 @@ class RegisterScrenn extends React.Component {
                 <View style={styles.BottomContainer}>
                     {this.state.styles[0].isSelect ?
                         (
-                            <View>
-                                <Text>Hi1</Text>
+                            <View style={styles.UserDataForm}>
+                                <View style={styles.UserInfo}>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>이메일</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                        <View style={styles.InnerContent}>
+                                            <TouchableOpacity>
+                                                <Text>인증</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>연락처</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>PIN번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>주소</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={styles.SignUpBtn}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                                        <Text>회원가입</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         ) : (
-                            <View>
-                                <Text>Hi2</Text>
+                            <View style={styles.UserDataForm}>
+                                <View style={styles.UserInfo}>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>이메일</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                        <View style={styles.InnerContent}>
+                                            <TouchableOpacity>
+                                                <Text>인증</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>연락처</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>PIN번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>주소</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                    <View style={styles.UserInfoDesign}>
+                                        <View style={styles.InnerContent}>
+                                            <Text>비밀번호</Text>
+                                        </View>
+                                        <View style={styles.InnerContentInput}>
+                                            <TextInput />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={styles.SignUpBtn}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                                        <Text>회원가입</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         )
                     }
@@ -108,7 +244,29 @@ const styles = StyleSheet.create({
     },
     BottomContainer: {
         flex: 9,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    UserDataForm: {
+        flex: 1,
+        width: width * 0.9,
+        marginBottom: 20,
+    },
+    UserInfo: {
+        flex: 4,
+        flexDirection: 'column',
+    },
+    UserInfoDesign: {
+        flex: 1,
+        margin: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    SignUpBtn: {
+        flex: 1,
     },
     txtNotPressed: {
         fontSize: 15,
@@ -119,6 +277,15 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: 'black',
         fontWeight: 'bold'
+    },
+    InnerContent: {
+        paddingLeft: 10,
+        flex: 1,
+    },
+    InnerContentInput: {
+        flex: 2,
+        borderBottomWidth: 1,
+        borderColor: 'gray',
     }
 })
 

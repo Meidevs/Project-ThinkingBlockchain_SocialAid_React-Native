@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
     },
     SearchFrom: {
         width: width * 0.9,
+        height : 40,
         flexDirection: 'row',
-        backgroundColor: 'white'
     },
     SearchIconArea: {
         padding: 10,
