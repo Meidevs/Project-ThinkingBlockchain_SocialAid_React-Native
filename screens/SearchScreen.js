@@ -18,10 +18,10 @@ class RegisterScrenn extends React.Component {
         super(props)
         this.state = {
             dataSet: [
-                { code: '1', name: '금계', shorttxt: '사랑해요', longtxt: '우리의 희망!', symbol: null },
-                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '우리의 퓨쳐!', symbol: null },
-                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '우리의 아이스크림!', symbol: null },
-                { code: '4', name: '목돈', shorttxt: '부자됩시다', longtxt: '우리의 예아!!', symbol: null },
+                { code: '1', name: '금계', shorttxt: '금을 모으자', longtxt: '부자됩시다', symbol: null },
+                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '치킨은 역시', symbol: null },
+                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '드림카', symbol: null },
+                { code: '4', name: '목돈', shorttxt: '저축', longtxt: '저축', symbol: null },
             ]
         }
     }

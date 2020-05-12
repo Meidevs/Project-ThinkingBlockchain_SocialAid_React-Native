@@ -118,31 +118,31 @@ class RegisterScrenn extends React.Component {
                                     </View>
                                     <View style={styles.UserInfoDesign}>
                                         <View style={styles.InnerContent}>
-                                            <Text>주소</Text>
+                                            <Text>이름</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
                                         </View>
                                     </View>
                                     <View style={styles.UserInfoDesign}>
-                                        <View style={styles.InnerContent}>
+                                        {/* <View style={styles.InnerContent}>
                                             <Text>비밀번호</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
-                                        </View>
+                                        </View> */}
                                     </View>
                                     <View style={styles.UserInfoDesign}>
-                                        <View style={styles.InnerContent}>
+                                        {/* <View style={styles.InnerContent}>
                                             <Text>비밀번호</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
-                                        </View>
+                                        </View> */}
                                     </View>
                                 </View>
                                 <View style={styles.SignUpBtn}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                                    <TouchableOpacity style={styles.RegisterBtn} onPress={() => this.props.navigation.navigate('Login')}>
                                         <Text>회원가입</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -189,31 +189,31 @@ class RegisterScrenn extends React.Component {
                                     </View>
                                     <View style={styles.UserInfoDesign}>
                                         <View style={styles.InnerContent}>
-                                            <Text>주소</Text>
+                                            <Text>이름</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
                                         </View>
                                     </View>
                                     <View style={styles.UserInfoDesign}>
-                                        <View style={styles.InnerContent}>
+                                        {/* <View style={styles.InnerContent}>
                                             <Text>비밀번호</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
-                                        </View>
+                                        </View> */}
                                     </View>
                                     <View style={styles.UserInfoDesign}>
-                                        <View style={styles.InnerContent}>
+                                        {/* <View style={styles.InnerContent}>
                                             <Text>비밀번호</Text>
                                         </View>
                                         <View style={styles.InnerContentInput}>
                                             <TextInput />
-                                        </View>
+                                        </View> */}
                                     </View>
                                 </View>
                                 <View style={styles.SignUpBtn}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                                    <TouchableOpacity style={styles.RegisterBtn} onPress={() => this.props.navigation.navigate('Login')}>
                                         <Text>회원가입</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     UserDataForm: {
         flex: 1,
@@ -257,16 +257,19 @@ const styles = StyleSheet.create({
     UserInfo: {
         flex: 4,
         flexDirection: 'column',
+        alignItems : 'flex-start',
+        justifyContent : 'center'
     },
     UserInfoDesign: {
         flex: 1,
         margin: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
     },
     SignUpBtn: {
         flex: 1,
+        alignItems : 'center',
+        justifyContent : 'center'
     },
     txtNotPressed: {
         fontSize: 15,
@@ -279,13 +282,23 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     InnerContent: {
+        width : width * 0.2,
         paddingLeft: 10,
-        flex: 1,
+        paddingRight: 10,
     },
     InnerContentInput: {
-        flex: 2,
+        width : width * 0.5,
         borderBottomWidth: 1,
         borderColor: 'gray',
+    },
+    RegisterBtn : {
+        width : width *0.5,
+        height : width * 0.12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth : 1,
+        borderRadius : 10,
+        margin : 10,
     }
 })
 
