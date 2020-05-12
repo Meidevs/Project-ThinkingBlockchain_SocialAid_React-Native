@@ -161,7 +161,16 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen
         name='Details'
-        component={DetailsScreen} />
+        component={DetailsScreen} 
+        options={{
+          headerStyle: {
+            backgroundColor: '#7E90AE',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
+        }}/>
     </MainStack.Navigator >
   )
 }
