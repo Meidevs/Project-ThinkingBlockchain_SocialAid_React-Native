@@ -116,7 +116,7 @@ class NowDetailsScreen extends React.Component {
                     </View>
                     <SafeAreaView style={{ flex: 10 }}>
                         <ScrollView>
-                            <StatusListUp data={this.state} />
+                            <StatusListUp data={this.state} navigation={this.props.navigation} />
                         </ScrollView>
                     </SafeAreaView>
                     <View style={styles.MyGroup}>
@@ -127,7 +127,7 @@ class NowDetailsScreen extends React.Component {
                     </View>
                     <SafeAreaView style={{ flex: 10 }}>
                         <ScrollView>
-                            <StatusListUp data={this.state} />
+                            <StatusListUp data={this.state} navigation={this.props.navigation} />
                         </ScrollView>
                     </SafeAreaView>
                 </View>

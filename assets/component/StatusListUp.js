@@ -18,8 +18,6 @@ class StatusListUp extends React.Component {
         var switchData = props.data.switch;
         var dataSet = props.data.dataSet;
         for (var i = 0; i < switchData.length; i++) {
-            console.log(i)
-            console.log(switchData[i])
             if (switchData[i].isSelected == true) {
                 if (i == 0) {
                     rawArray.push(dataSet.Complete)

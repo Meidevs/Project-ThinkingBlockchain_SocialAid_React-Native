@@ -19,6 +19,7 @@ import SearchScreen from './screens/SearchScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import AlarmSetScreen from './screens/AlarmSetScreen';
 import NowDetailsScreen from './screens/NowDetailsScreen';
+import NowShowDetailsScreen from './screens/NowShowDetailsScreen';
 
 
 const AuthStack = createStackNavigator()
@@ -103,8 +104,19 @@ const NowStackScreen = () => {
             borderBottomWidth: 0,
           },
           headerTitle: null,
-          // headerLeft: null,
-          // headerRight: null
+        })}
+      />
+      <NowStack.Screen 
+        name='NowShowDetails'
+        component={NowShowDetailsScreen}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: '#F2F2F2',
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTitle: null,
         })}
       />
     </NowStack.Navigator>
