@@ -60,11 +60,9 @@ class LoginScreen extends React.Component {
                                     아이디 기억하기
                                 </Text>
                             </TouchableOpacity>
-                            {/* <View style={styles.SearchUserPassword}> */}
                             <TouchableOpacity>
                                 <Text style={styles.SearchUserPasswordTxt}>아이디 비밀번호 찾기</Text>
                             </TouchableOpacity>
-                            {/* </View> */}
                         </View>
                     </View>
                 </View>
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
         padding: 3,
         marginRight: 10,
         borderWidth: 1,
-        borderColor: '#E0E0E0',
+        borderColor: '#CBCBCB',
         borderRadius: 3,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',

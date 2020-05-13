@@ -6,7 +6,8 @@ import {
     StatusBar,
     Dimensions,
     StyleSheet,
-    TextInput
+    TextInput,
+    Image
 } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
@@ -14,33 +15,33 @@ class RegisterScrenn extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            styles: [
+            user: [
                 { isSelect: true, },
                 { isSelect: false, }
-            ]
+            ],
+            form: {
+                isSelect: false,
+            }
         }
     }
 
     switchBtn = (num) => {
         if (num == 0) {
-            this.state.styles[0].isSelect = true;
-            this.state.styles[1].isSelect = false;
-            this.setState({
-                styles: [
-                    { isSelect: this.state.styles[0].isSelect },
-                    { isSelect: this.state.styles[1].isSelect },
-                ]
-            })
+            this.state.user[0].isSelect = true;
+            this.state.user[1].isSelect = false;
         } else if (num == 1) {
-            this.state.styles[0].isSelect = false;
-            this.state.styles[1].isSelect = true;
-            this.setState({
-                styles: [
-                    { isSelect: this.state.styles[0].isSelect },
-                    { isSelect: this.state.styles[1].isSelect },
-                ]
-            })
+            this.state.user[0].isSelect = false;
+            this.state.user[1].isSelect = true;
+        } else if (num == 2) {
+            this.state.form.isSelect = this.state.form.isSelect ? false : true;
         }
+        this.setState({
+            user: [
+                { isSelect: this.state.user[0].isSelect },
+                { isSelect: this.state.user[1].isSelect },
+            ],
+            form: { isSelect: this.state.form.isSelect }
+        })
     }
 
     render() {
@@ -61,71 +62,91 @@ class RegisterScrenn extends React.Component {
                     <Text style={styles.TopTitleTxt}>산타 월렛 API 요청 정보 입력</Text>
                 </View>
                 <View style={styles.UserSelectionForm}>
-                    <TouchableOpacity style={this.state.styles[0].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff} onPress={() => this.switchBtn(0)}>
-                        <Text style={this.state.styles[0].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>산타 월렛 기가입자</Text>
+                    <TouchableOpacity
+                        style={this.state.user[0].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
+                        onPress={() => this.switchBtn(0)}>
+                        <Text
+                            style={this.state.user[0].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
+                            산타 월렛 기가입자
+                        </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={this.state.styles[1].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff} onPress={() => this.switchBtn(1)}>
-                        <Text style={this.state.styles[1].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>산타 월렛 미가입자</Text>
+                    <TouchableOpacity
+                        style={this.state.user[1].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
+                        onPress={() => this.switchBtn(1)}>
+                        <Text
+                            style={this.state.user[1].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
+                            산타 월렛 미가입자
+                        </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.UserRegisterForm}>
                     <View style={styles.InputForm}>
                         <View>
-                            <Text>아이디(이메일주소)</Text>
+                            <Text style={styles.InputTxt}>아이디(이메일주소)</Text>
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'이메일을 입력하세요.'} />
                         </View>
                     </View>
                     <View style={styles.InputForm}>
                         <View>
-                            <Text>이름</Text>
+                            <Text style={styles.InputTxt}>이름</Text>
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'이름을 입력하세요.'} />
                         </View>
                     </View>
                     <View style={styles.InputForm}>
                         <View>
-                            <Text>휴대폰번호</Text>
+                            <Text style={styles.InputTxt}>휴대폰번호</Text>
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'휴대폰번호를 입력하세요.'} />
                         </View>
                     </View>
-                    <View style={styles.InputForm}>
+                    <View style={styles.InputFormA}>
                         <View>
-                            <Text>비밀번호</Text>
+                            <Text style={styles.InputTxt}>비밀번호</Text>
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'영문,숫자,특수문자 조합 8자리 이상'} />
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'비밀번호 확인'} />
                         </View>
                     </View>
-                    <View style={styles.InputForm}>
+                    <View style={styles.InputFormA}>
                         <View>
-                            <Text>PIN번호</Text>
+                            <Text style={styles.InputTxt}>PIN번호</Text>
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'PIN번호를 입력하세요'} />
                         </View>
                         <View style={styles.TxtInputForm}>
-                            <TextInput />
+                            <TextInput placeholder={'PIN번호 확인'} />
                         </View>
                     </View>
-                    <View style={styles.InputForm}>
+                    <View style={styles.AcceptForm}>
                         <View>
-                            <Text>이용약관에 동의합니다</Text>
+                            <TouchableOpacity style={styles.CheckBox} onPress={() => this.switchBtn(2)}>
+                                <View style={this.state.form.isSelect ? styles.CheckImageBox : styles.NonCheckImageBox}>
+                                    {this.state.form.isSelect ?
+                                        <Image source={require('../assets/images/ico_check_blue.png')} style={styles.CheckImage} />
+                                        :
+                                        <Image source={require('../assets/images/input_checkbox.png')} style={styles.CheckImage} />
+                                    }
+                                </View>
+                                <Text style={styles.InputTxt}>이용약관에 동의합니다</Text>
+                            </TouchableOpacity>
                         </View>
-                        <View>
-                            <Text>약관보기</Text>
+                        <View style={styles.Open}>
+                            <Text style={styles.InputTxt}>약관보기</Text>
+                            <Image source={require('../assets/images/ico_arrow_right.png')} style={styles.CheckImage} />
                         </View>
                     </View>
                 </View>
                 <View style={styles.RegisterBtn}>
-
+                    <Text >동의하고 회원가입</Text>
                 </View>
             </View>
         )
@@ -182,34 +203,94 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     UserRegisterForm: {
-        flex: 8,
+        flex: 10,
         paddingLeft: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     InputForm: {
-        width : width * 0.9,
-        flexDirection: 'column',
-        justifyContent : 'center',
-        alignItems : 'flex-start'
-    },
-    TxtInputForm : {
+        flex: width * 0.003,
         width: width * 0.9,
-        height : width * 0.2,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    InputFormA: {
+        flex: width * 0.0052,
+        width: width * 0.9,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    TxtInputForm: {
+        flex: 1,
+        marginTop: 5,
+        marginBottom: 5,
+        width: width * 0.9,
         borderWidth: 2,
-        borderBottomWidth: 0,
-        borderTopStartRadius: 10,
-        borderTopEndRadius: 10,
+        borderRadius: 5,
         borderColor: '#E0E0E0',
         justifyContent: 'center',
         padding: 10,
         backgroundColor: '#FFFFFF'
     },
-    RegisterBtn: {
-        height: width * 0.15,
-        backgroundColor: 'pink'
+    InputTxt: {
+        fontSize: 12,
+        color: '#929292'
     },
-    
+    AcceptForm: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: width * 0.9,
+        paddingTop: 10,
+        marginBottom: 10,
+    },
+    CheckBox: {
+        flexDirection: 'row',
+        width: width * 0.6,
+        alignItems: 'center',
+    },
+    CheckImage: {
+        width: width * 0.03,
+        height: width * 0.03,
+        resizeMode: 'contain'
+    },
+    CheckImageBox: {
+        width: width * 0.06,
+        height: width * 0.06,
+        padding: 3,
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#4f79d5',
+        borderRadius: 3,
+        backgroundColor: '#FFFFFF',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    NonCheckImageBox: {
+        width: width * 0.06,
+        height: width * 0.06,
+        padding: 3,
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#CBCBCB',
+        borderRadius: 3,
+        backgroundColor: '#FFFFFF',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    RegisterBtn: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#CBCBCB'
+    },
+    Open: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    }
 })
 
 export default RegisterScrenn;
