@@ -108,7 +108,7 @@ const NowStackScreen = () => {
             <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
         })}
       />
-      <NowStack.Screen 
+      <NowStack.Screen
         name='NowDetails'
         component={NowDetailsScreen}
         options={({ navigation }) => ({
@@ -121,7 +121,7 @@ const NowStackScreen = () => {
           headerTitle: null,
         })}
       />
-      <NowStack.Screen 
+      <NowStack.Screen
         name='NowShowDetails'
         component={NowShowDetailsScreen}
         options={({ navigation }) => ({
@@ -153,11 +153,11 @@ const MainStackScreen = () => {
           headerTitle: null,
           headerLeft: null,
           headerRight: () =>
-            <View style={{flexDirection : 'row',}}>
-              <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{padding : 10,}}>
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{ padding: 10, }}>
                 <Octicons name='search' size={20} />
               </TouchableOpacity>
-              <Octicons name='bell' size={20} style={{ padding : 10, }} />
+              <Octicons name='bell' size={20} style={{ padding: 10, }} />
             </View>
         })}
       />
@@ -176,7 +176,7 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen
         name='Details'
-        component={DetailsScreen} 
+        component={DetailsScreen}
         options={{
           headerStyle: {
             backgroundColor: '#7E90AE',
@@ -185,7 +185,7 @@ const MainStackScreen = () => {
             borderBottomWidth: 0,
           },
           headerTitle: null,
-        }}/>
+        }} />
     </MainStack.Navigator >
   )
 }
@@ -244,7 +244,18 @@ function App() {
       <AuthStack.Navigator
         initialRouteName="Login">
         <AuthStack.Screen name='Login' component={LoginScreen} options={{ title: 'Sign In', headerShown: false }} />
-        <AuthStack.Screen name='Register' component={RegisterScreen} options={{ title: 'Create Account' }} />
+        <AuthStack.Screen
+          name='Register'
+          component={RegisterScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: '#F2F2F2',
+              elevation: 0,
+              shadowOpacity: 0,
+              borderBottomWidth: 0,
+            },
+            headerTitle: null,
+          }} />
         <AuthStack.Screen name='MainTabs' component={MainTabs} options={{ headerShown: false }} />
       </AuthStack.Navigator>
     </NavigationContainer>
