@@ -85,12 +85,6 @@ class LoginScreen extends React.Component {
         )
     }
 }
-{/* <TouchableOpacity style={styles.LoginBtn} onPress={() => this.props.navigation.replace('MainTabs')}>
-<Text>Login</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.RegisterBtn} onPress={() => this.props.navigation.push('Register')}>
-<Text>Register</Text>
-</TouchableOpacity> */}
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
