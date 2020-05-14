@@ -10,6 +10,7 @@ import {
     ImageBackground,
     Image
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,13 +37,19 @@ class DetailsScreen extends React.Component {
                             <View style={styles.TopContent}>
                                 <Text style={styles.Title}>상품명 및 제목입니다.</Text>
                                 <View style={styles.STCArea}>
-                                    <Text style={{color : '#4C4C4C', fontSize : 20, fontWeight : 'bold', marginRight : 5,}}>7,502.12</Text><Text style={{color : '#4C4C4C', fontSize : 14, fontWeight : '600'}}>STC</Text>
+                                    <Text style={{ color: '#4C4C4C', fontSize: 20, fontWeight: 'bold', marginRight: 5, }}>7,502.12</Text><Text style={{ color: '#4C4C4C', fontSize: 14, fontWeight: '600' }}>STC</Text>
                                 </View>
                                 <Text style={styles.SubTxt}>소셜에이드 계모임 목적 및 설명입니다</Text>
                                 <Text>계기간 : 20.05.11 - 20.05.31</Text>
                             </View>
                             <View style={styles.ProgressBar}>
-
+                                <View style={{ width: width * 0.9, backgroundColor: '#E8E8E8', borderRadius: 10, }}>
+                                    <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.9 * 4 / 10, height: 6, borderRadius: 10, }} />
+                                </View>
+                                <View style={{ width: width * 0.9, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text style={styles.Participants}>현재참여인원</Text>
+                                    <Text style={styles.ParticipantsCount}>4명</Text>
+                                </View>
                             </View>
                         </View>
                         <View style={styles.BottomContainer}>
@@ -50,13 +57,13 @@ class DetailsScreen extends React.Component {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-
                 <View style={styles.joinBtnContent}>
                     <TouchableOpacity style={styles.calBtn}>
-                        <Text>수익계산</Text>
+                        <Image source={require('../assets/images/ico_calculator.png')} style={{marginRight : 5, width : 15, height : 15, resizeMode : 'contain'}}/>
+                        <Text style={styles.Txt}>수익 계산</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.joinBtn}>
-                        <Text>참가 하기</Text>
+                        <Text style={styles.Txt}>참가 하기</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -68,6 +75,7 @@ class DetailsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FFFFFF'
     },
     scrollview: {
         flexGrow: 1,
@@ -83,61 +91,79 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.4)',
     },
     TopContainer: {
-        height: 250,
+        height: 200,
         flexDirection: 'column',
-        alignItems : 'center',
+        alignItems: 'center',
     },
-    TopContent : {
-        flex : 3,
+    TopContent: {
+        flex: 3,
         flexDirection: 'column',
-        alignItems : 'center',
-        justifyContent : 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    Title : {
-        margin : 5,
-        color : '#4C4C4C'
+    Title: {
+        margin: 5,
+        color: '#4C4C4C'
     },
-    STCArea : {
-        flexDirection : 'row',
-        justifyContent : 'center',
-        alignItems : 'flex-end',
-        marginBottom : 5,
+    STCArea: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        marginBottom: 5,
     },
-    SubTxt : {
-        color : '#929292',
-        marginBottom : 5,
+    SubTxt: {
+        color: '#929292',
+        marginBottom: 5,
     },
-    ProgressBar : {
-        flex : 1,
+    ProgressBar: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    Participants: {
+        fontSize: 12,
+        fontWeight: '900',
+        color: '#4F79D5'
+    },
+    ParticipantsCount: {
+        fontSize: 12,
+        fontWeight: '900',
+        color: '#929292'
+    },
+    BottomContainer: {
+        height: 600,
+        backgroundColor: '#F7F7F7',
+        marginBottom: width * 0.08,
     },
     joinBtnContent: {
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
-        borderWidth: 1,
-        borderColor: 'gray',
+        width: width,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     calBtn: {
-        margin: width * 0.03,
-        width: width * 0.3,
-        height: width * 0.08,
+        flex: 1,
+        height: width * 0.135,
+        flexDirection : 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 5,
+        backgroundColor: '#9F9F9F'
     },
     joinBtn: {
-        margin: width * 0.03,
-        width: width * 0.5,
+        flex: 2,
+        height: width * 0.135,
         alignItems: 'center',
         justifyContent: 'center',
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 5,
+        backgroundColor: '#4F79D5'
+    },
+    Txt : {
+        color : '#FFFFFF',
+        fontSize : 12,
+        fontWeight : 'bold'
     }
 })
 

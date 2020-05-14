@@ -1,4 +1,5 @@
 function MyTabBar({ state, descriptors, navigation }) {
+    console.log(state)
     //state : Array [Name, Params of BottomTabNavigation Component]
     //descriptor : navigation.Functions, Options, render(?) What is Render?
     return (

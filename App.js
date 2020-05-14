@@ -4,8 +4,7 @@ import {
   View,
   Image,
   TouchableOpacity,
-  useWindowDimensions,
-  Button
+  Text
 } from 'react-native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -28,13 +27,76 @@ import NowDetailsScreen from './screens/NowDetailsScreen';
 import NowShowDetailsScreen from './screens/NowShowDetailsScreen';
 import NoticeScreen from './screens/NoticeScreen';
 
-
+// import CustomTabs from './assets/component/CustomTabBar';
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator();
 const MainStack = createStackNavigator();
 const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
+
+
+function MyTabBar({ state, descriptors, navigation }) {
+  //state : Array [Name, Params of BottomTabNavigation Component]
+  //descriptor : navigation.Functions, Options, render(?) What is Render?
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        // Label is the Way to Put Name on BottomTabNavigator using Route Name
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+              ? options.title
+              : route.name;
+        const icons =
+          options.tabBarLabel == '계모임'
+            ? [require('./assets/images/ico_botNav_home.png'), require('./assets/images/ico_botNav_home_on.png')]
+            : options.tabBarLabel == '만들기'
+              ? [require('./assets/images/ico_botNav_make.png'), require('./assets/images/ico_botNav_make_on.png')]
+              : options.tabBarLabel == '모임현황'
+                ? [require('./assets/images/ico_botNav_state.png'), require('./assets/images/ico_botNav_current_on.png')]
+                : [require('./assets/images/ico_botNav_more.png'), require('./assets/images/ico_botNav_more_on.png')]
+
+        const isFocused = state.index === index;
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityStates={isFocused ? ['selected'] : []}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1, alignItems: 'center', justifyContent : 'flex-start', marginBottom : 5, }}
+          >{isFocused ? <Image source={icons[1]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} /> : <Image source={icons[0]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} />}
+            <Text style={{ fontSize : 12, color: isFocused ? '#4F79D5' : '#000000' }}>
+              {label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
 
 function getTabBarVisible(route) {
   if (route.state == undefined) {
@@ -196,44 +258,33 @@ function MainTabs() {
   return (
     <Tabs.Navigator
       initialRouteName="Main"
-      drawerPosition="right">
+      tabBar={props => <MyTabBar {...props} />}
+      >
       <Tabs.Screen
         name='Main'
         component={MainStackScreen}
         options={({ route }) => ({
-          tabBarLabel: 'Main',
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" color={color} size={24} />
-          ),
+          tabBarLabel: '계모임',
           tabBarVisible: getTabBarVisible(route)
         })} />
       <Tabs.Screen
         name='Add'
         component={AddSocialScreen}
         options={{
-          tabBarLabel: 'Add',
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="form" color={color} size={24} />
-          ),
+          tabBarLabel: '만들기',
         }} />
       <Tabs.Screen
         name='Now'
         component={NowStackScreen}
         options={({ route }) => ({
-          tabBarLabel: 'Now',
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="barschart" color={color} size={24} />
-          ),
+          tabBarLabel: '모임현황',
           tabBarVisible: getTabBarVisible(route)
         })} />
       <Tabs.Screen
         name='Myinfo'
         component={MyinfoStackScreen}
         options={({ route }) => ({
-          tabBarLabel: 'Myinfo',
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="user" size={24} color="black" />
-          ),
+          tabBarLabel: '더보기',
           tabBarVisible: getTabBarVisible(route)
         })} />
     </Tabs.Navigator>
