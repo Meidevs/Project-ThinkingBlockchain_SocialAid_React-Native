@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { 
-  View, 
+import {
+  View,
   Image,
-  TouchableOpacity, 
+  TouchableOpacity,
   useWindowDimensions,
-  Button 
+  Button
 } from 'react-native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -157,13 +157,15 @@ const MainStackScreen = () => {
             borderBottomWidth: 0,
           },
           headerTitle: null,
-          headerLeft: () => <Image source={require('./assets/images/logo_main.png')} style={{width : 30, height : 30, resizeMode : 'contain', marginLeft : 10,}} />,
+          headerLeft: () => <Image source={require('./assets/images/logo_main.png')} style={{ width: 30, height: 30, resizeMode: 'contain', marginLeft: 10, }} />,
           headerRight: () =>
             <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{ padding: 10, }}>
-                <Octicons name='search' size={20} />
+              <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{ padding: 8, }}>
+                <Image source={require('./assets/images/ico_search.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
               </TouchableOpacity>
-              <Octicons name='bell' size={20} style={{ padding: 10, }} />
+              <View style={{ padding: 8 }}>
+                <Image source={require('./assets/images/ico_bell.png')} style={{ width: 20, height: 20, resizeMode: 'contain', marginRight: 10, }} />
+              </View>
             </View>
         })}
       />
@@ -255,7 +257,7 @@ function App() {
           component={RegisterScreen}
           options={{
             headerStyle: {
-              backgroundColor: '#F2F2F2',
+              backgroundColor: '#F7F7F7',
               elevation: 0,
               shadowOpacity: 0,
               borderBottomWidth: 0,

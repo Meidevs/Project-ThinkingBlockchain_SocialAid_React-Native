@@ -21,12 +21,12 @@ class MainScreen extends React.Component {
         super(props)
         this.state = {
             refreshing: false,
-            uri: ['../assets/images/BANNER.png'],
+            uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
             dataSet: [
-                { code: '1', name: '금계', shorttxt: '금을 모으자', longtxt: '부자됩시다', symbol: null },
-                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '치킨은 역시', symbol: null },
-                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '드림카', symbol: null },
-                { code: '4', name: '목돈', shorttxt: '저축', longtxt: '저축', symbol: null },
+                { code: '1', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
+                { code: '2', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
+                { code: '3', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
+                { code: '4', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
             ]
         }
     }
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
     },
     titletxt: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color : '#4C4C4C'
     },
     banner: {
         flex : 2,
@@ -132,7 +133,8 @@ const styles = StyleSheet.create({
     },
     TitleSubTxt: {
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color : '#4C4C4C'
     },
     bannerImage: {
     }
