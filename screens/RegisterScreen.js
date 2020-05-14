@@ -136,7 +136,7 @@ class RegisterScrenn extends React.Component {
                                         <Image source={require('../assets/images/input_checkbox.png')} style={styles.CheckImage} />
                                     }
                                 </View>
-                                <Text style={styles.InputTxt}>이용약관에 동의합니다</Text>
+                                <Text style={this.state.form.isSelect ? styles.InputOnTxt : styles.InputOffTxt}>이용약관에 동의합니다</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.Open}>
@@ -145,9 +145,9 @@ class RegisterScrenn extends React.Component {
                         </View>
                     </View>
                 </View>
-                <View style={styles.RegisterBtn}>
-                    <Text >동의하고 회원가입</Text>
-                </View>
+                <TouchableOpacity style={styles.RegisterBtn}onPress={() => this.props.navigation.navigate('Login')}>
+                    <Text style={styles.RegisterBtnTxt}>동의하고 회원가입</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -156,6 +156,7 @@ class RegisterScrenn extends React.Component {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
+        backgroundColor : '#F7F7F7'
     },
     TopTitle: {
         flex: 1,
@@ -234,7 +235,16 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#FFFFFF'
     },
-    InputTxt: {
+    InputOnTxt: {
+        fontSize: 12,
+        color: '#4C4C4C',
+        fontWeight :'bold'
+    },
+    InputOffTxt: {
+        fontSize: 12,
+        color: '#4C4C4C'
+    },
+    InputTxt : {
         fontSize: 12,
         color: '#929292'
     },
@@ -285,6 +295,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#CBCBCB'
+    },
+    RegisterBtnTxt : {
+        fontSize : 12,
+        fontWeight : 'bold',
+        color : '#FFFFFF'
     },
     Open: {
         flexDirection: 'row',

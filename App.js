@@ -1,6 +1,12 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text, TouchableOpacity, useWindowDimensions, Button } from 'react-native';
+import { 
+  View, 
+  Image,
+  TouchableOpacity, 
+  useWindowDimensions,
+  Button 
+} from 'react-native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -151,7 +157,7 @@ const MainStackScreen = () => {
             borderBottomWidth: 0,
           },
           headerTitle: null,
-          headerLeft: null,
+          headerLeft: () => <Image source={require('./assets/images/logo_main.png')} style={{width : 30, height : 30, resizeMode : 'contain', marginLeft : 10,}} />,
           headerRight: () =>
             <View style={{ flexDirection: 'row', }}>
               <TouchableOpacity onPress={() => navigation.navigate('Search')} style={{ padding: 10, }}>
