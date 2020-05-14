@@ -7,8 +7,10 @@ import {
     StyleSheet,
     SafeAreaView,
     ScrollView,
-    Button
+    ImageBackground,
+    Image
 } from 'react-native';
+
 const { width, height } = Dimensions.get('window');
 
 class DetailsScreen extends React.Component {
@@ -23,53 +25,27 @@ class DetailsScreen extends React.Component {
             <View style={styles.container}>
                 <SafeAreaView >
                     <ScrollView style={styles.scrollview}>
+                        <ImageBackground source={require('../assets/images/back_img.jpg')} style={styles.ImageContainer}>
+                            <View style={styles.Overlay}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                    <Image source={require('../assets/images/ico_back_white.png')} style={{ width: 20, height: 20, margin: 10, resizeMode: 'contain' }} />
+                                </TouchableOpacity>
+                            </View>
+                        </ImageBackground>
                         <View style={styles.TopContainer}>
                             <View style={styles.TopContent}>
-                                <View style={styles.TopBlank}>
+                                <Text style={styles.Title}>상품명 및 제목입니다.</Text>
+                                <View style={styles.STCArea}>
+                                    <Text style={{color : '#4C4C4C', fontSize : 20, fontWeight : 'bold', marginRight : 5,}}>7,502.12</Text><Text style={{color : '#4C4C4C', fontSize : 14, fontWeight : '600'}}>STC</Text>
                                 </View>
-                                <View style={styles.TopTitle}>
-                                    <Text style={styles.TopTitleTxt}>소제목</Text>
-                                    <Text style={styles.TopTitleTxt}>No.1</Text>
-                                </View>
-                                <View style={styles.TopBox}>
-                                    <View style={styles.TopBoxInner}>
-                                        <View style={styles.TopBoxInnerContent}>
-                                            <Text>계 금액</Text>
-                                            <Text>XXX STC</Text>
-                                        </View>
-                                        <View style={styles.TopBoxInnerContent}>
-                                            <Text>계 기간</Text>
-                                            <Text>10일</Text>
-                                        </View>
-                                        <View style={styles.TopBoxInnerContent}>
-                                            <Text>계 목적</Text>
-                                            <Text>금모으기</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <View style={styles.TopParticipants}>
-                                    <View style={styles.TopCircle}>
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#284678' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#284678' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#284678' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                        <View style={{ borderRadius: 50, backgroundColor: '#FFFFFF', borderWidth: 6, borderColor: '#FFFFFF' }} />
-                                    </View>
-                                    <View style={{ margin: 6, }}>
-                                        <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#FFFFFF' }}>현재 참가 인원</Text>
-                                    </View>
-                                </View>
+                                <Text style={styles.SubTxt}>소셜에이드 계모임 목적 및 설명입니다</Text>
+                                <Text>계기간 : 20.05.11 - 20.05.31</Text>
+                            </View>
+                            <View style={styles.ProgressBar}>
+
                             </View>
                         </View>
                         <View style={styles.BottomContainer}>
-
-                        </View>
-                        <View style={{ height: 50 }}>
 
                         </View>
                     </ScrollView>
@@ -96,62 +72,43 @@ const styles = StyleSheet.create({
     scrollview: {
         flexGrow: 1,
     },
+    ImageContainer: {
+        height: 200,
+        resizeMode: 'cover',
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
+    },
+    Overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.4)',
+    },
     TopContainer: {
         height: 250,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#7E90AE',
-    },
-    TopContent: {
-        flex: 1,
-        width: width * 0.9,
-    },
-    TopBlank: {
-        flex: 2,
-    },
-    TopTitle: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    TopTitleTxt: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: '#FFFFFF'
-    },
-    TopBox: {
-        flex: 2,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    TopBoxInner: {
-        flex: 1,
-        margin: 10,
-        width: width * 0.9,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: 'white'
-    },
-    TopBoxInnerContent: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    TopParticipants: {
-        flex: 1,
-        padding: 5,
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems : 'center',
     },
-    TopCircle: {
-        width: width * 0.7,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    TopContent : {
+        flex : 3,
+        flexDirection: 'column',
+        alignItems : 'center',
+        justifyContent : 'center',
     },
-    BottomContainer: {
-        backgroundColor: '#FFFFFF',
+    Title : {
+        margin : 5,
+        color : '#4C4C4C'
+    },
+    STCArea : {
+        flexDirection : 'row',
+        justifyContent : 'center',
+        alignItems : 'flex-end',
+        marginBottom : 5,
+    },
+    SubTxt : {
+        color : '#929292',
+        marginBottom : 5,
+    },
+    ProgressBar : {
+        flex : 1,
     },
     joinBtnContent: {
         position: 'absolute',
@@ -169,18 +126,18 @@ const styles = StyleSheet.create({
         height: width * 0.08,
         alignItems: 'center',
         justifyContent: 'center',
-        borderColor : 'gray',
-        borderWidth : 1,
-        borderRadius : 5,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
     },
     joinBtn: {
         margin: width * 0.03,
         width: width * 0.5,
         alignItems: 'center',
         justifyContent: 'center',
-        borderColor : 'gray',
-        borderWidth : 1,
-        borderRadius : 5,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
     }
 })
 

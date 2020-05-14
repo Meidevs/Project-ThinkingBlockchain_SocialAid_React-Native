@@ -186,13 +186,7 @@ const MainStackScreen = () => {
         name='Details'
         component={DetailsScreen}
         options={{
-          headerStyle: {
-            backgroundColor: '#7E90AE',
-            elevation: 0,
-            shadowOpacity: 0,
-            borderBottomWidth: 0,
-          },
-          headerTitle: null,
+          headerShown: false
         }} />
     </MainStack.Navigator >
   )
