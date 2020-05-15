@@ -122,9 +122,13 @@ const MyinfoStackScreen = () => {
             borderBottomWidth: 0,
           },
           headerTitle: null,
-          headerLeft: null,
+          headerLeft: () => <Image source={require('./assets/images/logo_main.png')} style={{ width: 30, height: 30, resizeMode: 'contain', marginLeft: 10, }} />,
           headerRight: () =>
-            <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
+            <View style={{ flexDirection: 'row', }}>
+              <View style={{ padding: 8 }}>
+                <Image source={require('./assets/images/ico_bell.png')} style={{ width: 20, height: 20, resizeMode: 'contain', marginRight: 10, }} />
+              </View>
+            </View>
         })}
       />
       <MyinfoStack.Screen

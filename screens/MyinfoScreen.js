@@ -3,8 +3,8 @@ import {
     View,
     Text,
     TouchableOpacity,
+    Image,
     Dimensions,
-    TextInput,
     StyleSheet,
     StatusBar
 } from 'react-native';
@@ -30,9 +30,19 @@ class MyinfoScreen extends React.Component {
                         <Text style={styles.TopTitleTxt}>더보기</Text>
                     </View>
                     <View style={styles.TopContent}>
-                        <View style={styles.WalletSector_1}>
-                            <Text style={styles.WalletTxt}>XXX님의 산타 월렛 계좌</Text>
-                            <Text style={styles.WalletAddrTxt}>XXXXXXXXXXXXXXXXXXXXXXXXX</Text>
+                        <View style={styles.WalletBox}>
+                            <Text style={styles.WalletTxt}>강서현님의 산타 월렛 계좌</Text>
+                            <View style={styles.WalletAddrBox}>
+                                <Text style={styles.WalletAddrTxt}>SdrJqbWY3G4T9PY77Yg5uBc VT</Text>
+                                <Image source={require('../assets/images/ico_copy.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
+                            </View>
+                        </View>
+                        <View style={styles.LineSection}>
+                            <Text style={{
+                                borderBottomColor: '#707A9D',
+                                borderBottomWidth: 1,
+                                height: 10,
+                            }} />
                         </View>
                         <View style={styles.WalletSector_2}>
                             <Text style={styles.WalletSTCTxt}>이용가능 STC</Text>
@@ -78,15 +88,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     TopContainer: {
-        flex: 4,
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     TopTitle: {
         flex: 1,
         flexDirection: 'row',
+        width: width * 0.9,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingLeft: 25,
-        paddingRight: 25,
     },
     TopTitleTxt: {
         fontSize: 15,
@@ -94,35 +105,45 @@ const styles = StyleSheet.create({
     },
     TopContent: {
         flex: 6,
+        width: width * 0.9,
         margin: 10,
-        backgroundColor: '#7A8CAB',
+        padding: 10,
+        backgroundColor: '#545E80',
         borderRadius: 10,
-        elevation : 3,
+        elevation: 3,
     },
-    WalletSector_1: {
+    WalletBox: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'center',
         padding: 10,
-        
+    },
+    WalletAddrBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     WalletTxt: {
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: '900',
         color: '#FFFFFF'
     },
     WalletAddrTxt: {
-        fontSize: 10,
+        fontSize: 14,
         fontWeight: '900',
-        color: '#FFFFFF'
+        color: '#919AB8',
+        marginRight: 10,
+    },
+    LineSection: {
+        flex: 1,
     },
     WalletSector_2: {
         flex: 1,
-        padding: 10,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingRight: 10,
+        paddingLeft: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     WalletSTCTxt: {
         fontSize: 15,
@@ -138,7 +159,7 @@ const styles = StyleSheet.create({
         flex: 5,
     },
     BottomContent: {
-        margin : 10,
+        margin: 10,
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'center',
@@ -152,7 +173,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        elevation : 3,
+        elevation: 3,
     },
     BottomContentBtn: {
         flexDirection: 'row',
