@@ -6,7 +6,8 @@ import {
     Image,
     Dimensions,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    VirtualizedList
 } from 'react-native'
 const { width, height } = Dimensions.get('window');
 
@@ -20,7 +21,7 @@ class ListUp extends React.Component {
         }
     }
 
-    _renderItem = ({ item }) => (
+    _renderItem = ({ item, index, separators }) => (
         <TouchableOpacity
             onPress={() =>
                 this.props.navigation.navigate('Details', {
@@ -49,8 +50,7 @@ class ListUp extends React.Component {
                 }} />
             </View>
             <View style={styles.DownerSection}>
-                <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04 ,marginTop : 5, marginRight : 5 }} />
-                
+                <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
                 <Text style={styles.ItemPeriod}>{item.longtxt}</Text>
             </View>
         </TouchableOpacity>
@@ -59,7 +59,13 @@ class ListUp extends React.Component {
     render() {
         return (
             <View>
-                <FlatList data={this.state.content} renderItem={this._renderItem} />
+                <FlatList
+                    ListHeaderComponent={<></>}
+                    data={this.state.content}
+                    renderItem={({ item, index, separators }) => this._renderItem({ item, index, separators })}
+                    keyExtractor={(item, index) => index.toString()}
+                    ListFooterComponent={<></>}
+                />
             </View>
         )
     }
@@ -107,13 +113,13 @@ const styles = StyleSheet.create({
     },
     DownerSection: {
         flex: 1,
-        flexDirection : 'row',
-        alignItems : 'center'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     ItemPeriod: {
         fontSize: 12,
         color: '#4C4C4C',
-        marginTop : 5
+        marginTop: 5
     },
 })
 export default ListUp;

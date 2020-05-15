@@ -7,7 +7,9 @@ import {
     Dimensions,
     StyleSheet,
     TextInput,
-    Image
+    Image,
+    SafeAreaView,
+    ScrollView
 } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
@@ -46,7 +48,7 @@ class RegisterScrenn extends React.Component {
 
     render() {
         return (
-            <View style={styles.Container}>
+            <SafeAreaView style={styles.Container}>
                 <StatusBar
                     barStyle="dark-content"
                     // dark-content, light-content and default
@@ -58,97 +60,99 @@ class RegisterScrenn extends React.Component {
                     //allowing light, but not detailed shapes
                     networkActivityIndicatorVisible={true}
                 />
-                <View style={styles.TopTitle}>
-                    <Text style={styles.TopTitleTxt}>산타 월렛 API 요청 정보 입력</Text>
-                </View>
-                <View style={styles.UserSelectionForm}>
-                    <TouchableOpacity
-                        style={this.state.user[0].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
-                        onPress={() => this.switchBtn(0)}>
-                        <Text
-                            style={this.state.user[0].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
-                            산타 월렛 기가입자
+                <ScrollView style={styles.ScrollView}>
+                    <View style={styles.TopTitle}>
+                        <Text style={styles.TopTitleTxt}>산타 월렛 API 요청 정보 입력</Text>
+                    </View>
+                    <View style={styles.UserSelectionForm}>
+                        <TouchableOpacity
+                            style={this.state.user[0].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
+                            onPress={() => this.switchBtn(0)}>
+                            <Text
+                                style={this.state.user[0].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
+                                산타 월렛 기가입자
                         </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={this.state.user[1].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
-                        onPress={() => this.switchBtn(1)}>
-                        <Text
-                            style={this.state.user[1].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
-                            산타 월렛 미가입자
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={this.state.user[1].isSelect ? styles.UserSwitchBtnOn : styles.UserSwitchBtnOff}
+                            onPress={() => this.switchBtn(1)}>
+                            <Text
+                                style={this.state.user[1].isSelect ? styles.UserSwitchBtnOnTxt : styles.UserSwitchBtnOffTxt}>
+                                산타 월렛 미가입자
                         </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.UserRegisterForm}>
+                        <View style={styles.InputForm}>
+                            <View>
+                                <Text style={styles.InputTxt}>아이디(이메일주소)</Text>
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'이메일을 입력하세요.'} />
+                            </View>
+                        </View>
+                        <View style={styles.InputForm}>
+                            <View>
+                                <Text style={styles.InputTxt}>이름</Text>
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'이름을 입력하세요.'} />
+                            </View>
+                        </View>
+                        <View style={styles.InputForm}>
+                            <View>
+                                <Text style={styles.InputTxt}>휴대폰번호</Text>
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'휴대폰번호를 입력하세요.'} />
+                            </View>
+                        </View>
+                        <View style={styles.InputFormA}>
+                            <View>
+                                <Text style={styles.InputTxt}>비밀번호</Text>
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'영문,숫자,특수문자 조합 8자리 이상'} />
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'비밀번호 확인'} />
+                            </View>
+                        </View>
+                        <View style={styles.InputFormA}>
+                            <View>
+                                <Text style={styles.InputTxt}>PIN번호</Text>
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'PIN번호를 입력하세요'} />
+                            </View>
+                            <View style={styles.TxtInputForm}>
+                                <TextInput placeholder={'PIN번호 확인'} />
+                            </View>
+                        </View>
+                        <View style={styles.AcceptForm}>
+                            <View>
+                                <TouchableOpacity style={styles.CheckBox} onPress={() => this.switchBtn(2)}>
+                                    <View style={this.state.form.isSelect ? styles.CheckImageBox : styles.NonCheckImageBox}>
+                                        {this.state.form.isSelect ?
+                                            <Image source={require('../assets/images/ico_check_blue.png')} style={styles.CheckImage} />
+                                            :
+                                            <Image source={require('../assets/images/input_checkbox.png')} style={styles.CheckImage} />
+                                        }
+                                    </View>
+                                    <Text style={this.state.form.isSelect ? styles.InputOnTxt : styles.InputOffTxt}>이용약관에 동의합니다</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.Open}>
+                                <Text style={styles.InputTxt}>약관보기</Text>
+                                <Image source={require('../assets/images/ico_arrow_right.png')} style={styles.CheckImage} />
+                            </View>
+                        </View>
+                    </View>
+                    <TouchableOpacity style={styles.RegisterBtn} onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style={styles.RegisterBtnTxt}>동의하고 회원가입</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.UserRegisterForm}>
-                    <View style={styles.InputForm}>
-                        <View>
-                            <Text style={styles.InputTxt}>아이디(이메일주소)</Text>
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'이메일을 입력하세요.'} />
-                        </View>
-                    </View>
-                    <View style={styles.InputForm}>
-                        <View>
-                            <Text style={styles.InputTxt}>이름</Text>
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'이름을 입력하세요.'} />
-                        </View>
-                    </View>
-                    <View style={styles.InputForm}>
-                        <View>
-                            <Text style={styles.InputTxt}>휴대폰번호</Text>
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'휴대폰번호를 입력하세요.'} />
-                        </View>
-                    </View>
-                    <View style={styles.InputFormA}>
-                        <View>
-                            <Text style={styles.InputTxt}>비밀번호</Text>
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'영문,숫자,특수문자 조합 8자리 이상'} />
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'비밀번호 확인'} />
-                        </View>
-                    </View>
-                    <View style={styles.InputFormA}>
-                        <View>
-                            <Text style={styles.InputTxt}>PIN번호</Text>
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'PIN번호를 입력하세요'} />
-                        </View>
-                        <View style={styles.TxtInputForm}>
-                            <TextInput placeholder={'PIN번호 확인'} />
-                        </View>
-                    </View>
-                    <View style={styles.AcceptForm}>
-                        <View>
-                            <TouchableOpacity style={styles.CheckBox} onPress={() => this.switchBtn(2)}>
-                                <View style={this.state.form.isSelect ? styles.CheckImageBox : styles.NonCheckImageBox}>
-                                    {this.state.form.isSelect ?
-                                        <Image source={require('../assets/images/ico_check_blue.png')} style={styles.CheckImage} />
-                                        :
-                                        <Image source={require('../assets/images/input_checkbox.png')} style={styles.CheckImage} />
-                                    }
-                                </View>
-                                <Text style={this.state.form.isSelect ? styles.InputOnTxt : styles.InputOffTxt}>이용약관에 동의합니다</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.Open}>
-                            <Text style={styles.InputTxt}>약관보기</Text>
-                            <Image source={require('../assets/images/ico_arrow_right.png')} style={styles.CheckImage} />
-                        </View>
-                    </View>
-                </View>
-                <TouchableOpacity style={styles.RegisterBtn}onPress={() => this.props.navigation.navigate('Login')}>
-                    <Text style={styles.RegisterBtnTxt}>동의하고 회원가입</Text>
-                </TouchableOpacity>
-            </View>
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }
@@ -156,7 +160,7 @@ class RegisterScrenn extends React.Component {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        backgroundColor : '#F7F7F7'
+        backgroundColor: '#F7F7F7'
     },
     TopTitle: {
         flex: 1,
@@ -238,13 +242,13 @@ const styles = StyleSheet.create({
     InputOnTxt: {
         fontSize: 12,
         color: '#4C4C4C',
-        fontWeight :'bold'
+        fontWeight: 'bold'
     },
     InputOffTxt: {
         fontSize: 12,
         color: '#4C4C4C'
     },
-    InputTxt : {
+    InputTxt: {
         fontSize: 12,
         color: '#929292'
     },
@@ -292,14 +296,15 @@ const styles = StyleSheet.create({
     },
     RegisterBtn: {
         flex: 1,
+        height: width * 0.135,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#CBCBCB'
     },
-    RegisterBtnTxt : {
-        fontSize : 12,
-        fontWeight : 'bold',
-        color : '#FFFFFF'
+    RegisterBtnTxt: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#FFFFFF'
     },
     Open: {
         flexDirection: 'row',

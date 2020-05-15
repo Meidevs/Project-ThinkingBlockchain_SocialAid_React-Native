@@ -7,8 +7,11 @@ import {
     StyleSheet,
     SafeAreaView,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
 const { width, height } = Dimensions.get('window');
 
 class SocialNowScreen extends React.Component {
@@ -57,7 +60,7 @@ class SocialNowScreen extends React.Component {
     }
     render() {
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.Container}>
                 <StatusBar
                     barStyle="dark-content"
                     // dark-content, light-content and default
@@ -73,107 +76,118 @@ class SocialNowScreen extends React.Component {
                     nestedScrollEnabled={true}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    style={styles.scrollview}
+                    vertical={true}
+                    style={styles.Scrollview}
                 >
                     <View style={styles.TopContainer}>
-                        <View style={styles.TopContentUpper}>
-                            <View style={styles.TopContentTxt}>
-                                <View style={styles.Content}>
-                                    <Text style={styles.TopTxt}>
-                                        계 현황
-                                    </Text>
+                        <LinearGradient
+                            colors={['rgba(141,158,255,1)', 'rgba(89, 131, 224, 1)']}
+                            style={styles.GradientColor}
+                        >
+                            <View style={styles.TopContentUpper}>
+                                <View style={styles.TitleBox}>
+                                    <Text style={styles.TitleTxt}>전체 계모임 금액</Text>
+                                    <View style={styles.STCBox}>
+                                        <Text style={styles.STCCount}>7,502.12</Text><Text style={styles.STCTxt}>STC</Text>
+                                    </View>
                                 </View>
-                                <View style={styles.Content}>
-                                    <Text style={styles.SubTopTxt}>
-                                        전체 계모임 금액
-                                    </Text>
-                                    <Text style={styles.TopTxt}>
-                                        XXXXX STC
-                                    </Text>
-                                </View>
-                                <View style={styles.Content}>
-                                    <Text style={styles.SubTopTxt}>
-                                        예상 수익률
-                                    </Text>
-                                    <Text style={styles.TopTxt}>
-                                        수익률%
-                                    </Text>
+                                <View style={styles.RevenueBox}>
+                                    <View style={styles.LeftBox}>
+                                        <Image source={require('../assets/images/ico_current1_graph.png')} style={{ width: 30, height: 30, resizeMode: 'center', borderRadius: 10, }} />
+                                    </View>
+                                    <View style={styles.RightBox}>
+                                        <View style={styles.RightRevenueBox}>
+                                            <Text style={styles.RevenueTxt}>예상 수익률</Text><Text style={styles.RevenueTxt}>+50%</Text>
+                                        </View>
+                                        <View style={styles.ProgressBar}>
+                                            <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.7 * 5 / 10, height: 6, borderRadius: 10, }} />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
-                        <View style={styles.TopContentDowner}>
-                            <ScrollView
-                                nestedScrollEnabled={true}
-                                showsHorizontalScrollIndicator={false}
-                                showsVerticalScrollIndicator={false}
-                                horizontal={true}
-                                style={{ paddingVertical: 10 }}
-                            >
-                                <View style={styles.SubDetails}>
-                                    <View style={styles.SubContent}>
-                                        <Text style={styles.SubContentTxt}>총 누적계</Text>
+                            <View style={styles.TopContentDowner}>
+                                <ScrollView
+                                    nestedScrollEnabled={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    showsVerticalScrollIndicator={false}
+                                    horizontal={true}
+                                    style={{ paddingHorizontal: 20, marginBottom: 40 }}
+                                >
+                                    <View style={styles.ContentBox}>
+                                        <Image source={require('../assets/images/ico_current1_swipe1.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                                        <View style={styles.TextBox}>
+                                            <Text style={styles.Txt}>
+                                                총 누적 계
+                                            </Text>
+                                            <Text style={styles.Txt}>
+                                                350
+                                            </Text>
+                                        </View>
                                     </View>
-                                    <Text style={styles.TopTxt}>1</Text>
-                                </View>
-                                <View style={styles.SubDetails}>
-                                    <View style={styles.SubContent}>
-                                        <Text style={styles.SubContentTxt}>누적 수익</Text>
+                                    <View style={styles.ContentBox}>
+                                        <Image source={require('../assets/images/ico_current1_swipe2.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                                        <View style={styles.TextBox}>
+                                            <Text style={styles.Txt}>
+                                                누적 수익
+                                            </Text>
+                                            <Text style={styles.Txt}>
+                                                2,000,000
+                                            </Text>
+                                        </View>
                                     </View>
-                                    <Text style={styles.TopTxt}>2</Text>
-                                </View>
-                                <View style={styles.SubDetails}>
-                                    <View style={styles.SubContent}>
-                                        <Text style={styles.SubContentTxt}>누적 상환 계</Text>
+                                    <View style={styles.ContentBox}>
+                                        <Image source={require('../assets/images/ico_current1_swipe3.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                                        <View style={styles.TextBox}>
+                                            <Text style={styles.Txt}>
+                                                누적 상환
+                                            </Text>
+                                            <Text style={styles.Txt}>
+                                                500
+                                            </Text>
+                                        </View>
                                     </View>
-                                    <Text style={styles.TopTxt}>3</Text>
-                                </View>
-                            </ScrollView>
-                        </View>
+                                </ScrollView>
+                            </View>
+                        </LinearGradient>
                     </View>
                     <View style={styles.BottomContainer}>
                         <View style={styles.BottomUpperContent}>
                             <TouchableOpacity style={styles.BottomFirstBox} onPress={() => this.props.navigation.navigate('NowDetails')}>
-                                <Text style={styles.BottomContentTxt}>계모임 현황</Text>
-                                <View style={styles.FirstBoxBtn}>
-                                    <Text style={styles.BottomContentTxt}>총 X 건</Text>
-                                    <Text style={styles.BottomContentTxt}>></Text>
+                                <Text style={styles.BottomUpperTxt}>계모임 현황</Text>
+                                <View style={styles.GoToDetails}>
+                                    <Text style={styles.GoToDetailsTxt}>총 30건</Text>
+                                    <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.BottomMiddleContent}>
                             <View style={styles.BottomSecondBox}>
                                 <View style={styles.BottomTitleBox}>
-                                    <View style={{ flexDirection: 'column', flex: 4, }}>
-                                        <Text style={styles.BottomContentTxt}>상환 내역</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'column', flex: 1, }}>
-                                        <View style={styles.BottomTitleBox}>
-                                            <TouchableOpacity onPress={() => this.switchBtn(0)}>
-                                                <Text style={this.state.styles[0].isSelect ? styles.txtPressed : styles.txtNotPressed}>월간</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.switchBtn(1)}>
-                                                <Text style={this.state.styles[1].isSelect ? styles.txtPressed : styles.txtNotPressed}>연간</Text>
-                                            </TouchableOpacity>
-                                        </View>
+                                    <Text style={styles.BottomTitleTxt}>상환 내역</Text>
+                                    <View style={styles.SwitchBtnBox}>
+                                        <TouchableOpacity onPress={() => this.switchBtn(0)} style={styles.SwitchBtn}>
+                                            <Text style={this.state.styles[0].isSelect ? styles.txtPressed : styles.txtNotPressed}>월간</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.switchBtn(1)}  style={styles.SwitchBtn}>
+                                            <Text style={this.state.styles[1].isSelect ? styles.txtPressed : styles.txtNotPressed}>연간</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                                 <View style={styles.BottomSubDetailBox}>
-                                    <View>
-                                        <Text style={styles.SubDetailTxt}>x 월 수령액</Text>
-                                        <Text style={{ color: '#2D67C4', fontSize: 12, fontWeight: '800' }}>xxxx STC</Text>
-                                    </View>
+                                    <Text style={styles.BottomSubDetailTxt_1}>3월 수령액</Text>
+                                    <Text style={styles.BottomSubDetailTxt_2}>200 STC</Text>
                                 </View>
                                 <View style={styles.BottomGraphBox}>
-                                    {this.state.styles[0].isSelect ?
+                                {this.state.styles[0].isSelect ?
                                         (
                                                 <View style={styles.MonthlyGraph}>
                                                     {this.state.dataSet[0].month.map((data, i) => (
                                                         <View style={{ flexDirection: 'column', flex: 1, }}>
-                                                            <View style={{ height: data * 2, backgroundColor: '#BBCEEC', margin: 5, }}>
+                                                            <View style={{ height: data * 2, backgroundColor: '#C9C9C9', margin: 8, borderRadius :10,}}>
                                                             </View>
                                                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                                                <Text style={{ fontSize: 8, color: '#BBCEEC' }}>
-                                                                    {i}
+                                                                <Text style={{ fontSize: 8, color: '#C9C9C9' }}>
+                                                                    {i + 1}
                                                                 </Text>
                                                             </View>
                                                         </View>
@@ -185,6 +199,9 @@ class SocialNowScreen extends React.Component {
                                         )
                                     }
                                 </View>
+                                <View style={styles.EmptyBox}>
+
+                                </View>
                             </View>
                         </View>
                         <View style={styles.BottomLowerContent}>
@@ -194,68 +211,127 @@ class SocialNowScreen extends React.Component {
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
+            </SafeAreaView >
         )
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    Container: {
+        flex: 1
     },
-    scrollview: {
+    Scrollview: {
         flexGrow: 1,
     },
     TopContainer: {
         flex: 1,
-        backgroundColor: '#7A8CAB',
         height: 300,
     },
-    TopContentUpper: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingTop: 15,
-    },
-    TopContentTxt: {
+    GradientColor: {
+        height: 300,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
         flexDirection: 'column',
-        alignItems: 'flex-start'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    Content: {
-        paddingBottom: 10
+    TopContentUpper: {
+        flex: 0.8,
+        width: width * 0.9,
+        marginTop: 5,
     },
-    SubTopTxt: {
-        fontSize: 10,
-        fontWeight: 'bold',
-        color: '#FFFFFF'
+    TitleBox: {
+        flexDirection: 'column',
+        marginBottom: 15,
     },
-    TopTxt: {
+    TitleTxt: {
+        color: '#FFFFFF',
+        fontSize: 11,
+        fontWeight: '600'
+    },
+    STCBox: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+    },
+    STCCount: {
+        color: '#FFFFFF',
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#FFFFFF'
+        marginRight: 5
+    },
+    STCTxt: {
+        color: '#FFFFFF',
+        fontSize: 14,
+        fontWeight: '900'
+    },
+    RevenueBox: {
+        width: width * 0.9,
+        height: 65,
+        borderRadius: 5,
+        backgroundColor: '#4F79D5',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    LeftBox: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    RightBox: {
+        flex: 5,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    RightRevenueBox: {
+        width: width * 0.7,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    RevenueTxt: {
+        fontSize: 12,
+        color: '#FFFFFF',
+        fontWeight: '900'
+    },
+    ProgressBar: {
+        width: width * 0.7,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        marginTop: 5,
     },
     TopContentDowner: {
         flex: 1,
         flexDirection: 'row',
+        alignItems: 'center',
+    },
+    ContentBox: {
+        width: width * 0.35,
+        height: width * 0.3,
+        backgroundColor: '#FFFFFF',
+        marginRight: 8,
+        borderRadius: 5,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5,
+    },
+    TextBox: {
+        marginTop: 5,
+        justifyContent: 'center',
         alignItems: 'center'
     },
-    SubDetails: {
-        backgroundColor: '#284678',
-        width: 120,
-        height: 60,
-        margin: 10,
-        borderRadius: 10,
-        alignItems: 'center',
-        elevation: 3,
-    },
-    SubContent: {
-        padding: 5,
-    },
-    SubContentTxt: {
+    Txt: {
+        color: '#929292',
+        fontWeight: 'bold',
         fontSize: 12,
-        color: '#FFFFFF'
     },
     BottomContainer: {
         height: 600,
-        top: -20,
+        top: -35,
     },
     BottomUpperContent: {
         flex: 1,
@@ -274,10 +350,21 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 3,
     },
-    FirstBoxBtn: {
+    BottomUpperTxt: {
+        fontSize: 13,
+        color: '#929292',
+        fontWeight: 'bold'
+    },
+    GoToDetailsTxt: {
+        color: '#4F79D5',
+        fontSize: 13,
+        fontWeight: 'bold',
+        marginRight: 5,
+    },
+    GoToDetails: {
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
+        alignItems: 'center'
     },
     BottomMiddleContent: {
         flex: 5,
@@ -300,19 +387,45 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    BottomTitleTxt : {
+        color : '#4C4C4C',
+        fontSize : 14,
+        fontWeight : 'bold'
+    },  
+    SwitchBtnBox : {
+        flexDirection : 'row',
+        justifyContent : 'center',
+    },
     BottomSubDetailBox: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginTop: 20,
+        marginBottom : 10,
     },
-    SubDetailTxt: {
-        fontSize: 12,
-        fontWeight: '800'
+    BottomSubDetailTxt_1 : {
+        color : '#929292',
+        fontWeight : '800',
+        fontSize : 12,
+        marginRight : 5
+    },
+    BottomSubDetailTxt_2 : {
+        color : '#4F79D5',
+        fontWeight : '800',
+        fontSize : 12,
     },
     BottomGraphBox: {
-        flex: 10,
+        flex: 8,
+        flexDirection : 'column',
+        justifyContent : 'flex-end',
+        alignItems : 'center'
+    },
+    MonthlyGraph : {
+        flexDirection : 'row',
+        alignItems : 'flex-end'
+    },
+    EmptyBox : {
+        flex : 1,
     },
     BottomLowerContent: {
         flex: 3,
@@ -320,24 +433,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    BottomContentTxt: {
-        fontSize: 15,
-        fontWeight: '800',
+    SwitchBtn : {
+        marginRight : 5,
     },
     txtNotPressed: {
-        fontSize: 15,
-        color: 'gray',
-        fontWeight: '800'
+        fontSize: 13,
+        color: '#929292',
+        fontWeight: 'bold'
     },
     txtPressed: {
-        fontSize: 15,
-        color: 'black',
-        fontWeight: '800'
+        fontSize: 13,
+        color: '#4C4C4C',
+        fontWeight: 'bold'
     },
-    MonthlyGraph: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-    }
+
 })
 export default SocialNowScreen;

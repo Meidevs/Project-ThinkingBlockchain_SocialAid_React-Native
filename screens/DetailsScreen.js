@@ -37,7 +37,7 @@ class DetailsScreen extends React.Component {
                             <View style={styles.TopContent}>
                                 <Text style={styles.Title}>상품명 및 제목입니다.</Text>
                                 <View style={styles.STCArea}>
-                                    <Text style={{ color: '#4C4C4C', fontSize: 20, fontWeight: 'bold', marginRight: 5, }}>7,502.12</Text><Text style={{ color: '#4C4C4C', fontSize: 14, fontWeight: '600' }}>STC</Text>
+                                    <Text style={styles.STCCount}>7,502.12</Text><Text style={styles.STCTxt}>STC</Text>
                                 </View>
                                 <Text style={styles.SubTxt}>소셜에이드 계모임 목적 및 설명입니다</Text>
                                 <Text>계기간 : 20.05.11 - 20.05.31</Text>
@@ -59,7 +59,7 @@ class DetailsScreen extends React.Component {
                 </SafeAreaView>
                 <View style={styles.joinBtnContent}>
                     <TouchableOpacity style={styles.calBtn}>
-                        <Image source={require('../assets/images/ico_calculator.png')} style={{marginRight : 5, width : 15, height : 15, resizeMode : 'contain'}}/>
+                        <Image source={require('../assets/images/ico_calculator.png')} style={{ marginRight: 5, width: 15, height: 15, resizeMode: 'contain' }} />
                         <Text style={styles.Txt}>수익 계산</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.joinBtn}>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     calBtn: {
         flex: 1,
         height: width * 0.135,
-        flexDirection : 'row',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#9F9F9F'
@@ -160,10 +160,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#4F79D5'
     },
-    Txt : {
-        color : '#FFFFFF',
-        fontSize : 12,
-        fontWeight : 'bold'
+    Txt: {
+        color: '#FFFFFF',
+        fontSize: 12,
+        fontWeight: 'bold'
+    },
+    STCCount: {
+        color: '#4C4C4C',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginRight: 5
+    },
+    STCTxt: {
+        color: '#4C4C4C',
+        fontSize: 14,
+        fontWeight: '600'
     }
 })
 

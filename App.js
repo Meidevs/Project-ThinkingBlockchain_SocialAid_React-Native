@@ -86,9 +86,9 @@ function MyTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1, alignItems: 'center', justifyContent : 'flex-start', marginBottom : 5, }}
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', marginBottom: 5, }}
           >{isFocused ? <Image source={icons[1]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} /> : <Image source={icons[0]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} />}
-            <Text style={{ fontSize : 12, color: isFocused ? '#4F79D5' : '#000000' }}>
+            <Text style={{ fontSize: 12, color: isFocused ? '#4F79D5' : '#000000' }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -165,15 +165,19 @@ const NowStackScreen = () => {
         component={SocialNowScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#7A8CAB',
+            backgroundColor: '#8D9EFF',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
           },
           headerTitle: null,
-          headerLeft: null,
+          headerLeft: () => <Image source={require('./assets/images/logo_white.png')} style={{ width: 30, height: 30, resizeMode: 'contain', marginLeft: 10, }} />,
           headerRight: () =>
-            <Octicons name='bell' size={20} style={{ marginRight: 20, }} />
+            <View style={{ flexDirection: 'row', }}>
+              <View style={{ padding: 8 }}>
+                <Image source={require('./assets/images/ico_bell_white.png')} style={{ width: 20, height: 20, resizeMode: 'contain', marginRight: 10, }} />
+              </View>
+            </View>
         })}
       />
       <NowStack.Screen
@@ -259,7 +263,7 @@ function MainTabs() {
     <Tabs.Navigator
       initialRouteName="Main"
       tabBar={props => <MyTabBar {...props} />}
-      >
+    >
       <Tabs.Screen
         name='Main'
         component={MainStackScreen}
