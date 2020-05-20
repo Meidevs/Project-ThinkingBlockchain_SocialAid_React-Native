@@ -4,8 +4,12 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Text
+  Text,
+  Dimensions
 } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -40,7 +44,7 @@ function MyTabBar({ state, descriptors, navigation }) {
   //state : Array [Name, Params of BottomTabNavigation Component]
   //descriptor : navigation.Functions, Options, render(?) What is Render?
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row'}}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         // Label is the Way to Put Name on BottomTabNavigator using Route Name

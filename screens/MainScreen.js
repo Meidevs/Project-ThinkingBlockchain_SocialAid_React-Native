@@ -27,6 +27,7 @@ class MainScreen extends React.Component {
                 { code: '2', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
                 { code: '3', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
                 { code: '4', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
+                { code: '5', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: null },
             ]
         }
     }
@@ -74,10 +75,8 @@ class MainScreen extends React.Component {
                         <View style={styles.SubTitle}>
                             <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
-                        <View style={styles.GroupList}>
                             <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
                         </View>
-                    </View>
                 </ScrollView>
             </SafeAreaView>
         )

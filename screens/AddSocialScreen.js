@@ -12,6 +12,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import PeriodPicker from '../assets/component/PeriodPicker';
+import CatesPicker from '../assets/component/CatesPicker';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,18 +21,38 @@ class AddSocialScreen extends React.Component {
         super(props)
         this.state = {
             period: 10,
+            prcnt : 0.2,
+            cates: '자동차'
         }
     }
     PeriodCallBack = (dataFromChild) => {
-        this.EndDateCal(dataFromChild.period)
+        this.EndCal(dataFromChild.period, this.state.cates)
     }
-    EndDateCal = (period) => {
-        this.setState({ period: period })
+    CateCallBack = (dataFromChild) => {
+        this.EndCal(this.state.period, dataFromChild.cates)
+    }
+    CalReward = (data) => {
+        console.log(this.state.prcnt)
+        this.setState({ text: data, revenue: parseInt(data) * this.state.prcnt });
+    }
+
+    EndCal = (period, cates) => {
+        switch (parseInt(period)) {
+            case 10:
+                this.setState({ period: period, cates: cates, prcnt: 0.2 });
+                break;
+            case 20:
+                this.setState({ period: period, cates: cates, prcnt: 0.4 })
+                break;
+            case 30:
+                this.setState({ period: period, cates: cates, prcnt: 0.6 })
+                break;
+        }
     }
     render() {
-        const { period } = this.state;
+        const { period, text, cates, expla } = this.state;
         return (
-            <View style={styles.Container}>
+            <SafeAreaView style={styles.Container}>
                 <StatusBar
                     barStyle="dark-content"
                     // dark-content, light-content and default
@@ -43,69 +64,92 @@ class AddSocialScreen extends React.Component {
                     //allowing light, but not detailed shapes
                     networkActivityIndicatorVisible={true}
                 />
-                <View style={styles.Header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                        <Image source={require('../assets/images/ico_back.png')} style={{ width: 20, height: 20, margin: 10, resizeMode: 'contain' }} />
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                >
+                    <View style={styles.TopContainer}>
+                        <View style={styles.TopTitle}>
+                            <Text style={styles.TopTitleTxt}>만들기</Text>
+                        </View>
+                        <View style={styles.TopContent}>
+                            <View style={styles.TopSubTitle}>
+                                <Image source={require('../assets/images/ico_check_blue.png')} style={{ width: 12, height: 12, marginRight: 5, resizeMode: 'contain' }} />
+                                <Text style={styles.SubTitleTxt}>기본사항</Text>
+                            </View>
+                            <View style={styles.ContentBox}>
+                                <Text style={styles.InnerTxt}>계모임명</Text>
+                                <View style={styles.TopContentInputBox}>
+                                    <TextInput placeholder={'계모임 명을 입력하세요.'} />
+                                </View>
+                            </View>
+                            <View style={styles.TopContentBox_2}>
+                                <View style={styles.TopContent_2InnerBox}>
+                                    <Text style={styles.InnerTxt}>기간 (최소 10일 이상)</Text>
+                                    <PeriodPicker callback={this.PeriodCallBack} />
+                                </View>
+                                <View style={styles.TopContent_2InnerBox}>
+                                    <Text style={styles.InnerTxt}>납입금액 (최대 100STC)</Text>
+                                    <View style={styles.STCInputBox}>
+                                        <TextInput
+                                            placeholder={'STC를 입력해주세요'}
+                                            onChangeText={(text) => this.CalReward(text)}
+                                            value={text}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.BottomContainer}>
+                        <View style={styles.BottomContent}>
+                            <View style={styles.TopSubTitle}>
+                                <Image source={require('../assets/images/ico_check_blue.png')} style={{ width: 12, height: 12, marginRight: 5, resizeMode: 'contain' }} />
+                                <Text style={styles.SubTitleTxt}>계모임 목적</Text>
+                            </View>
+                            <View style={styles.ContentBox}>
+                                <Text style={styles.InnerTxt}>카테고리</Text>
+                                <CatesPicker callback={this.CateCallBack} />
+                            </View>
+                            <View style={styles.ContentBox}>
+                                <Text style={styles.InnerTxt}>설명</Text>
+                                <View style={styles.TopContentInputBox}>
+                                    <TextInput
+                                        placeholder={'계모임에 대한 설명을 입력해주세요 '}
+                                        onChangeText={(expla) => this.setState({ expla })}
+                                        value={expla}
+                                    />
+                                </View>
+                            </View>
+                            <View style={styles.ContentBox}>
+                                <Text style={styles.CalRewardTxt}>수익 계산</Text>
+                                <View style={styles.Reward}>
+                                    <Text>{this.state.revenue}</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <TouchableOpacity style={styles.CreateBox}>
+                        <Text>계모임 만들기</Text>
+                        <Text>계모임 만들기</Text>
+                        <Text>계모임 만들기</Text>
+                        <Text>계모임 만들기</Text>
                     </TouchableOpacity>
-                </View>
-                <SafeAreaView>
-                    <ScrollView style={styles.Scrollview}>
-                        <View style={styles.TopContainer}>
-                            <View style={styles.TopTitle}>
-                                <Text style={styles.TopTitleTxt}>만들기</Text>
-                            </View>
-                            <View style={styles.TopContent}>
-                                <View style={styles.TopSubTitle}>
-                                    <Image source={require('../assets/images/ico_check_blue.png')} style={{ width: 12, height: 12, marginRight: 5, resizeMode: 'contain' }} />
-                                    <Text style={styles.TopSubTitleTxt}>기본사항</Text>
-                                </View>
-                                <View style={styles.TopContentBox}>
-                                    <Text style={styles.TopInnerTxt}>계모임명</Text>
-                                    <View style={styles.TopContentInputBox}>
-                                        <TextInput placeholder={'계모임 명을 입력하세요.'}/>
-                                    </View>
-                                </View>
-                                <View style={styles.TopContentBox_2}>
-                                    <View style={styles.TopContent_2InnerBox}>
-                                        <Text>기간 (최소 10일 이상)</Text>
-                                        <PeriodPicker callback={this.PeriodCallBack} />
-                                    </View>
-                                    <View style={styles.TopContent_2InnerBox}>
-                                        <Text>납입금액 (최대 100STC)</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.BottomContainer}>
-
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
-            </View>
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     Container: {
-        flex: 1,
         alignItems: 'center'
     },
-    Header: {
-        width: width,
-        height: height * 0.07,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-    },
-    Scrollview: {
-        flexGrow: 1,
-    },
     TopContainer: {
-        width: width * 0.94,
-        height: height * 0.4,
+        marginTop: 20,
+        marginRight: 10,
+        marginLeft: 10,
     },
     TopTitle: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'flex-start',
     },
@@ -115,52 +159,97 @@ const styles = StyleSheet.create({
         color: '#4C4C4C',
     },
     TopContent: {
-        flex: 6,
+        marginTop: 10,
+        marginBottom: 10,
         flexDirection: 'column',
         justifyContent: 'flex-start'
     },
     TopSubTitle: {
-        flex: 1,
+        marginTop: 10,
+        marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    TopSubTitleTxt: {
+    SubTitleTxt: {
         fontSize: 15,
         fontWeight: 'bold',
         color: '#4F79D5'
     },
-    TopContentBox: {
-        flex: 1,
+    ContentBox: {
         flexDirection: 'column',
         justifyContent: 'center',
+        marginBottom: 10,
     },
     TopContentInputBox: {
-        height : width * 0.13,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#E0E0E0',
         justifyContent: 'center',
         backgroundColor: '#FFFFFF',
         marginTop: 5,
+        padding: 10,
     },
-    TopInnerTxt: {
+    InnerTxt: {
         marginBottom: 5,
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#4C4C4C'
     },
     TopContentBox_2: {
         flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 10,
     },
     TopContent_2InnerBox: {
         flex: 1,
         flexDirection: 'column',
+        justifyContent: 'center',
         marginTop: 5,
-        backgroundColor: 'red'
+    },
+    STCInputBox: {
+        marginTop: 5,
+        width: width * 0.94 / 2,
+        // height: width * 0.13,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#E0E0E0',
+        backgroundColor: '#FFFFFF',
+        padding: 10,
     },
     BottomContainer: {
-        height: height * 0.6,
+        marginRight: 10,
+        marginLeft: 10,
+    },
+    BottomContent: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
+    },
+    BottomContentBox: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        marginBottom: 10,
+    },
+    CalRewardTxt: {
+        fontSize: 16,
+        fontWeight: '700',
+        color: '#4C4C4C'
+    },
+    Reward: {
+        height: width * 0.16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 5,
+        padding: 10,
+    },
+    CreateBox: {
+        width: width,
+        backgroundColor: 'red'
     }
 })
 
