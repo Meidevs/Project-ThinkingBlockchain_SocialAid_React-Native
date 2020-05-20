@@ -4,41 +4,88 @@ import {
     Text,
     TextInput,
     Dimensions,
-    Button,
+    Image,
     StatusBar,
     StyleSheet,
-    TouchableOpacity
+    FlatList,
+    TouchableOpacity,
+    SafeAreaView,
+    ScrollView
 } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
-import ListUp from '../assets/component/ListUp';
 import CatesPicker from '../assets/component/CatesPicker';
 
 class SearchScrenn extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
+            cnt: 0,
             dataSet: [
-                { code: '1', name: '금계', shorttxt: '금을 모으자', longtxt: '부자됩시다', symbol: null },
-                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '치킨은 역시', symbol: null },
-                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '드림카', symbol: null },
-                { code: '4', name: '목돈', shorttxt: '저축', longtxt: '저축', symbol: null },
+                { user: null, cates: null, stc: null, days: null },
             ],
-            cates: '카테고리'
         }
     }
+    _renderItem = ({ item, index, separators }) => (
+        <TouchableOpacity
+            onPress={() =>
+                this.props.navigation.navigate('Details', {
+                    item,
+                })
+            }
+            style={styles.BtnFrame}
+        >
+            <View style={styles.UpperSection}>
+                <View style={styles.LeftArea}>
+                    <Text style={styles.ItemName}>{item.user.length > 22 ? item.user.substring(0, 22) + '...' : item.user}</Text>
+                    <Text style={styles.ItemExpla}>{item.cates.length > 30 ? item.cates.substring(0, 30) + '...' : item.cates}</Text>
 
-    CateCallBack = (dataFromChild) => {
-        this.EndCal(dataFromChild.cates)
+                </View>
+                <View style={styles.RightArea}>
+                    <View style={styles.Circle}>
+                        <Text>{item.stc}</Text>
+                    </View>
+                </View>
+            </View>
+            <View style={styles.LineSection}>
+                <Text style={{
+                    borderBottomColor: '#F3F3F3',
+                    borderBottomWidth: 1,
+                    height: 10,
+                }} />
+            </View>
+            <View style={styles.DownerSection}>
+                <Image source={require('../assets/images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
+                <Text style={styles.ItemPeriod}>{item.days}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+    CreatorCallback = (dataFromChild) => {
+        this.EndCal(dataFromChild.users, this.state.cates)
     }
-
-    EndCal = (cates) => {
-        this.setState({ cates: cates, });
+    CateCallBack = (dataFromChild) => {
+        this.EndCal(this.state.users, dataFromChild.cates)
+    }
+    EndCal = (users, cates) => {
+        this.setState({ users: users, cates: cates, });
+    }
+    SearchItems = () => {
+        this.setState({
+            dataSet: [
+                { user: '화성인', cates: '자동차', stc: 100, days: 10 },
+                { user: '우주인', cates: '금', stc: 40, days: 20 },
+                { user: '외계인', cates: '여행', stc: 80, days: 10 },
+                { user: '지구인', cates: '자동차', stc: 100, days: 30 },
+                { user: '목성인', cates: '금', stc: 100, days: 30 }
+            ]
+        })
     }
     render() {
-        const { cates } = this.state;
+        const { cates, users, dataSet } = this.state;
+        console.log('SearchScreen', dataSet)
         return (
             <View style={styles.Container}>
                 <StatusBar
@@ -54,28 +101,50 @@ class SearchScrenn extends React.Component {
                 />
                 {/* <ListUp data={this.state.dataSet} navigation={this.props.navigation}/> */}
                 <View style={styles.TopTitle}>
-
                     <View style={styles.TopContent}>
                         <Text style={styles.TopContentTxt}>어떤 상품을 찾으시나요?</Text>
                     </View>
                     <View style={styles.SearchFrom}>
                         <View style={styles.SearchInnerForm}>
                             <CatesPicker props={width * 0.8 / 2} callback={this.CateCallBack} />
-                            <Text style={{color : '#929292', fontSize : 20,}}>|</Text>
-                            <CatesPicker props={width * 0.8 / 2} callback={this.CateCallBack} />
-                        </View>
-                        <View style={styles.SearchInnerForm}>
-                            <TextInput placeholder={'검색어를 입력해주세요'} />
-                            <View style={styles.SearchIconArea}>
-                                <Octicons name='search' size={15} />
+                            <Text style={{ color: '#E0E0E0', fontSize: 20, }}>|</Text>
+                            <View style={styles.TextInputArea}>
+                                <TextInput placeholder={'계주명'} />
                             </View>
                         </View>
-
+                        <View style={styles.SearchInnerForm}>
+                            <TextInput
+                                placeholder={'상품명을 입력해주세요'}
+                                style={{ alignSelf: 'flex-start' }}
+                            />
+                            <TouchableOpacity style={{ padding: 8, }} onPress={this.SearchItems}>
+                                <Image source={require('../assets/images/ico_search.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.ContentArea}>
-
+                    <View style={styles.ContentTitle}>
+                        <Text style={{ fontSize: 14, fontWeight: '800', color: '#4C4C4C', marginRight: 5, }}>검색결과 총</Text>
+                        <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#4F79D5' }}>{this.state.cnt}</Text>
+                        <Text style={{ fontSize: 14, fontWeight: '800', color: '#4C4C4C' }}>건</Text>
                     </View>
                 </View>
+                <SafeAreaView style={styles.ScrollArea}>
+                    <ScrollView
+                        nestedScrollEnabled={true}>
+                        {
+                            dataSet[0].user == null
+                                ? <View></View>
+                                :
+                                <FlatList
+                                    ListHeaderComponent={<></>}
+                                    data={dataSet}
+                                    renderItem={({ item, index, separators }) => this._renderItem({ item, index, separators })}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    ListFooterComponent={<></>}
+                                />
+                        }
+                    </ScrollView>
+                </SafeAreaView>
             </View>
         )
     }
@@ -86,7 +155,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     TopTitle: {
-        flex: 1,
+        flex: 3,
         padding: 15,
         flexDirection: 'column',
         alignItems: 'flex-start',
@@ -111,24 +180,78 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    SearchInnerForm : {
-        flex : 1,
-        padding : 10,
-        flexDirection : 'row',
-        justifyContent : 'space-between',
-        alignItems : 'flex-start',
-    },
-    SearchIconArea: {
-        padding: 10,
-    },
-    SearchArea: {
+    SearchInnerForm: {
         flex: 1,
         padding: 10,
-        borderBottomWidth: 1,
-        borderColor: '#2D67C4',
+        width: width * 0.9,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    TextInputArea: {
+        width: width * 0.8 / 2,
+        height: width * 0.08,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
+    ContentTitle: {
+        marginTop: 20,
+        marginBottom: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    ScrollArea: {
+        flex : 6
+    },
+    BtnFrame: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#FFFFFF',
+        width: width * 0.9,
+        elevation: 2,
+        borderRadius: 10,
+        margin: 10,
+        padding: 15,
+    },
+    UpperSection: {
+        flex: 3,
         flexDirection: 'row',
     },
-    ContentArea: {
+    LeftArea: {
+        flex: 4
+    },
+    ItemName: {
+        fontSize: 12,
+        color: '#4C4C4C',
+        fontWeight: 'bold'
+    },
+    ItemExpla: {
+        fontSize: 12,
+        color: '#929292'
+    },
+    RightArea: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    LineSection: {
+        flex: 1,
+    },
+    Circle: {
+        width: 40,
+        height: 40,
+        borderWidth: 1,
+        borderRadius: 60,
+    },
+    DownerSection: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    ItemPeriod: {
+        fontSize: 12,
+        color: '#4C4C4C',
+        marginTop: 5
     },
 })
 
