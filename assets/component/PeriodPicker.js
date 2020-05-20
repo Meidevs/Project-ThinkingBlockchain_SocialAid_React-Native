@@ -2,11 +2,12 @@ import React, { Component, useState } from 'react'
 import {
     View,
     Picker,
-    Text,
+    Dimensions,
     StyleSheet
 } from 'react-native'
+const { width, height } = Dimensions.get('window');
 
-class DatePicker extends React.Component {
+class PeriodPicker extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,22 +20,18 @@ class DatePicker extends React.Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.date}>
-                    <Text>
-                        {this.state.period}일
-                    </Text>
+            <View style={styles.Container}>
+                <View style={styles.Period}>
                     <Picker
                         selectedValue={this.state.period}
                         mode='dropdown'
-                        style={{ height: 50, width: 50 }}
+                        style={{ height : width * 0.13, width: 100, color : '#4C4C4C'}}
                         onValueChange={(itemValue, itemIndex) =>
                             this.onChangeRefresh(itemValue)
                         }>
                         <Picker.Item label='10일' value='10' />
                         <Picker.Item label='20일' value='20' />
                         <Picker.Item label='30일' value='30' />
-
                     </Picker>
                 </View>
             </View >
@@ -43,14 +40,19 @@ class DatePicker extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    Container: {
+        marginTop: 5,
         flexDirection: 'row',
     },
-    date: {
+    Period: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth : 1,
+        borderRadius : 5,
+        borderColor : '#E0E0E0',
+        backgroundColor : '#FFFFFF',
     }
 })
 
-export default DatePicker;
+export default PeriodPicker;

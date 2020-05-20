@@ -57,25 +57,25 @@ class MyinfoScreen extends React.Component {
                 <View style={styles.BottomContainer}>
                     <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Alarm')}>
-                            <Text style={styles.BottomContentTxt}>계모임 알림</Text>
+                            <Text style={styles.BottomContentMainTxt}>계모임 알림</Text>
                             <View style={styles.BottomContentBtn}>
                                 <Text style={styles.BottomContentTxt}>해제됨</Text>
-                                <Text style={styles.BottomContentTxt}>></Text>
+                                <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox}>
-                            <Text style={styles.BottomContentTxt}>자동참가 설정</Text>
+                            <Text style={styles.BottomContentMainTxt}>자동참가 설정</Text>
                             <View style={styles.BottomContentBtn}>
                                 <Text style={styles.BottomContentTxt}>해제됨</Text>
-                                <Text style={styles.BottomContentTxt}>></Text>
+                                <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
                             </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Notice')}>
-                            <Text style={styles.BottomContentTxt}>공지사항</Text>
+                            <Text style={styles.BottomContentMainTxt}>공지사항</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     TopTitle: {
-        flex: 1,
+        flex: 2,
         flexDirection: 'row',
         width: width * 0.9,
         justifyContent: 'flex-start',
@@ -101,10 +101,11 @@ const styles = StyleSheet.create({
     },
     TopTitleTxt: {
         fontSize: 15,
+        color : '#4C4C4C',
         fontWeight: 'bold'
     },
     TopContent: {
-        flex: 6,
+        flex: 5,
         width: width * 0.9,
         margin: 10,
         padding: 10,
@@ -173,12 +174,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        elevation: 3,
+        elevation: 2,
     },
     BottomContentBtn: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    BottomContentMainTxt : {
+        color : '#4C4C4C',
+    },
+    BottomContentTxt : {
+        color : '#929292',
+        marginRight : 5
+    }
 })
 export default MyinfoScreen;
