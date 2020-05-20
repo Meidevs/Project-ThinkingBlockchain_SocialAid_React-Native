@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         padding : 10,
         flexDirection : 'row',
         justifyContent : 'space-between',
-        alignItems : 'flex-start/',
+        alignItems : 'flex-start',
     },
     SearchIconArea: {
         padding: 10,
