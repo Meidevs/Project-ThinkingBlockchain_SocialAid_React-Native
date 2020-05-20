@@ -20,37 +20,37 @@ class AddSocialScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            stc: 0,
             period: 10,
-            prcnt : 0.2,
+            prcnt: 0.2,
             cates: '자동차'
         }
     }
     PeriodCallBack = (dataFromChild) => {
-        this.EndCal(dataFromChild.period, this.state.cates)
+        this.EndCal(this.state.stc, dataFromChild.period, this.state.cates)
     }
     CateCallBack = (dataFromChild) => {
-        this.EndCal(this.state.period, dataFromChild.cates)
+        this.EndCal(this.state.stc, this.state.period, dataFromChild.cates)
     }
-    CalReward = (data) => {
-        console.log(this.state.prcnt)
-        this.setState({ text: data, revenue: parseInt(data) * this.state.prcnt });
+    SetSTC = (data) => {
+        this.EndCal(data, this.state.period, this.state.cates);
     }
 
-    EndCal = (period, cates) => {
+    EndCal = (stc, period, cates) => {
         switch (parseInt(period)) {
             case 10:
-                this.setState({ period: period, cates: cates, prcnt: 0.2 });
+                this.setState({ stc: stc, period: period, cates: cates, prcnt: 0.2 });
                 break;
             case 20:
-                this.setState({ period: period, cates: cates, prcnt: 0.4 })
+                this.setState({ stc: stc, period: period, cates: cates, prcnt: 0.8 })
                 break;
             case 30:
-                this.setState({ period: period, cates: cates, prcnt: 0.6 })
+                this.setState({ stc: stc, period: period, cates: cates, prcnt: 1.8 })
                 break;
         }
     }
     render() {
-        const { period, text, cates, expla } = this.state;
+        const { period, stc, cates, expla } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -92,8 +92,8 @@ class AddSocialScreen extends React.Component {
                                     <View style={styles.STCInputBox}>
                                         <TextInput
                                             placeholder={'STC를 입력해주세요'}
-                                            onChangeText={(text) => this.CalReward(text)}
-                                            value={text}
+                                            onChangeText={(stc) => this.SetSTC(stc)}
+                                            value={stc}
                                         />
                                     </View>
                                 </View>
@@ -123,16 +123,20 @@ class AddSocialScreen extends React.Component {
                             <View style={styles.ContentBox}>
                                 <Text style={styles.CalRewardTxt}>수익 계산</Text>
                                 <View style={styles.Reward}>
-                                    <Text>{this.state.revenue}</Text>
+                                    <View style={styles.RewardCal}>
+                                        <Text style={styles.InnerTxt} >총 납입 STC</Text>
+                                        <Text style={styles.InnerTxt}>{this.state.period * this.state.stc}</Text>
+                                    </View>
+                                    <View style={styles.RewardCal}>
+                                        <Text style={styles.InnerTxt}>보상액</Text>
+                                        <Text style={styles.InnerTxt}>{this.state.stc * this.state.prcnt}</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.CreateBox}>
-                        <Text>계모임 만들기</Text>
-                        <Text>계모임 만들기</Text>
-                        <Text>계모임 만들기</Text>
-                        <Text>계모임 만들기</Text>
+                        <Text style={styles.CreateBtn}>계모임 만들기</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </SafeAreaView>
@@ -212,7 +216,6 @@ const styles = StyleSheet.create({
     STCInputBox: {
         marginTop: 5,
         width: width * 0.94 / 2,
-        // height: width * 0.13,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -241,15 +244,29 @@ const styles = StyleSheet.create({
         color: '#4C4C4C'
     },
     Reward: {
-        height: width * 0.16,
+        height: width * 0.2,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 5,
         padding: 10,
     },
+    RewardCal : {
+        width : width * 0.8,
+        flexDirection : 'row',
+        justifyContent : 'space-between',
+        alignItems : 'center'
+    },
     CreateBox: {
         width: width,
-        backgroundColor: 'red'
+        height: width * 0.135,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#cbcbcb'
+    },
+    CreateBtn: {
+        color: '#FFFFFF',
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 })
 
