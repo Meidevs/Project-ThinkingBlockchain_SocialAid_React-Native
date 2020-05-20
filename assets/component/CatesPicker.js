@@ -11,21 +11,22 @@ class CatesPicker extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            width : props.props,
             cates: '자동차',
         }
     }
     onChangeRefresh = (itemValue) => {
+        console.log('a', itemValue)
         this.setState({cates : itemValue});
         this.props.callback({ cates : itemValue });
     }
     render() {
         return (
             <View style={styles.Container}>
-                <View style={styles.Period}>
                     <Picker
                         selectedValue={this.state.cates}
                         mode='dropdown'
-                        style={{ height : width * 0.13, width : width * 0.94, color : '#4C4C4C'}}
+                        style={{ height : width * 0.13, width : this.state.width, color : '#4C4C4C'}}
                         onValueChange={(itemValue, itemIndex) =>
                             this.onChangeRefresh(itemValue)
                         }>
@@ -33,7 +34,6 @@ class CatesPicker extends React.Component {
                         <Picker.Item label='금' value='gold' />
                         <Picker.Item label='여행' value='travel' />
                     </Picker>
-                </View>
             </View >
         )
     }
@@ -44,15 +44,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         flexDirection: 'row',
     },
-    Period: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth : 1,
-        borderRadius : 5,
-        borderColor : '#E0E0E0',
-        backgroundColor : '#FFFFFF',
-    }
 })
 
 export default CatesPicker;

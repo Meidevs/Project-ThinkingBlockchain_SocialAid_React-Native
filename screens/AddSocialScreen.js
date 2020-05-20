@@ -108,7 +108,17 @@ class AddSocialScreen extends React.Component {
                             </View>
                             <View style={styles.ContentBox}>
                                 <Text style={styles.InnerTxt}>카테고리</Text>
-                                <CatesPicker callback={this.CateCallBack} />
+                                <View style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderWidth: 1,
+                                    borderRadius: 5,
+                                    borderColor: '#E0E0E0',
+                                    backgroundColor: '#FFFFFF',
+                                }}>
+                                    <CatesPicker props={width * 0.94} callback={this.CateCallBack} />
+                                </View>
                             </View>
                             <View style={styles.ContentBox}>
                                 <Text style={styles.InnerTxt}>설명</Text>
@@ -250,11 +260,11 @@ const styles = StyleSheet.create({
         marginTop: 5,
         padding: 10,
     },
-    RewardCal : {
-        width : width * 0.8,
-        flexDirection : 'row',
-        justifyContent : 'space-between',
-        alignItems : 'center'
+    RewardCal: {
+        width: width * 0.8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     CreateBox: {
         width: width,
