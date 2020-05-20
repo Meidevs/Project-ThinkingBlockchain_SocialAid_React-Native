@@ -153,6 +153,7 @@ class SearchScrenn extends React.Component {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
+        backgroundColor : '#f7f7f7'
     },
     TopTitle: {
         flex: 3,

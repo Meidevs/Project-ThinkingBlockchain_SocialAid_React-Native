@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     scrollview: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#f7f7f7',
     },
     TopContainer: {
         flexDirection : 'column',

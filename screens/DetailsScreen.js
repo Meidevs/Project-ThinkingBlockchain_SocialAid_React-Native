@@ -23,7 +23,7 @@ class DetailsScreen extends React.Component {
     }
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.Container}>
                 <SafeAreaView >
                     <ScrollView style={styles.scrollview}>
                         <ImageBackground source={require('../assets/images/back_img.jpg')} style={styles.ImageContainer}>
@@ -73,7 +73,7 @@ class DetailsScreen extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
+    Container: {
         flex: 1,
         backgroundColor: '#FFFFFF'
     },

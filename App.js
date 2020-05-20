@@ -120,7 +120,7 @@ const MyinfoStackScreen = () => {
         component={MyinfoScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#F7F7F7',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
@@ -140,7 +140,7 @@ const MyinfoStackScreen = () => {
         component={AlarmSetScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#F7F7F7',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
@@ -153,7 +153,7 @@ const MyinfoStackScreen = () => {
         component={NoticeScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#F7F7F7',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,
@@ -225,7 +225,7 @@ const MainStackScreen = () => {
         component={MainScreen}
         options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#f7f7f7',
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 0,

@@ -217,7 +217,8 @@ class SocialNowScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     Container: {
-        flex: 1
+        flex: 1,
+        backgroundColor : '#F7F7F7'
     },
     Scrollview: {
         flexGrow: 1,
