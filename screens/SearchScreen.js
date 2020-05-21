@@ -40,13 +40,18 @@ class SearchScrenn extends React.Component {
         >
             <View style={styles.UpperSection}>
                 <View style={styles.LeftArea}>
-                    <Text style={styles.ItemName}>{item.user.length > 22 ? item.user.substring(0, 22) + '...' : item.user}</Text>
-                    <Text style={styles.ItemExpla}>{item.cates.length > 30 ? item.cates.substring(0, 30) + '...' : item.cates}</Text>
+                    <View style={styles.MakeRow}>
+                        <Text style={styles.ItemName}>계주명</Text>
+                        <Text style={styles.ItemName}>{item.user}</Text>
+                    </View>
+                    <View style={styles.MakeRow}>
+                        <Text style={styles.ItemExpla}>계 목적</Text>
+                        <Text style={styles.ItemExpla}>{item.cates}</Text>
+                    </View>
                 </View>
                 <View style={styles.RightArea}>
-                    <View style={styles.Circle}>
-                        <Text>{item.stc}</Text>
-                    </View>
+                    <Text style={styles.ItemName}>일일 납입 STC</Text>
+                    <Text style={styles.ItemExpla}>{item.stc} STC</Text>
                 </View>
             </View>
             <View style={styles.LineSection}>
@@ -58,7 +63,9 @@ class SearchScrenn extends React.Component {
             </View>
             <View style={styles.DownerSection}>
                 <Image source={require('../assets/images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
-                <Text style={styles.ItemPeriod}>{item.days}</Text>
+                <Text style={styles.ItemPeriod}>
+                    {item.days == 10 ? '10일의 짧은 기간동안 진행되는 계모임입니다.' : item.days == 20 ? '20일의 보통 기간 동안 진행되는 계모임입니다.' : '30일의 장기간 동안 진행되는 계모임입니다.'}
+                </Text>
             </View>
         </TouchableOpacity>
     );
@@ -152,7 +159,7 @@ class SearchScrenn extends React.Component {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        backgroundColor : '#f7f7f7'
+        backgroundColor: '#f7f7f7'
     },
     TopTitle: {
         flex: 3,
@@ -202,7 +209,7 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     ScrollArea: {
-        flex : 6
+        flex: 6
     },
     BtnFrame: {
         flex: 1,
@@ -219,20 +226,31 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     LeftArea: {
-        flex: 4
+        flex: 1,
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
+    MakeRow : {
+        flex : 1,
+        flexDirection : 'row',
+        justifyContent : 'center',
+        alignItems : 'center'
     },
     ItemName: {
+        padding : 5,
         fontSize: 12,
         color: '#4C4C4C',
-        fontWeight: 'bold'
+        fontWeight: '700'
     },
     ItemExpla: {
+        padding : 5,
         fontSize: 12,
         color: '#929292'
     },
     RightArea: {
         flex: 1,
         alignItems: 'center',
+        justifyContent : 'center'
     },
     LineSection: {
         flex: 1,
