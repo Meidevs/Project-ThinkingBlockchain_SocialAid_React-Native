@@ -13,32 +13,27 @@ const { width, height } = Dimensions.get('window');
 
 //https://stackoverflow.com/questions/58243680/react-native-another-virtualizedlist-backed-container
 
-class ListUp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            content: props.data
-        }
-    }
-
-    _renderItem = ({ item, index, separators }) => (
+function Item({ data, navigation }) {
+    return (
         <TouchableOpacity
             onPress={() =>
-                this.props.navigation.navigate('Details', {
-                    item,
+                navigation.navigate('Details', {
+                    data,
                 })
             }
             style={styles.BtnFrame}
         >
             <View style={styles.UpperSection}>
                 <View style={styles.LeftArea}>
-                    <Text style={styles.ItemName}>{item.name.length > 22 ? item.name.substring(0, 22) + '...' : item.name}</Text>
-                    <Text style={styles.ItemExpla}>{item.shorttxt.length > 30 ? item.shorttxt.substring(0, 30) + '...' : item.shorttxt}</Text>
+                    <Text style={styles.ItemName}>{data.name.length > 22 ? data.name.substring(0, 22) + '...' : data.name}</Text>
+                    <Text style={styles.ItemExpla}>{data.shorttxt.length > 30 ? data.shorttxt.substring(0, 30) + '...' : data.shorttxt}</Text>
 
                 </View>
                 <View style={styles.RightArea}>
                     <View style={styles.Circle}>
-                        <Text>{item.image}</Text>
+                        {
+                            data.symbol == '자동차' ? <Image source={require('../images/pp_car.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.symbol == '금' ? <Image source={require('../images/pp_gold.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.symbol == '명품' ? <Image source={require('../images/pp_luxury.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : <Image source={require('../images/pp_travel.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                        }
                     </View>
                 </View>
             </View>
@@ -51,24 +46,28 @@ class ListUp extends React.Component {
             </View>
             <View style={styles.DownerSection}>
                 <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
-                <Text style={styles.ItemPeriod}>{item.longtxt}</Text>
+                <Text style={styles.ItemPeriod}>{data.longtxt}</Text>
             </View>
         </TouchableOpacity>
-    );
+    )
+};
 
-    render() {
-        return (
-            <View>
-                <FlatList
-                    ListHeaderComponent={<></>}
-                    data={this.state.content}
-                    renderItem={({ item, index, separators }) => this._renderItem({ item, index, separators })}
-                    keyExtractor={(item, index) => index.toString()}
-                    ListFooterComponent={<></>}
-                />
-            </View>
-        )
-    }
+const ListUp = ({ data, navigation }) => {
+    return (
+        <View>
+            <FlatList
+                ListHeaderComponent={<></>}
+                data={data}
+                renderItem={({ item }) => (
+                    <Item
+                        data={item}
+                        navigation={navigation} />
+                )}
+                keyExtractor={(item, index) => index.toString()}
+                ListFooterComponent={<></>}
+            />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -106,10 +105,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     Circle: {
-        width: 40,
-        height: 40,
-        borderWidth: 1,
-        borderRadius: 60,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     DownerSection: {
         flex: 1,

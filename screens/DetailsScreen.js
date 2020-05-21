@@ -8,7 +8,8 @@ import {
     SafeAreaView,
     ScrollView,
     ImageBackground,
-    Image
+    Image,
+    Modal
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -21,6 +22,8 @@ class DetailsScreen extends React.Component {
             data: null
         }
     }
+
+
     render() {
         return (
             <View style={styles.Container}>
@@ -57,7 +60,7 @@ class DetailsScreen extends React.Component {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-                <View style={styles.joinBtnContent}>
+                <View style={styles.joinBtnContent} onPress={() => this.OpenModal(true)}>
                     <TouchableOpacity style={styles.calBtn}>
                         <Image source={require('../assets/images/ico_calculator.png')} style={{ marginRight: 5, width: 15, height: 15, resizeMode: 'contain' }} />
                         <Text style={styles.Txt}>수익 계산</Text>
