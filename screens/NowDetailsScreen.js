@@ -32,20 +32,41 @@ class NowDetailsScreen extends React.Component {
             ],
             dataSet: {
                 Ongoing: [
-                    { id: 1, name: '계모임 명1', stc: '계모임 금액1', duedate: '계모임 종료 일자1' }, { id: 2, name: '계모임 명', stc: '계모임 금액', duedate: '계모임 종료 일자' }
+                    { id: 1, name: '금모으는계', stc: '100', duedate: '2020.05.14' }, { id: 2, name: '동호회계', stc: '20', duedate: '2020.05.19' }, { id: 3, name: '명품계', stc: '100', duedate: '2020.05.23' }
                 ],
                 Wating: [
-                    { id: 1, name: '계모임 명2', stc: '계모임 금액2', duedate: '계모임 종료 일자2' }, { id: 2, name: '계모임 명', stc: '계모임 금액', duedate: '계모임 종료 일자' }
+                    { id: 1, name: '자동차계', stc: '80', duedate: '2020.06.18' }, { id: 2, name: '우리계', stc: '10', duedate: '2020.06.19' }
                 ],
                 Complete: [
-                    { id: 1, name: '계모임 명3', stc: '계모임 금액3', duedate: '계모임 종료 일자3' }, { id: 2, name: '계모임 명', stc: '계모임 금액', duedate: '계모임 종료 일자' }
+                    { id: 1, name: '함께하계', stc: '40', duedate: '2020.05.17' }, { id: 2, name: '사랑하계', stc: '60', duedate: '2020.05.29' }, { id: 3, name: '명품계', stc: '10', duedate: '2020.06.02' }
                 ]
             },
+            show : null,
         }
     }
 
-    selectedCates = (num) => {
+    componentDidMount = () => {
+        console.log('hi')
+        // To Get Participants DBd From SocialAid Server & Divide them into Each Cases.
+        // But Reconize that Front-End Request Data of Each Cases When they selected.
+        // It means that Front-End Request only Ongoing Datas at first time.
         var dataSet = this.state.dataSet;
+        this.setState({
+            switch: [
+                { isSelected: true },
+                { isSelected: false},
+                { isSelected: false },
+            ],
+            dataSet: dataSet,
+            show : dataSet.Ongoing
+        });
+    }
+
+
+    selectedCates = (num) => {
+        console.log(num)
+        var dataSet = this.state.dataSet;
+        
         if (num == 0) {
             this.state.switch[0].isSelect = true;
             this.state.switch[1].isSelect = false;
@@ -57,6 +78,7 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[2].isSelect },
                 ],
                 dataSet: dataSet,
+                show : dataSet.Ongoing
             });
         } else if (num == 1) {
             this.state.switch[0].isSelect = false;
@@ -69,6 +91,7 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[2].isSelect },
                 ],
                 dataSet: dataSet,
+                show : dataSet.Wating
             });
         } else if (num == 2) {
             this.state.switch[0].isSelect = false;
@@ -81,13 +104,17 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[2].isSelect },
                 ],
                 dataSet: dataSet,
+                show : dataSet.Complete
             });
         }
     }
 
     render() {
+        console.log('b')
+        const props = this.props.navigation;
+        const { show } = this.state;
         return (
-            <View style={styles.container}>
+            <View style={styles.Container}>
                 <View style={styles.TopCotainer}>
                     <View style={styles.TopTitle}>
                         <Text style={styles.TitleTxt}>계모임 현황</Text>
@@ -110,24 +137,20 @@ class NowDetailsScreen extends React.Component {
                 <View style={styles.BottomContainer}>
                     <View style={styles.MyGroup}>
                         <Text style={styles.MyGroupFont}>내 모임</Text>
-                    </View>
-                    <View style={styles.Count}>
                         <Text style={styles.CountTxt}>총 X 건</Text>
                     </View>
-                    <SafeAreaView style={{ flex: 10 }}>
+                    <SafeAreaView style={{flex : 10}}>
                         <ScrollView>
-                            <StatusListUp data={this.state} navigation={this.props.navigation} />
+                            <StatusListUp data={show} navigation={props} />
                         </ScrollView>
                     </SafeAreaView>
                     <View style={styles.MyGroup}>
                         <Text style={styles.MyGroupFont}>외부 모임</Text>
-                    </View>
-                    <View style={styles.Count}>
                         <Text style={styles.CountTxt}>총 X 건</Text>
                     </View>
-                    <SafeAreaView style={{ flex: 10 }}>
+                    <SafeAreaView style={{flex : 10}}>
                         <ScrollView>
-                            <StatusListUp data={this.state} navigation={this.props.navigation} />
+                            {/* <StatusListUp data={show} navigation={this.props.navigation} /> */}
                         </ScrollView>
                     </SafeAreaView>
                 </View>
@@ -137,26 +160,29 @@ class NowDetailsScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    Container: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
     },
     TopCotainer: {
         flex: 1,
+        paddingRight: 10,
+        paddingLeft: 10,
     },
     TopTitle: {
-        padding: 15,
-        marginLeft: 5,
+        flex : 1,
+        justifyContent : 'center'
     },
     TitleTxt: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color : '#4C4C4C',
     },
     TopCateSwitch: {
-        padding: 15,
-        marginLeft: 5,
+        flex : 1,
         flexDirection: 'row',
+        alignItems : 'center',
     },
     Switch: {
         flexDirection: 'row',
@@ -164,35 +190,37 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     BottomContainer: {
-        flex: 4,
-        padding: 15,
-        paddingTop: 5,
+        flex: 5,
+        paddingRight : 10,
+        paddingLeft : 10,
     },
     MyGroup: {
         flex: 1,
-        marginBottom: 10,
+        flexDirection : 'row',
+        justifyContent : 'space-between',
+        alignItems : 'center',
+        paddingTop : 10,
+        paddingBottom : 10,
     },
     MyGroupFont: {
         fontSize: 15,
-        fontWeight: 'bold'
-    },
-    Count: {
-        flex: 1,
-        marginLeft: 20,
-        marginRight: 20,
+        fontWeight: '800',
+        color : '#4C4C4C'
     },
     CountTxt: {
         fontSize: 12,
-        fontWeight: 'bold'
+        fontWeight: '600',
+        color : '#4C4C4C'
     },
     SelectedTxt: {
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color : '#4C4C4C'
     },
     NonSelectedTxt: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: 'gray'
+        color: '#929292'
     }
 })
 

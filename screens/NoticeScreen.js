@@ -150,7 +150,6 @@ class NoticeScreen extends React.Component {
         }
         var fArray = rawArray.filter(Boolean)
         this.setState({ notion: dataSet, show: fArray, first: first, middle: middle, last: last, currentPage: currentPage })
-
     }
     MoreInformation = (data, num) => {
         data.visible = !data.visible;
