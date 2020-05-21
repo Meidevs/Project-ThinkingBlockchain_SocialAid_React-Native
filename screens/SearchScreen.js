@@ -42,7 +42,6 @@ class SearchScrenn extends React.Component {
                 <View style={styles.LeftArea}>
                     <Text style={styles.ItemName}>{item.user.length > 22 ? item.user.substring(0, 22) + '...' : item.user}</Text>
                     <Text style={styles.ItemExpla}>{item.cates.length > 30 ? item.cates.substring(0, 30) + '...' : item.cates}</Text>
-
                 </View>
                 <View style={styles.RightArea}>
                     <View style={styles.Circle}>
@@ -78,7 +77,7 @@ class SearchScrenn extends React.Component {
                 { user: '화성인', cates: '자동차', stc: 100, days: 10 },
                 { user: '우주인', cates: '금', stc: 40, days: 20 },
                 { user: '외계인', cates: '여행', stc: 80, days: 10 },
-                { user: '지구인', cates: '자동차', stc: 100, days: 30 },
+                { user: '지구인', cates: '명품', stc: 100, days: 30 },
                 { user: '목성인', cates: '금', stc: 100, days: 30 }
             ]
         })

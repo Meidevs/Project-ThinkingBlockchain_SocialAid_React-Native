@@ -12,16 +12,16 @@ const { width, height } = Dimensions.get('window');
 class NowShowDetailsScreen extends React.Component {
     constructor(props) {
         super(props)
+        console.log(props.route.params.data)
+        var dataSet = props.route.params.data;
         this.state = {
-            dataSet: [
-                { code: '1', name: '금계', shorttxt: '사랑해요', longtxt: '우리의 희망!', symbol: null },
-                { code: '2', name: '치킨', shorttxt: '치킨 사먹자', longtxt: '우리의 퓨쳐!', symbol: null },
-                { code: '3', name: '자동차', shorttxt: '나의 사랑 자동차', longtxt: '우리의 아이스크림!', symbol: null },
-                { code: '4', name: '목돈', shorttxt: '부자됩시다', longtxt: '우리의 예아!!', symbol: null },
-            ]
+            status: dataSet.d,
+            stc: dataSet.stc,
+            days: dataSet.days
         }
     }
     render() {
+        const { status, stc, days } = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.TopContainer}>
@@ -31,19 +31,27 @@ class NowShowDetailsScreen extends React.Component {
                     <View style={styles.TopContent}>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>계모임 상태</Text>
-                            <Text style={styles.TopContentTxt}>종료</Text>
+                            <View style={styles.TopContentFrom}>
+                                <Text style={styles.TopContentTxt}>종료</Text>
+                                {
+                                    status == 1 ?
+                                        (<View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} />) :
+                                        status == 2 ? (<View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />) :
+                                            <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
+                                }
+                            </View>
                         </View>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>계모임 금액</Text>
-                            <Text style={styles.TopContentTxt}>xxx STC</Text>
+                            <Text style={styles.TopContentTxt}>{stc} STC</Text>
                         </View>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>예상 수익률</Text>
-                            <Text style={styles.TopContentTxt}>xxx%</Text>
+                            <Text style={styles.TopContentTxt}>{ days == 10 ? 2 : days == 20 ? 4 : 6 }%</Text>
                         </View>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>거치기간</Text>
-                            <Text style={styles.TopContentTxt}>10일</Text>
+                            <Text style={styles.TopContentTxt}>{days}일</Text>
                         </View>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>상환방식</Text>
@@ -117,12 +125,14 @@ const styles = StyleSheet.create({
     },
     TopTitle: {
         flex: 1,
+        justifyContent : 'center',
+        alignItems : 'flex-start',
         width: width * 0.9,
-        borderBottomWidth: 1,
-        borderColor: 'gray'
+        borderColor: '#929292'
     },
     TopTitleTxt: {
         fontSize: 18,
+        color : '#4C4C4C',
         fontWeight: 'bold'
     },
     TopContent: {
@@ -130,6 +140,11 @@ const styles = StyleSheet.create({
         width: width * 0.9,
         flexDirection: 'column',
         justifyContent: 'center'
+    },
+    TopContentFrom : {
+        flexDirection : 'row',
+        justifyContent : 'flex-end',
+        alignItems : 'center'
     },
     TopContentArea: {
         flex: 1,
@@ -139,8 +154,10 @@ const styles = StyleSheet.create({
     },
     TopContentTxt: {
         fontSize: 12,
-        color: 'gray',
-        fontWeight: '900'
+        color: '#929292',
+        fontWeight: '700',
+        marginRight : 5,
+        marginLeft : 5,
     },
     BottomContainer: {
         flex: 4,
