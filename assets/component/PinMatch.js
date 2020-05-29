@@ -8,9 +8,6 @@ const PinMatch = (data) => {
     var marksBoolean = regExp.test(data);
     var alpBoolean = alpExp.test(data);
 
-    console.log('a', marksBoolean);
-    console.log('b', alpBoolean);
-
     if (marksBoolean != true && alpBoolean != true) { 
         resText = true;
     }

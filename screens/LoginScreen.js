@@ -42,10 +42,16 @@ class LoginScreen extends React.Component {
                 <View style={styles.MainContainer}>
                     <View style={styles.UserInputForm}>
                         <View style={styles.UserEmail}>
-                            <TextInput placeholder={'이메일 아이디'} />
+                            <TextInput
+                                placeholder={'이메일 아이디'}
+                                onChangeText={text => this.setState({ email: text })}
+                            />
                         </View>
                         <View style={styles.UserPassword}>
-                            <TextInput placeholder={'비밀번호'} />
+                            <TextInput
+                                placeholder={'비밀번호'}
+                                onChangeText={text => this.setState({ password: text })}
+                            />
                         </View>
                         <View style={styles.UserCheckForm}>
                             <TouchableOpacity style={styles.CheckBox} onPress={() => this.CheckBtn()}>
@@ -68,7 +74,7 @@ class LoginScreen extends React.Component {
                 </View>
                 <View style={styles.ButtonContainer}>
                     <View style={styles.ButtonForm}>
-                        <TouchableOpacity style={styles.LoginBtn} onPress={() => this.props.navigation.replace('MainTabs')}>
+                        <TouchableOpacity style={styles.LoginBtn} onPress={() => this.Login()}>
                             <Text style={styles.LoginBtnTxt}>로그인</Text>
                         </TouchableOpacity>
                         <View style={styles.RegisterForm}>
@@ -81,6 +87,35 @@ class LoginScreen extends React.Component {
                 </View>
             </View>
         )
+    }
+
+    Login = async () => {
+        const {email, password} = this.state;
+        try {
+            const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password : password
+                })
+            })
+            let json = await response.json();
+            if (json.flag == 1)  {
+                alert('아이디를 확인해 주세요.');
+            } else if (json.flag == 2) {
+                alert('비밀번호를 확인해 주세요.');
+            }
+            if (response.ok) {
+                this.props.navigation.replace('MainTabs')
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 }
 const styles = StyleSheet.create({
@@ -199,31 +234,31 @@ const styles = StyleSheet.create({
         width: width * 0.9,
         height: width * 0.15,
         backgroundColor: '#4F79D5',
-        borderRadius : 10,
-        justifyContent : 'center',
-        alignItems : 'center',
-        marginBottom : 10,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
     },
-    RegisterForm : {
-        flexDirection : 'row',
-        justifyContent : 'center',
-        alignItems : 'center'
+    RegisterForm: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    LoginBtnTxt : {
-        color : '#FFFFFF',
-        fontWeight : 'bold'
+    LoginBtnTxt: {
+        color: '#FFFFFF',
+        fontWeight: 'bold'
     },
-    AskRegiTxt : {
-        color : '#929292'
+    AskRegiTxt: {
+        color: '#929292'
     },
-    RegisterBtn : {
-        marginLeft : 10,
+    RegisterBtn: {
+        marginLeft: 10,
     },
-    RegiBtnTxt : {
-        color : '#4F79D5',
-        textDecorationLine : 'underline',
-        textDecorationStyle : 'solid',
-        textDecorationColor : '#4F79D5'
+    RegiBtnTxt: {
+        color: '#4F79D5',
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'solid',
+        textDecorationColor: '#4F79D5'
     }
 })
 export default LoginScreen;
