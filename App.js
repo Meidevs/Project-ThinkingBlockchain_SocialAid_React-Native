@@ -44,7 +44,7 @@ function MyTabBar({ state, descriptors, navigation }) {
   //state : Array [Name, Params of BottomTabNavigation Component]
   //descriptor : navigation.Functions, Options, render(?) What is Render?
   return (
-    <View style={{ flexDirection: 'row'}}>
+    <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         // Label is the Way to Put Name on BottomTabNavigator using Route Name
