@@ -1,10 +1,11 @@
 import React, { Component, useState } from 'react'
 import {
     View,
-    Picker,
     Dimensions,
     StyleSheet
-} from 'react-native'
+} from 'react-native';
+import { Picker } from '@react-native-community/picker';
+
 const { width, height } = Dimensions.get('window');
 
 class PeriodPicker extends React.Component {

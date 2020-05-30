@@ -23,16 +23,20 @@ class AddSocialScreen extends React.Component {
             stc: 0,
             period: 10,
             prcnt: 0.2,
-            cates: '자동차'
         }
     }
+
     PeriodCallBack = (dataFromChild) => {
         this.EndCal(this.state.stc, dataFromChild.period, this.state.cates)
     }
     CateCallBack = (dataFromChild) => {
+        console.log('dataFromChild', dataFromChild)
         this.EndCal(this.state.stc, this.state.period, dataFromChild.cates)
     }
     SetSTC = (data) => {
+        if (data > 100) {
+            data = null;
+        }
         this.EndCal(data, this.state.period, this.state.cates);
     }
 
@@ -50,7 +54,7 @@ class AddSocialScreen extends React.Component {
         }
     }
     render() {
-        const { period, stc, cates, expla } = this.state;
+        const { period, stc, expla } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -79,7 +83,10 @@ class AddSocialScreen extends React.Component {
                             <View style={styles.ContentBox}>
                                 <Text style={styles.InnerTxt}>계모임명</Text>
                                 <View style={styles.TopContentInputBox}>
-                                    <TextInput placeholder={'계모임 명을 입력하세요.'} />
+                                    <TextInput
+                                        placeholder={'계모임 명을 입력하세요.'}
+                                        onChangeText={text => this.setState({ name: text })}
+                                    />
                                 </View>
                             </View>
                             <View style={styles.TopContentBox_2}>
@@ -92,7 +99,7 @@ class AddSocialScreen extends React.Component {
                                     <View style={styles.STCInputBox}>
                                         <TextInput
                                             placeholder={'STC를 입력해주세요'}
-                                            onChangeText={(stc) => this.SetSTC(stc)}
+                                            onChangeText={stc => this.SetSTC(stc)}
                                             value={stc}
                                         />
                                     </View>
@@ -139,18 +146,46 @@ class AddSocialScreen extends React.Component {
                                     </View>
                                     <View style={styles.RewardCal}>
                                         <Text style={styles.InnerTxt}>보상액</Text>
-                                        <Text style={styles.InnerTxt}>{this.state.stc * this.state.prcnt}</Text>
+                                        <Text style={styles.InnerTxt}>{Math.floor(this.state.stc * this.state.prcnt)}</Text>
                                     </View>
                                 </View>
                             </View>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.CreateBox}>
+                    <TouchableOpacity style={styles.CreateBox} onPress={() => this.CreateGroup()}>
                         <Text style={styles.CreateBtn}>계모임 만들기</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </SafeAreaView>
         )
+    }
+
+    CreateGroup = async () => {
+        try {
+            if (this.state.cates == 'cates' || this.state.cates == undefined) {
+                alert('카테고리를 선택해 주세요.')
+            } else {
+                let response = await fetch('http://localhost:3000/api/creategroup', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        story : this.state.expla,
+                        catesid : this.state.cates,
+                        name : this.state.name,
+                        stc : this.state.stc,
+                        period : this.state.period
+                    })
+                });
+                if (response.ok) {
+                    this.props.navigation.navigate('Main')
+                }
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

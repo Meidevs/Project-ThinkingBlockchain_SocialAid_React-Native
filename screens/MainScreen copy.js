@@ -75,7 +75,7 @@ class MainScreen extends React.Component {
                         <View style={styles.SubTitle}>
                             <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
-                            <ListUp navigation={this.props.navigation} />
+                            <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
                         </View>
                 </ScrollView>
             </SafeAreaView>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         alignItems : 'flex-start',
         paddingTop : 15,
         paddingLeft : 15,
-        paddingRight : 15,
+        paddingRight : 15, //
     },
     titletxt: {
         fontSize: 20,

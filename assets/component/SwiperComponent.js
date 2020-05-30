@@ -13,8 +13,6 @@ import Swiper from 'react-native-swiper'
 class SwiperComponent extends React.Component {
     constructor(props) {
         super(props)
-        // console.log(props.uri)
-        // console.log(props.uri.length)
         this.state = {
             uri : props.uri,
             timer: 0,
