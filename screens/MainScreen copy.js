@@ -75,7 +75,7 @@ class MainScreen extends React.Component {
                         <View style={styles.SubTitle}>
                             <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
-                            <ListUp data={this.state.dataSet} navigation={this.props.navigation} />
+                            <ListUp navigation={this.props.navigation} />
                         </View>
                 </ScrollView>
             </SafeAreaView>

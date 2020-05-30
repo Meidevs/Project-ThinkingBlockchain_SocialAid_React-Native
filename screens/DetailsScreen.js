@@ -18,13 +18,21 @@ const { width, height } = Dimensions.get('window');
 class DetailsScreen extends React.Component {
     constructor(props) {
         super(props)
+        var groupsid = props.route.params.groupsid;
         this.state = {
-            data: null
+            flags: 999,
+            groupsid: groupsid,
+            host: null,
+            cates: null,
+            story: null,
+            groupname: null,
+            stc: 0,
+            period: 0,
+            participants: 0,
         }
     }
-
-
     render() {
+        const { flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
         return (
             <View style={styles.Container}>
                 <SafeAreaView >
@@ -38,20 +46,20 @@ class DetailsScreen extends React.Component {
                         </ImageBackground>
                         <View style={styles.TopContainer}>
                             <View style={styles.TopContent}>
-                                <Text style={styles.Title}>상품명 및 제목입니다.</Text>
+                                <Text style={styles.Title}>{groupname}</Text>
                                 <View style={styles.STCArea}>
-                                    <Text style={styles.STCCount}>7,502.12</Text><Text style={styles.STCTxt}>STC</Text>
+                                    <Text style={styles.STCCount}>{stc}</Text><Text style={styles.STCTxt}>STC</Text>
                                 </View>
-                                <Text style={styles.SubTxt}>소셜에이드 계모임 목적 및 설명입니다</Text>
-                                <Text>계기간 : 20.05.11 - 20.05.31</Text>
+                                <Text style={styles.SubTxt}>{story}</Text>
+                                <Text>계기간 : {period} 일간</Text>
                             </View>
                             <View style={styles.ProgressBar}>
                                 <View style={{ width: width * 0.9, backgroundColor: '#E8E8E8', borderRadius: 10, }}>
-                                    <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.9 * 4 / 10, height: 6, borderRadius: 10, }} />
+                                    <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.9 * participants / 10, height: 6, borderRadius: 10, }} />
                                 </View>
                                 <View style={{ width: width * 0.9, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Text style={styles.Participants}>현재참여인원</Text>
-                                    <Text style={styles.ParticipantsCount}>4명</Text>
+                                    <Text style={styles.ParticipantsCount}>{participants}명</Text>
                                 </View>
                             </View>
                         </View>
@@ -65,14 +73,117 @@ class DetailsScreen extends React.Component {
                         <Image source={require('../assets/images/ico_calculator.png')} style={{ marginRight: 5, width: 15, height: 15, resizeMode: 'contain' }} />
                         <Text style={styles.Txt}>수익 계산</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.joinBtn}>
-                        <Text style={styles.Txt}>참가 하기</Text>
-                    </TouchableOpacity>
+                    {
+                        flags == 999 ? <View></View> :
+                            flags == 0 ? <TouchableOpacity style={styles.joinBtn} onPress={() => this.JoinGroup()}>
+                                <Text style={styles.Txt}>참가 하기</Text>
+                            </TouchableOpacity> :
+                                flags == 1 ? <TouchableOpacity style={styles.joinBtn} onPress={() => this.CancelGroup()}>
+                                    <Text style={styles.Txt}>계모임 취소</Text>
+                                </TouchableOpacity> : <TouchableOpacity style={styles.joinBtn} onPress={() => this.CancelJoin()}>
+                                        <Text style={styles.Txt}>계모임 참가 취소</Text>
+                                    </TouchableOpacity>
+                    }
                 </View>
             </View>
 
 
         )
+    }
+
+    componentDidMount = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/loadgroup', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ groupsid: this.state.groupsid })
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    flags: json.flags,
+                    groupsid: json.groupsid,
+                    host: json.host,
+                    cates: json.cates,
+                    story: json.story,
+                    groupname: json.groupname,
+                    stc: json.stc,
+                    period: json.period,
+                    participants: json.participants,
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    JoinGroup = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/joingroup', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    groupsid: this.state.groupsid,
+                })
+            })
+            if (response.ok) {
+                this.props.navigation.replace('Details', {
+                    groupsid: this.state.groupsid
+                })
+            }
+        } catch (err) {
+            alert('참가에 실패하였습니다')
+        }
+    }
+
+    CancelGroup = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/cancelgroup', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    groupsid: this.state.groupsid,
+                })
+            })
+            if (response.ok) {
+                this.props.navigation.navigate('Main',)
+            }
+        } catch (err) {
+            alert('계모임 삭제에 실패하였습니다.')
+
+        }
+    }
+
+    CancelJoin = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/canceljoin', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    groupsid: this.state.groupsid,
+                })
+            })
+            if (response.ok) {
+                this.props.navigation.replace('Details', {
+                    groupsid: this.state.groupsid
+                })
+            }
+        } catch (err) {
+            alert('참가 취소에 실패하였습니다')
+        }
     }
 }
 const styles = StyleSheet.create({

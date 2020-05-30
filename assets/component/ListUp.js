@@ -28,7 +28,7 @@ class ListUp extends React.Component {
             <TouchableOpacity
                 onPress={() =>
                     navigation.navigate('Details', {
-                        data,
+                        groupsid : data.groupsid
                     })
                 }
                 style={styles.BtnFrame}

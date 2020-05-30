@@ -22,13 +22,6 @@ class MainScreen extends React.Component {
         this.state = {
             refreshing: false,
             uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
-            dataSet: [
-                { code: '1', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: '자동차' },
-                { code: '2', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: '금' },
-                { code: '3', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: '자동차' },
-                { code: '4', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: '여행' },
-                { code: '5', name: '계모임 상품명입니다. 상품명은 한줄까지 입력가능합니다.', shorttxt: '안녕하세요 계모임 설명 부분입니다. 설명은 40자 이내만 표시됩니다.', longtxt: '투자기간이 짧은 상품입니다.', symbol: '명품' },
-            ]
         }
     }
 
