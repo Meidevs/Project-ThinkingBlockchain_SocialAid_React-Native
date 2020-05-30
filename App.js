@@ -90,6 +90,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
+            key={index}
             style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', marginBottom: 5, }}
           >{isFocused ? <Image source={icons[1]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} /> : <Image source={icons[0]} style={{ marginTop: 10, width: 20, height: 20, resizeMode: 'contain' }} />}
             <Text style={{ fontSize: 12, color: isFocused ? '#4F79D5' : '#000000' }}>

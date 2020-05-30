@@ -33,7 +33,15 @@ class SocialNowScreen extends React.Component {
                         202, 347, 198
                     ]
                 }
-            ]
+            ],
+            totalSTC: 0,
+            revenue: 0,
+            balance: 0,
+            profit: 0,
+            repayment: 0,
+            count: 0,
+            annually: 0,
+            monthly: 0,
         }
     }
 
@@ -58,7 +66,13 @@ class SocialNowScreen extends React.Component {
             })
         }
     }
+
+    componentDidMount() {
+        this.GetGroupStatus();
+    }
+
     render() {
+        const { revenue } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -88,7 +102,7 @@ class SocialNowScreen extends React.Component {
                                 <View style={styles.TitleBox}>
                                     <Text style={styles.TitleTxt}>전체 계모임 금액</Text>
                                     <View style={styles.STCBox}>
-                                        <Text style={styles.STCCount}>7,502.12</Text><Text style={styles.STCTxt}>STC</Text>
+                                        <Text style={styles.STCCount}>{this.state.totalSTC}</Text><Text style={styles.STCTxt}>STC</Text>
                                     </View>
                                 </View>
                                 <View style={styles.RevenueBox}>
@@ -97,10 +111,10 @@ class SocialNowScreen extends React.Component {
                                     </View>
                                     <View style={styles.RightBox}>
                                         <View style={styles.RightRevenueBox}>
-                                            <Text style={styles.RevenueTxt}>예상 수익률</Text><Text style={styles.RevenueTxt}>+50%</Text>
+                                            <Text style={styles.RevenueTxt}>예상 수익률</Text><Text style={styles.RevenueTxt}>+{revenue}%</Text>
                                         </View>
                                         <View style={styles.ProgressBar}>
-                                            <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.7 * 5 / 10, height: 6, borderRadius: 10, }} />
+                                            <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.7 * revenue / 100, height: 6, borderRadius: 10, }} />
                                         </View>
                                     </View>
                                 </View>
@@ -120,7 +134,7 @@ class SocialNowScreen extends React.Component {
                                                 총 누적 계
                                             </Text>
                                             <Text style={styles.Txt}>
-                                                350
+                                                {this.state.balance}
                                             </Text>
                                         </View>
                                     </View>
@@ -131,7 +145,7 @@ class SocialNowScreen extends React.Component {
                                                 누적 수익
                                             </Text>
                                             <Text style={styles.Txt}>
-                                                2,000,000
+                                                {this.state.profit}
                                             </Text>
                                         </View>
                                     </View>
@@ -142,7 +156,7 @@ class SocialNowScreen extends React.Component {
                                                 누적 상환
                                             </Text>
                                             <Text style={styles.Txt}>
-                                                500
+                                                {this.state.repayment}
                                             </Text>
                                         </View>
                                     </View>
@@ -155,7 +169,7 @@ class SocialNowScreen extends React.Component {
                             <TouchableOpacity style={styles.BottomFirstBox} onPress={() => this.props.navigation.navigate('NowDetails')}>
                                 <Text style={styles.BottomUpperTxt}>계모임 현황</Text>
                                 <View style={styles.GoToDetails}>
-                                    <Text style={styles.GoToDetailsTxt}>총 30건</Text>
+                                    <Text style={styles.GoToDetailsTxt}>총 {this.state.count}건</Text>
                                     <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
                                 </View>
                             </TouchableOpacity>
@@ -168,7 +182,7 @@ class SocialNowScreen extends React.Component {
                                         <TouchableOpacity onPress={() => this.switchBtn(0)} style={styles.SwitchBtn}>
                                             <Text style={this.state.styles[0].isSelect ? styles.txtPressed : styles.txtNotPressed}>월간</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.switchBtn(1)}  style={styles.SwitchBtn}>
+                                        <TouchableOpacity onPress={() => this.switchBtn(1)} style={styles.SwitchBtn}>
                                             <Text style={this.state.styles[1].isSelect ? styles.txtPressed : styles.txtNotPressed}>연간</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -178,21 +192,21 @@ class SocialNowScreen extends React.Component {
                                     <Text style={styles.BottomSubDetailTxt_2}>200 STC</Text>
                                 </View>
                                 <View style={styles.BottomGraphBox}>
-                                {this.state.styles[0].isSelect ?
+                                    {this.state.styles[0].isSelect ?
                                         (
-                                                <View style={styles.MonthlyGraph}>
-                                                    {this.state.dataSet[0].month.map((data, i) => (
-                                                        <View style={{ flexDirection: 'column', flex: 1, }}>
-                                                            <View style={{ height: data * 2, backgroundColor: '#C9C9C9', margin: 8, borderRadius :10,}}>
-                                                            </View>
-                                                            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                                                <Text style={{ fontSize: 8, color: '#C9C9C9' }}>
-                                                                    {i + 1}
-                                                                </Text>
-                                                            </View>
+                                            <View style={styles.MonthlyGraph}>
+                                                {this.state.dataSet[0].month.map((data, i) => (
+                                                    <View style={{ flexDirection: 'column', flex: 1, }}>
+                                                        <View style={{ height: data * 2, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10, }}>
                                                         </View>
-                                                    ))}
-                                                </View>
+                                                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                            <Text style={{ fontSize: 8, color: '#C9C9C9' }}>
+                                                                {i + 1}
+                                                            </Text>
+                                                        </View>
+                                                    </View>
+                                                ))}
+                                            </View>
                                         ) : (
                                             <View style={styles.YearGraph}>
                                             </View>
@@ -214,11 +228,39 @@ class SocialNowScreen extends React.Component {
             </SafeAreaView >
         )
     }
+
+    GetGroupStatus = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/rewards/groupstatus', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    totalSTC: json.totalSTC,
+                    revenue: json.revenue,
+                    balance: 0,
+                    profit: json.profit,
+                    repayment: json.repayment,
+                    count: json.count,
+                    annually: json.anuually,
+                    monthly: json.monthly,
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        backgroundColor : '#F7F7F7'
+        backgroundColor: '#F7F7F7'
     },
     Scrollview: {
         flexGrow: 1,
@@ -388,45 +430,45 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    BottomTitleTxt : {
-        color : '#4C4C4C',
-        fontSize : 14,
-        fontWeight : 'bold'
-    },  
-    SwitchBtnBox : {
-        flexDirection : 'row',
-        justifyContent : 'center',
+    BottomTitleTxt: {
+        color: '#4C4C4C',
+        fontSize: 14,
+        fontWeight: 'bold'
+    },
+    SwitchBtnBox: {
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     BottomSubDetailBox: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginBottom : 10,
+        marginBottom: 10,
     },
-    BottomSubDetailTxt_1 : {
-        color : '#929292',
-        fontWeight : '800',
-        fontSize : 12,
-        marginRight : 5
+    BottomSubDetailTxt_1: {
+        color: '#929292',
+        fontWeight: '800',
+        fontSize: 12,
+        marginRight: 5
     },
-    BottomSubDetailTxt_2 : {
-        color : '#4F79D5',
-        fontWeight : '800',
-        fontSize : 12,
+    BottomSubDetailTxt_2: {
+        color: '#4F79D5',
+        fontWeight: '800',
+        fontSize: 12,
     },
     BottomGraphBox: {
         flex: 8,
-        flexDirection : 'column',
-        justifyContent : 'flex-end',
-        alignItems : 'center'
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
-    MonthlyGraph : {
-        flexDirection : 'row',
-        alignItems : 'flex-end'
+    MonthlyGraph: {
+        flexDirection: 'row',
+        alignItems: 'flex-end'
     },
-    EmptyBox : {
-        flex : 1,
+    EmptyBox: {
+        flex: 1,
     },
     BottomLowerContent: {
         flex: 3,
@@ -434,8 +476,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    SwitchBtn : {
-        marginRight : 5,
+    SwitchBtn: {
+        marginRight: 5,
     },
     txtNotPressed: {
         fontSize: 13,
