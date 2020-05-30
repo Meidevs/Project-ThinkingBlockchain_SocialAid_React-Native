@@ -30,7 +30,6 @@ class AddSocialScreen extends React.Component {
         this.EndCal(this.state.stc, dataFromChild.period, this.state.cates)
     }
     CateCallBack = (dataFromChild) => {
-        console.log('dataFromChild', dataFromChild)
         this.EndCal(this.state.stc, this.state.period, dataFromChild.cates)
     }
     SetSTC = (data) => {

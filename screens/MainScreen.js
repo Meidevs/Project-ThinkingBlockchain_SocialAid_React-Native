@@ -19,16 +19,17 @@ class MainScreen extends React.Component {
 
     constructor(props) {
         super(props)
+        console.log(props)
         this.state = {
             refreshing: false,
             uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
         }
     }
-
     _onRefresh = () => {
         this.setState({ refreshing: true });
         this.wait(2000).then(() => {
-            this.setState({ refreshing : false, })
+            this.GetGroupList()
+            this.setState({ refreshing: false, })
         })
     }
     wait = (timeout) => {
@@ -36,6 +37,10 @@ class MainScreen extends React.Component {
             setTimeout(resolve, timeout);
         });
     }
+    componentDidMount() {
+        this.GetGroupList()
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -68,11 +73,30 @@ class MainScreen extends React.Component {
                         <View style={styles.SubTitle}>
                             <Text style={styles.TitleSubTxt}>신규 계모임 상품</Text>
                         </View>
-                            <ListUp navigation={this.props.navigation} />
-                        </View>
+                        <ListUp navigation={this.props.navigation} data={this.state.data} />
+                    </View>
                 </ScrollView>
             </SafeAreaView>
         )
+    }
+
+    GetGroupList = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/grouplist', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({ data: json })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
@@ -84,49 +108,49 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f7f7',
     },
     TopContainer: {
-        flexDirection : 'column',
-        alignItems : 'flex-start',
-        justifyContent : 'center',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
         height: 150,
     },
     title: {
-        flex : 1,
+        flex: 1,
         flexDirection: 'row',
-        alignItems : 'flex-start',
-        paddingTop : 15,
-        paddingLeft : 15,
-        paddingRight : 15,
+        alignItems: 'flex-start',
+        paddingTop: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
     },
     titletxt: {
         fontSize: 20,
         fontWeight: 'bold',
-        color : '#4C4C4C'
+        color: '#4C4C4C'
     },
     banner: {
-        flex : 2,
+        flex: 2,
         width: width,
-        paddingBottom : 15,
-        paddingRight : 15,
-        paddingLeft : 15,
+        paddingBottom: 15,
+        paddingRight: 15,
+        paddingLeft: 15,
     },
     BottomContainer: {
-        width : width,
-        justifyContent : 'center',
-        alignItems : 'center',
+        width: width,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    SubTitle : {
-        width : width,
-        flexDirection : 'row',
-        justifyContent : 'flex-start',
-        alignItems : 'center',
-        paddingTop : 15,
-        paddingLeft : 15,
-        paddingRight : 15,
+    SubTitle: {
+        width: width,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
     },
     TitleSubTxt: {
         fontSize: 15,
         fontWeight: 'bold',
-        color : '#4C4C4C'
+        color: '#4C4C4C'
     },
     bannerImage: {
     }

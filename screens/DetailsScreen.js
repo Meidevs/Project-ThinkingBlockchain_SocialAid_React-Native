@@ -156,11 +156,10 @@ class DetailsScreen extends React.Component {
                 })
             })
             if (response.ok) {
-                this.props.navigation.navigate('Main',)
+                this.props.navigation.navigate('Main')
             }
         } catch (err) {
             alert('계모임 삭제에 실패하였습니다.')
-
         }
     }
 

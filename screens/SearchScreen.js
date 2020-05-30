@@ -25,7 +25,7 @@ class SearchScrenn extends React.Component {
         this.state = {
             cnt: 0,
             dataSet: [
-                { user: null, cates: null, stc: null, days: null },
+                { host: null, cates: null, stc: null, period: null },
             ],
         }
     }
@@ -33,7 +33,7 @@ class SearchScrenn extends React.Component {
         <TouchableOpacity
             onPress={() =>
                 this.props.navigation.navigate('Details', {
-                    item,
+                    groupsid: item.groupsid
                 })
             }
             style={styles.BtnFrame}
@@ -42,7 +42,7 @@ class SearchScrenn extends React.Component {
                 <View style={styles.LeftArea}>
                     <View style={styles.MakeRow}>
                         <Text style={styles.ItemName}>계주명</Text>
-                        <Text style={styles.ItemName}>{item.user}</Text>
+                        <Text style={styles.ItemName}>{item.host}</Text>
                     </View>
                     <View style={styles.MakeRow}>
                         <Text style={styles.ItemExpla}>계 목적</Text>
@@ -64,34 +64,44 @@ class SearchScrenn extends React.Component {
             <View style={styles.DownerSection}>
                 <Image source={require('../assets/images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
                 <Text style={styles.ItemPeriod}>
-                    {item.days == 10 ? '10일의 짧은 기간동안 진행되는 계모임입니다.' : item.days == 20 ? '20일의 보통 기간 동안 진행되는 계모임입니다.' : '30일의 장기간 동안 진행되는 계모임입니다.'}
+                    {item.period == 10 ? '10일의 짧은 기간동안 진행되는 계모임입니다.' : item.period == 20 ? '20일의 보통 기간 동안 진행되는 계모임입니다.' : '30일의 장기간 동안 진행되는 계모임입니다.'}
                 </Text>
             </View>
         </TouchableOpacity>
     );
-    CreatorCallback = (dataFromChild) => {
-        this.EndCal(dataFromChild.users, this.state.cates)
-    }
     CateCallBack = (dataFromChild) => {
-        this.EndCal(this.state.users, dataFromChild.cates)
+        this.setState({ cates: dataFromChild.cates, });
     }
-    EndCal = (users, cates) => {
-        this.setState({ users: users, cates: cates, });
-    }
-    SearchItems = () => {
-        this.setState({
-            dataSet: [
-                { user: '화성인', cates: '자동차', stc: 100, days: 10 },
-                { user: '우주인', cates: '금', stc: 40, days: 20 },
-                { user: '외계인', cates: '여행', stc: 80, days: 10 },
-                { user: '지구인', cates: '명품', stc: 100, days: 30 },
-                { user: '목성인', cates: '금', stc: 100, days: 30 }
-            ]
-        })
+
+    SearchItems = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/search', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    catesid: this.state.cates,
+                    name: this.state.name,
+                    groupname : this.state.groupname,
+                })
+            })
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    dataSet : json
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
     }
     render() {
         const { cates, users, dataSet } = this.state;
-        console.log('SearchScreen', dataSet)
+        console.log(dataSet)
         return (
             <View style={styles.Container}>
                 <StatusBar
@@ -115,13 +125,17 @@ class SearchScrenn extends React.Component {
                             <CatesPicker props={width * 0.8 / 2} callback={this.CateCallBack} />
                             <Text style={{ color: '#E0E0E0', fontSize: 20, }}>|</Text>
                             <View style={styles.TextInputArea}>
-                                <TextInput placeholder={'계주명'} />
+                                <TextInput
+                                    placeholder={'계주명'}
+                                    onChangeText={(name) => this.setState({ name : name })}
+                                />
                             </View>
                         </View>
                         <View style={styles.SearchInnerForm}>
                             <TextInput
                                 placeholder={'상품명을 입력해주세요'}
                                 style={{ alignSelf: 'flex-start' }}
+                                onChangeText={(groupname) => this.setState({ groupname: groupname })}
                             />
                             <TouchableOpacity style={{ padding: 8, }} onPress={this.SearchItems}>
                                 <Image source={require('../assets/images/ico_search.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
@@ -138,14 +152,14 @@ class SearchScrenn extends React.Component {
                     <ScrollView
                         nestedScrollEnabled={true}>
                         {
-                            dataSet[0].user == null
+                            dataSet[0].host == null
                                 ? <View></View>
                                 :
                                 <FlatList
                                     ListHeaderComponent={<></>}
                                     data={dataSet}
                                     renderItem={({ item, index, separators }) => this._renderItem({ item, index, separators })}
-                                    keyExtractor={(item, index) => index.toString()}
+                                    keyExtractor={(item) => item.groupsid}
                                     ListFooterComponent={<></>}
                                 />
                         }
@@ -227,30 +241,30 @@ const styles = StyleSheet.create({
     },
     LeftArea: {
         flex: 1,
-        justifyContent : 'center',
-        alignItems : 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    MakeRow : {
-        flex : 1,
-        flexDirection : 'row',
-        justifyContent : 'center',
-        alignItems : 'center'
+    MakeRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     ItemName: {
-        padding : 5,
+        padding: 5,
         fontSize: 12,
         color: '#4C4C4C',
         fontWeight: '700'
     },
     ItemExpla: {
-        padding : 5,
+        padding: 5,
         fontSize: 12,
         color: '#929292'
     },
     RightArea: {
         flex: 1,
         alignItems: 'center',
-        justifyContent : 'center'
+        justifyContent: 'center'
     },
     LineSection: {
         flex: 1,
