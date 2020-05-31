@@ -11,7 +11,22 @@ import {
 const { width, height } = Dimensions.get('window');
 
 class MyinfoScreen extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            wallet: null,
+            ableSTC: 0,
+            totalSTC: 0,
+            name: null
+        }
+    }
+
+    componentDidMount() {
+        this.GetMyinfo();
+    }
+
     render() {
+        const { wallet, ableSTC, totalSTC, name } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -31,9 +46,9 @@ class MyinfoScreen extends React.Component {
                     </View>
                     <View style={styles.TopContent}>
                         <View style={styles.WalletBox}>
-                            <Text style={styles.WalletTxt}>강서현님의 산타 월렛 계좌</Text>
+                            <Text style={styles.WalletTxt}>{name}님의 산타 월렛 계좌</Text>
                             <View style={styles.WalletAddrBox}>
-                                <Text style={styles.WalletAddrTxt}>SdrJqbWY3G4T9PY77Yg5uBc VT</Text>
+                                <Text style={styles.WalletAddrTxt}>{wallet}</Text>
                                 <Image source={require('../assets/images/ico_copy.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
                             </View>
                         </View>
@@ -46,11 +61,11 @@ class MyinfoScreen extends React.Component {
                         </View>
                         <View style={styles.WalletSector_2}>
                             <Text style={styles.WalletSTCTxt}>이용가능 STC</Text>
-                            <Text style={styles.WalletSTCSubTxt}>XXX STC</Text>
+                            <Text style={styles.WalletSTCSubTxt}>{ableSTC} STC</Text>
                         </View>
                         <View style={styles.WalletSector_2}>
                             <Text style={styles.WalletSTCTxt}>총 보유 STC</Text>
-                            <Text style={styles.WalletSTCSubTxt}>XXX STC</Text>
+                            <Text style={styles.WalletSTCSubTxt}>{totalSTC} STC</Text>
                         </View>
                     </View>
                 </View>
@@ -82,11 +97,36 @@ class MyinfoScreen extends React.Component {
             </View>
         )
     }
+
+    GetMyinfo = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/users/myinfo', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    wallet: json.wallet,
+                    ableSTC: json.ableSTC,
+                    totalSTC: json.totalSTC,
+                    name: json.name,
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor : '#F7F7F7'
+        backgroundColor: '#F7F7F7'
     },
     TopContainer: {
         flex: 3,
@@ -102,7 +142,7 @@ const styles = StyleSheet.create({
     },
     TopTitleTxt: {
         fontSize: 15,
-        color : '#4C4C4C',
+        color: '#4C4C4C',
         fontWeight: 'bold'
     },
     TopContent: {
@@ -182,12 +222,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    BottomContentMainTxt : {
-        color : '#4C4C4C',
+    BottomContentMainTxt: {
+        color: '#4C4C4C',
     },
-    BottomContentTxt : {
-        color : '#929292',
-        marginRight : 5
+    BottomContentTxt: {
+        color: '#929292',
+        marginRight: 5
     }
 })
 export default MyinfoScreen;

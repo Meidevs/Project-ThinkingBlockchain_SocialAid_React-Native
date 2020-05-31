@@ -15,11 +15,11 @@ function Item({ data, navigation }) {
         <View style={styles.BtnFrame} >
             <View style={styles.LeftSection}>
                 <View style={styles.TitleForm}>
-                    <Text style={styles.TitleTxt}>{data.name}</Text>
+                    <Text style={styles.TitleTxt}>{data.groupname}</Text>
                     {
-                    data.d == 1 ? 
+                    data.status == 0 ? 
                     (<View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} />) :
-                    data.d == 2 ? (<View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />) :
+                    data.d == 1 ? (<View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />) :
                     <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
                     }
                 </View>
@@ -42,9 +42,9 @@ function Item({ data, navigation }) {
                     style={styles.DetailsBtnForm}
                 >
                     <View style={styles.DetailsBtnTextForm}>
-                        <Text style={styles.SubTxt}>계모임 종료 일자</Text>
+                        <Text style={styles.SubTxt}>계모임 진행 기간</Text>
                         <Text style={styles.SubTxt}> | </Text>
-                        <Text style={styles.SubTxt}>{data.duedate}</Text>
+                        <Text style={styles.SubTxt}>{data.period} 일</Text>
                     </View>
                     <Image source={require('../images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                 </TouchableOpacity>
@@ -64,7 +64,7 @@ const StatusListUp = ({ data, navigation }) => {
                         navigation={navigation}
                     />
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.groupsid}
             />
         </View>
     )

@@ -31,43 +31,40 @@ class NowDetailsScreen extends React.Component {
                 },
             ],
             dataSet: {
-                Ongoing: [
-                    { d : 1, id: 1, name: '금모으는계', stc: '100', duedate: '2020.05.14', days : 20 }, { d : 1, id: 2, name: '동호회계', stc: '20', duedate: '2020.05.19', days : 10 }, { d : 1, id: 3, name: '명품계', stc: '100', duedate: '2020.05.23', days : 30 }
-                ],
-                Wating: [
-                    { d : 2, id: 1, name: '자동차계', stc: '80', duedate: '2020.06.18', days : 10 }, { d : 2, id: 2, name: '우리계', stc: '10', duedate: '2020.06.19', days : 30 }
-                ],
-                Complete: [
-                    {d : 3, id: 1, name: '함께하계', stc: '40', duedate: '2020.05.17', days : 30 }, {d : 3, id: 2, name: '사랑하계', stc: '60', duedate: '2020.05.29', days : 10 }, {d : 3, id: 3, name: '명품계', stc: '10', duedate: '2020.06.02', days : 10 }
-                ]
+                // Ongoing: [
+                //     { d : 1, id: 1, name: '금모으는계', stc: '100', duedate: '2020.05.14', days : 20 }, { d : 1, id: 2, name: '동호회계', stc: '20', duedate: '2020.05.19', days : 10 }, { d : 1, id: 3, name: '명품계', stc: '100', duedate: '2020.05.23', days : 30 }
+                // ],
+                // Wating: [
+                //     { d : 2, id: 1, name: '자동차계', stc: '80', duedate: '2020.06.18', days : 10 }, { d : 2, id: 2, name: '우리계', stc: '10', duedate: '2020.06.19', days : 30 }
+                // ],
+                // Complete: [
+                //     {d : 3, id: 1, name: '함께하계', stc: '40', duedate: '2020.05.17', days : 30 }, {d : 3, id: 2, name: '사랑하계', stc: '60', duedate: '2020.05.29', days : 10 }, {d : 3, id: 3, name: '명품계', stc: '10', duedate: '2020.06.02', days : 10 }
+                // ]
             },
             show : null,
         }
     }
 
     componentDidMount = () => {
-        console.log('hi')
         // To Get Participants DBd From SocialAid Server & Divide them into Each Cases.
         // But Reconize that Front-End Request Data of Each Cases When they selected.
         // It means that Front-End Request only Ongoing Datas at first time.
-        var dataSet = this.state.dataSet;
+
+        this.GetGroupsWaiting();
         this.setState({
             switch: [
                 { isSelected: true },
                 { isSelected: false},
                 { isSelected: false },
             ],
-            dataSet: dataSet,
-            show : dataSet.Ongoing
         });
     }
 
 
     selectedCates = (num) => {
-        console.log(num)
-        var dataSet = this.state.dataSet;
         
         if (num == 0) {
+            this.GetGroupsWaiting();
             this.state.switch[0].isSelect = true;
             this.state.switch[1].isSelect = false;
             this.state.switch[2].isSelect = false;
@@ -77,10 +74,9 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[1].isSelect },
                     { isSelected: this.state.switch[2].isSelect },
                 ],
-                dataSet: dataSet,
-                show : dataSet.Ongoing
             });
         } else if (num == 1) {
+            this.GetGroupsOngoing();
             this.state.switch[0].isSelect = false;
             this.state.switch[1].isSelect = true;
             this.state.switch[2].isSelect = false;
@@ -90,10 +86,9 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[1].isSelect },
                     { isSelected: this.state.switch[2].isSelect },
                 ],
-                dataSet: dataSet,
-                show : dataSet.Wating
             });
         } else if (num == 2) {
+            this.GetGroupsDone();
             this.state.switch[0].isSelect = false;
             this.state.switch[1].isSelect = false;
             this.state.switch[2].isSelect = true;
@@ -103,16 +98,13 @@ class NowDetailsScreen extends React.Component {
                     { isSelected: this.state.switch[1].isSelect },
                     { isSelected: this.state.switch[2].isSelect },
                 ],
-                dataSet: dataSet,
-                show : dataSet.Complete
             });
         }
     }
 
     render() {
-        console.log('b')
         const props = this.props.navigation;
-        const { show } = this.state;
+        const { host, join } = this.state;
         return (
             <View style={styles.Container}>
                 <View style={styles.TopCotainer}>
@@ -122,11 +114,11 @@ class NowDetailsScreen extends React.Component {
                     <View style={styles.TopCateSwitch}>
                         <TouchableOpacity style={styles.Switch} onPress={() => this.selectedCates(0)}>
                             <View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} />
-                            <Text style={this.state.switch[0].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>정상진행중</Text>
+                            <Text style={this.state.switch[0].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>진행대기중</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.Switch} onPress={() => this.selectedCates(1)}>
                             <View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />
-                            <Text style={this.state.switch[1].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>진행대기중</Text>
+                            <Text style={this.state.switch[1].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>진행중</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.Switch} onPress={() => this.selectedCates(2)}>
                             <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
@@ -141,7 +133,7 @@ class NowDetailsScreen extends React.Component {
                     </View>
                     <SafeAreaView style={{flex : 10}}>
                         <ScrollView>
-                            <StatusListUp data={show} navigation={props} />
+                            <StatusListUp data={host} navigation={props} />
                         </ScrollView>
                     </SafeAreaView>
                     <View style={styles.MyGroup}>
@@ -150,12 +142,76 @@ class NowDetailsScreen extends React.Component {
                     </View>
                     <SafeAreaView style={{flex : 10}}>
                         <ScrollView>
-                            {/* <StatusListUp data={show} navigation={this.props.navigation} /> */}
+                            <StatusListUp data={join} navigation={this.props.navigation} />
                         </ScrollView>
                     </SafeAreaView>
                 </View>
             </View>
         )
+    }
+
+    GetGroupsWaiting = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/waiting',{
+                method : 'GET',
+                credentials : 'include',
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    host : json.host,
+                    join : json.join
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    GetGroupsOngoing = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/ongoing',{
+                method : 'GET',
+                credentials : 'include',
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    host : json.host,
+                    join : json.join
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    GetGroupsDone = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/done',{
+                method : 'GET',
+                credentials : 'include',
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    host : json.host,
+                    join : json.join
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

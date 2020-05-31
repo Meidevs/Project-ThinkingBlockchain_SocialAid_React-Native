@@ -24,9 +24,7 @@ class SearchScrenn extends React.Component {
         super(props)
         this.state = {
             cnt: 0,
-            dataSet: [
-                { host: null, cates: null, stc: null, period: null },
-            ],
+            dataSet: [],
         }
     }
     _renderItem = ({ item, index, separators }) => (
@@ -70,38 +68,13 @@ class SearchScrenn extends React.Component {
         </TouchableOpacity>
     );
     CateCallBack = (dataFromChild) => {
-        this.setState({ cates: dataFromChild.cates, });
+        this.setState({ cates: dataFromChild.cates });
     }
 
-    SearchItems = async () => {
-        try {
-            let response = await fetch('http://localhost:3000/api/search', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    catesid: this.state.cates,
-                    name: this.state.name,
-                    groupname : this.state.groupname,
-                })
-            })
 
-            let json = await response.json();
-            if (response.ok) {
-                this.setState({
-                    dataSet : json
-                })
-            }
-        } catch (err) {
-            console.log(err)
-        }
-
-    }
     render() {
         const { cates, users, dataSet } = this.state;
-        console.log(dataSet)
+        console.log(dataSet[0])
         return (
             <View style={styles.Container}>
                 <StatusBar
@@ -127,7 +100,7 @@ class SearchScrenn extends React.Component {
                             <View style={styles.TextInputArea}>
                                 <TextInput
                                     placeholder={'계주명'}
-                                    onChangeText={(name) => this.setState({ name : name })}
+                                    onChangeText={(name) => this.setState({ name: name })}
                                 />
                             </View>
                         </View>
@@ -152,7 +125,7 @@ class SearchScrenn extends React.Component {
                     <ScrollView
                         nestedScrollEnabled={true}>
                         {
-                            dataSet[0].host == null
+                            dataSet[0] == undefined
                                 ? <View></View>
                                 :
                                 <FlatList
@@ -167,6 +140,32 @@ class SearchScrenn extends React.Component {
                 </SafeAreaView>
             </View>
         )
+    }
+
+    SearchItems = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/search', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    catesid: this.state.cates,
+                    name: this.state.name,
+                    groupname: this.state.groupname,
+                })
+            })
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    dataSet: json
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
