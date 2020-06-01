@@ -11,6 +11,7 @@ import {
     FlatList
 } from 'react-native';
 import { render } from 'react-dom';
+import { getCurrentFrame } from 'expo/build/AR';
 const { width, height } = Dimensions.get('window');
 
 class NoticeScreen extends React.Component {
@@ -31,126 +32,118 @@ class NoticeScreen extends React.Component {
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.14', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.15', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.16', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.17', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.18', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.19', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.20', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.21', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.22', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.23', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.24', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.25', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.26', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.27', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.28', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.29', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.30', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.31', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
+                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
                 end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
             },
         ];
         this.state = {
             notion: notion,
             show: null,
-            dataPerPage: 5,
+            dataPerPage: 3,
             currentPage: 1,
             pageCount: 3,
+            pageGroup: [],
         }
     }
 
     componentDidMount = () => {
         this.Paging(this.state.currentPage);
     }
-
+    prevPage = (currentPage) => {
+        if (currentPage > 1)
+            currentPage--;
+        this.Paging(currentPage)
+    }
+    nextPage = (currentPage) => {
+        if (currentPage < this.state.totalPage)
+            currentPage++;
+        this.Paging(currentPage)
+    }
     Paging = (currentPage) => {
-        if (currentPage == 'next') {
-            currentPage = this.state.currentPage + 1
-        }
-        if (currentPage == 'prev') {
-            currentPage = this.state.currentPage - 1
-        }
-        if (currentPage <= 0) {
+        var dataSet = this.state.notion;
+
+        // dataPerPage : Number of Data on a Page
+        var dataPerPage = this.state.dataPerPage;
+
+        //pageCount : ??
+        var pageCount = this.state.pageCount;
+
+        // totalData : Number Of Data.
+        var totalData = this.state.notion.length;
+
+        // Total Pages. 
+        var totalPage = Math.ceil(totalData / dataPerPage);
+
+        // pageGroup : It means that Notice Page Shows 1 - 3, 4 - 6 numbers of pageGroup.
+        // 1 pageGroup is 1 2 3, 
+        // 2 pageGroup is 4 5 6
+        if (currentPage < 1) {
             currentPage = 1;
         }
-        var dataSet = this.state.notion;
-        var dataPerPage = this.state.dataPerPage;
-        var pageCount = this.state.pageCount;
-        var totalData = this.state.notion.length;
-        var totalPage = Math.ceil(totalData / dataPerPage);
+
+        if (currentPage > totalPage) {
+            currentPage = totalPage;
+        }
         var pageGroup = Math.ceil(currentPage / pageCount)
 
-        var rawArray = new Array();
+        var pageGroupArray = new Array();
+        var dataArray = new Array();
+        var last = pageGroup * 3 > totalPage ? totalPage : pageGroup * 3;
+        for (var i = (pageGroup - 1) * 3; i < last; i++) {
+            pageGroupArray.push(i)
+        }
 
-        var last = pageGroup * pageCount;
-        var middle = last - 1;
-        var first = last - (pageCount - 1);
-        if (last > totalPage) {
-            last = totalPage
-            if (last % 3 == 1) {
-                first = undefined
-            }
-            middle = undefined
+        // 9 > 8  8 == 8 
+        for (var i = (currentPage - 1) * 3; i < (currentPage * 3); i++) {
+            dataArray.push(dataSet[i])
         }
-        for (var i = (currentPage - 1) * 5; i <= (currentPage * 5) - 1; i++) {
-            rawArray.push(dataSet[i])
-        }
-        var fArray = rawArray.filter(Boolean)
-        this.setState({ notion: dataSet, show: fArray, first: first, middle: middle, last: last, currentPage: currentPage })
+        this.setState({ pageGroup: pageGroupArray, show: dataArray, totalPage : totalPage, currentPage : currentPage })
     }
+
     MoreInformation = (data, num) => {
         data.visible = !data.visible;
         var show = this.state.show;
@@ -159,6 +152,7 @@ class NoticeScreen extends React.Component {
         }
         this.setState({ show: show })
     }
+
     _renderItem = ({ item, index, separators }) => (
         <View>
             <TouchableOpacity style={styles.NoticeContentForm} onPress={() => this.MoreInformation(item, index)}>
@@ -192,8 +186,10 @@ class NoticeScreen extends React.Component {
             }
         </View>
     );
+
     render() {
-        const { notion, show, first, middle, last, currentPage } = this.state;
+        const { show, currentPage, pageGroup } = this.state;
+        console.log(currentPage)
         return (
             <SafeAreaView style={styles.Container}>
                 <ScrollView>
@@ -212,27 +208,22 @@ class NoticeScreen extends React.Component {
                             <TouchableOpacity style={styles.PaginationItem}>
                                 <Image source={require('../assets/images/ico_arrow_first.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.PaginationItem} onPress={() => this.Paging('prev')}>
+                            <TouchableOpacity style={styles.PaginationItem} onPress={() => this.prevPage(currentPage)}>
                                 <Image source={require('../assets/images/ico_arrow_left.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                             </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.Paging(first)}
-                                style={styles.PaginationItem}
-                            >
-                                <Text>{this.state.first}</Text>
-                            </TouchableOpacity><TouchableOpacity
-                                onPress={() => this.Paging(middle)}
-                                style={styles.PaginationItem}
-                            >
-                                <Text>{this.state.middle}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.Paging(last)}
-                                style={styles.PaginationItem}
-                            >
-                                <Text>{this.state.last}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.PaginationItem} onPress={() => this.Paging('next')}>
+                            {
+                                pageGroup.map((a, i) => {
+                                    return (
+                                        <TouchableOpacity
+                                            onPress={() => this.Paging(a + 1)}
+                                            style={styles.PaginationItem}
+                                        >
+                                            <Text>{a + 1}</Text>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                            }
+                            <TouchableOpacity style={styles.PaginationItem} onPress={() => this.nextPage(currentPage)}>
                                 <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.PaginationItem}>
@@ -314,14 +305,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-start'
     },
-    InnerTextForm : {
-        marginTop : 10,
-        marginBottom : 10,
+    InnerTextForm: {
+        marginTop: 10,
+        marginBottom: 10,
     },
-    TextTxt : {
-        fontSize : 13,
-        fontWeight : '600',
-        color : '#4C4C4C'
+    TextTxt: {
+        fontSize: 13,
+        fontWeight: '600',
+        color: '#4C4C4C'
     }
 })
 export default NoticeScreen;
