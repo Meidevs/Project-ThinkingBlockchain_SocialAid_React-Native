@@ -12,7 +12,6 @@ const { width, height } = Dimensions.get('window');
 class NowShowDetailsScreen extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props.route.params.data)
         var dataSet = props.route.params.data;
         this.state = {
             status: dataSet.d,

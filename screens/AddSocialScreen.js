@@ -100,6 +100,7 @@ class AddSocialScreen extends React.Component {
                                         <TextInput
                                             placeholder={'STC를 입력해주세요'}
                                             onChangeText={stc => this.SetSTC(stc)}
+                                            keyboardType={'numeric'}
                                             value={stc}
                                         />
                                     </View>

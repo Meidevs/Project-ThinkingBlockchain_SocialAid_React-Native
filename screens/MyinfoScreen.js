@@ -6,7 +6,8 @@ import {
     Image,
     Dimensions,
     StyleSheet,
-    StatusBar
+    StatusBar,
+    Clipboard
 } from 'react-native';
 const { width, height } = Dimensions.get('window');
 

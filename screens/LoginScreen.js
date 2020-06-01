@@ -51,6 +51,7 @@ class LoginScreen extends React.Component {
                             <TextInput
                                 placeholder={'비밀번호'}
                                 onChangeText={text => this.setState({ password: text })}
+                                secureTextEntry={true}
                             />
                         </View>
                         <View style={styles.UserCheckForm}>

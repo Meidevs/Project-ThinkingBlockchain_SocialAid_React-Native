@@ -52,7 +52,7 @@ class CatesPicker extends React.Component {
                     <Picker.Item label='카테고리' value='cates' />
                     {this.state.cates.map((data) => {
                         return (
-                            <Picker.Item label={data.name} value={data.catesid} />
+                            <Picker.Item key={data.catesid} label={data.name} value={data.catesid} />
                         )
                     })}
                 </Picker>

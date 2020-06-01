@@ -74,7 +74,6 @@ class SearchScrenn extends React.Component {
 
     render() {
         const { cates, users, dataSet } = this.state;
-        console.log(dataSet[0])
         return (
             <View style={styles.Container}>
                 <StatusBar
