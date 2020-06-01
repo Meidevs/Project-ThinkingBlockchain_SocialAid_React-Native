@@ -22,26 +22,16 @@ class SocialNowScreen extends React.Component {
                 { isSelect: true, },
                 { isSelect: false, }
             ],
-            dataSet: [
-                {
-                    month: [
-                        12, 5, 8, 21, 30, 18, 15, 12, 2, 35, 20, 20
-                    ]
-                },
-                {
-                    year: [
-                        202, 347, 198
-                    ]
-                }
-            ],
             totalSTC: 0,
             revenue: 0,
             balance: 0,
             profit: 0,
             repayment: 0,
             count: 0,
-            annually: 0,
-            monthly: 0,
+            annually: [],
+            monthly: [],
+            mSTC: 0,
+            month : 0,
         }
     }
 
@@ -70,9 +60,30 @@ class SocialNowScreen extends React.Component {
     componentDidMount() {
         this.GetGroupStatus();
     }
+    ChooseMonth = (num) => {
+        const { monthly, mbarColor } = this.state;
+        var rawArray = new Array();
+        for (var i = 0; i < 12; i++) {
+            var rawData = { height: monthly[i].total, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 }
+            rawArray.push(rawData)
+        }
+        rawArray[num] = { height: monthly[num].total, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 }
+        this.setState({mbarColor : rawArray, mSTC : monthly[num].total, month : monthly[num].month + 1})
+    }
+
+    ChooseYear = (num) => {
+        const { annually, ybarColor } = this.state;
+        var rawArray = new Array();
+        for (var i = 0; i < 6; i++) {
+            var rawData = { height: annually[i].total, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 }
+            rawArray.push(rawData)
+        }
+        rawArray[num] = { height: annually[num].total, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 }
+        this.setState({ybarColor : rawArray, ySTC : annually[num].total, year : annually[num].year})
+    }
 
     render() {
-        const { revenue } = this.state;
+        const { revenue, annually, monthly, ybarColor, mbarColor, mSTC, month, ySTC, year } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -187,32 +198,71 @@ class SocialNowScreen extends React.Component {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                                <View style={styles.BottomSubDetailBox}>
-                                    <Text style={styles.BottomSubDetailTxt_1}>3월 수령액</Text>
-                                    <Text style={styles.BottomSubDetailTxt_2}>200 STC</Text>
-                                </View>
-                                <View style={styles.BottomGraphBox}>
-                                    {this.state.styles[0].isSelect ?
-                                        (
-                                            <View style={styles.MonthlyGraph}>
-                                                {this.state.dataSet[0].month.map((data, i) => (
-                                                    <View style={{ flexDirection: 'column', flex: 1, }}>
-                                                        <View style={{ height: data * 2, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10, }}>
-                                                        </View>
-                                                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                                            <Text style={{ fontSize: 8, color: '#C9C9C9' }}>
-                                                                {i + 1}
-                                                            </Text>
-                                                        </View>
-                                                    </View>
-                                                ))}
+                                {this.state.styles[0].isSelect ?
+                                    (
+                                        <View style={styles.BottomSubDetailBox}>
+                                            <View style={styles.BottomSubDetailInnerBox}>
+                                    <Text style={styles.BottomSubDetailTxt_1}>{month}월 수령액</Text>
+                                                <Text style={styles.BottomSubDetailTxt_2}>{mSTC} STC</Text>
                                             </View>
-                                        ) : (
-                                            <View style={styles.YearGraph}>
+                                            <View style={{ flex: 6 }}>
+                                                <ScrollView
+                                                    nestedScrollEnabled={true}
+                                                    showsHorizontalScrollIndicator={false}
+                                                    showsVerticalScrollIndicator={false}
+                                                    horizontal={true}
+                                                    style={{ flex: 1 }}
+                                                >
+                                                    {monthly.map((data, i) => {
+                                                        return (
+                                                            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', }} onPress={() => this.ChooseMonth(i)}>
+                                                                <View style={mbarColor[i]}>
+                                                                </View>
+                                                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                                    <Text style={{ fontSize: 12, color: '#C9C9C9' }}>
+                                                                        {data.month + 1}
+                                                                    </Text>
+                                                                </View>
+                                                            </TouchableOpacity>
+                                                        )
+                                                    })
+                                                    }
+                                                </ScrollView>
                                             </View>
-                                        )
-                                    }
-                                </View>
+                                        </View>
+                                    ) : (
+                                        <View style={styles.BottomSubDetailBox}>
+                                            <View style={styles.BottomSubDetailInnerBox}>
+                                                <Text style={styles.BottomSubDetailTxt_1}>{year}년도 수령액</Text>
+                                                <Text style={styles.BottomSubDetailTxt_2}>{ySTC} STC</Text>
+                                            </View>
+                                            <View style={{ flex: 6 }}>
+                                                <ScrollView
+                                                    nestedScrollEnabled={true}
+                                                    showsHorizontalScrollIndicator={false}
+                                                    showsVerticalScrollIndicator={false}
+                                                    horizontal={true}
+                                                    style={{ flex: 1 }}
+                                                >
+                                                    {annually.map((data, i) => {
+                                                        return (
+                                                            <TouchableOpacity style={{ flex : 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 10, marginRight: 10, }} onPress={() => this.ChooseYear(i)}>
+                                                                <View style={ybarColor[i]}>
+                                                                </View>
+                                                                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                                    <Text style={{ fontSize: 12, color: '#C9C9C9' }}>
+                                                                        {data.year}
+                                                                    </Text>
+                                                                </View>
+                                                            </TouchableOpacity>
+                                                        )
+                                                    })
+                                                    }
+                                                </ScrollView>
+                                            </View>
+                                        </View>
+                                    )
+                                }
                                 <View style={styles.EmptyBox}>
 
                                 </View>
@@ -240,6 +290,23 @@ class SocialNowScreen extends React.Component {
             });
 
             let json = await response.json();
+            var mbarColor = new Array();
+            var ybarColor = new Array();
+            for (var i = 0; i < json.monthly.length; i++) {
+                if (i == 6) {
+                    mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
+                } else {
+                    mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
+                }
+            }
+            for (var i = 0; i < json.annually.length; i++) {
+                if (i == 3) {
+                    ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
+                } else {
+                    ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
+                }
+            }
+            
             if (response.ok) {
                 this.setState({
                     totalSTC: json.totalSTC,
@@ -248,8 +315,14 @@ class SocialNowScreen extends React.Component {
                     profit: json.profit,
                     repayment: json.repayment,
                     count: json.count,
-                    annually: json.anuually,
+                    annually: json.annually,
                     monthly: json.monthly,
+                    ybarColor : ybarColor,
+                    mbarColor : mbarColor,
+                    mSTC : json.monthly[6].total,
+                    month : json.monthly[6].month + 1,
+                    ySTC : json.annually[3].total,
+                    year : json.annually[3].year,
                 })
             }
         } catch (err) {
@@ -440,11 +513,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     BottomSubDetailBox: {
-        flex: 1,
-        flexDirection: 'row',
+        flex: 3,
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        marginBottom: 10,
+        justifyContent: 'center',
+    },
+    BottomSubDetailInnerBox: {
+        flex: 1,
+        width: width * 0.85,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
     },
     BottomSubDetailTxt_1: {
         color: '#929292',
@@ -457,15 +536,10 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         fontSize: 12,
     },
-    BottomGraphBox: {
-        flex: 8,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignItems: 'center'
-    },
     MonthlyGraph: {
         flexDirection: 'row',
-        alignItems: 'flex-end'
+        flex: 1,
+        alignItems: 'flex-end',
     },
     EmptyBox: {
         flex: 1,

@@ -31,15 +31,6 @@ class NowDetailsScreen extends React.Component {
                 },
             ],
             dataSet: {
-                // Ongoing: [
-                //     { d : 1, id: 1, name: '금모으는계', stc: '100', duedate: '2020.05.14', days : 20 }, { d : 1, id: 2, name: '동호회계', stc: '20', duedate: '2020.05.19', days : 10 }, { d : 1, id: 3, name: '명품계', stc: '100', duedate: '2020.05.23', days : 30 }
-                // ],
-                // Wating: [
-                //     { d : 2, id: 1, name: '자동차계', stc: '80', duedate: '2020.06.18', days : 10 }, { d : 2, id: 2, name: '우리계', stc: '10', duedate: '2020.06.19', days : 30 }
-                // ],
-                // Complete: [
-                //     {d : 3, id: 1, name: '함께하계', stc: '40', duedate: '2020.05.17', days : 30 }, {d : 3, id: 2, name: '사랑하계', stc: '60', duedate: '2020.05.29', days : 10 }, {d : 3, id: 3, name: '명품계', stc: '10', duedate: '2020.06.02', days : 10 }
-                // ]
             },
             show : null,
         }
