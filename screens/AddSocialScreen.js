@@ -53,7 +53,7 @@ class AddSocialScreen extends React.Component {
         }
     }
     render() {
-        const { period, stc, expla } = this.state;
+        const { period, stc, expla, name } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -84,7 +84,8 @@ class AddSocialScreen extends React.Component {
                                 <View style={styles.TopContentInputBox}>
                                     <TextInput
                                         placeholder={'계모임 명을 입력하세요.'}
-                                        onChangeText={text => this.setState({ name: text })}
+                                        onChangeText={(name) => this.setState({ name })}
+                                        value={name}
                                     />
                                 </View>
                             </View>
@@ -179,6 +180,13 @@ class AddSocialScreen extends React.Component {
                     })
                 });
                 if (response.ok) {
+                    this.setState({
+                        expla : null,
+                        catesid : null,
+                        name : null,
+                        stc :null,
+                        period : null,
+                    })
                     this.props.navigation.navigate('Main')
                 }
             }

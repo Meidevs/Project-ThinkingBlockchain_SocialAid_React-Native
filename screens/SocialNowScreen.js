@@ -215,7 +215,7 @@ class SocialNowScreen extends React.Component {
                                                 >
                                                     {monthly.map((data, i) => {
                                                         return (
-                                                            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', }} onPress={() => this.ChooseMonth(i)}>
+                                                            <TouchableOpacity key={i.toString()} style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', }} onPress={() => this.ChooseMonth(i)}>
                                                                 <View style={mbarColor[i]}>
                                                                 </View>
                                                                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -246,7 +246,7 @@ class SocialNowScreen extends React.Component {
                                                 >
                                                     {annually.map((data, i) => {
                                                         return (
-                                                            <TouchableOpacity style={{ flex : 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 10, marginRight: 10, }} onPress={() => this.ChooseYear(i)}>
+                                                            <TouchableOpacity key={i.toString()} style={{ flex : 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 10, marginRight: 10, }} onPress={() => this.ChooseYear(i)}>
                                                                 <View style={ybarColor[i]}>
                                                                 </View>
                                                                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

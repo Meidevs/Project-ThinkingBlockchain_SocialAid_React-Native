@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -12,7 +12,7 @@ import {
     Modal
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import ModalComponent from '../assets/component/ModalComponent';
 const { width, height } = Dimensions.get('window');
 
 class DetailsScreen extends React.Component {
@@ -29,10 +29,14 @@ class DetailsScreen extends React.Component {
             stc: 0,
             period: 0,
             participants: 0,
+            showmodal: false,
         }
     }
+    setModalVisible = (showmodal) => {
+        this.setState({ showmodal: showmodal })
+    }
     render() {
-        const { flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
+        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
         return (
             <View style={styles.Container}>
                 <SafeAreaView >
@@ -48,7 +52,7 @@ class DetailsScreen extends React.Component {
                             <View style={styles.TopContent}>
                                 <Text style={styles.Title}>{groupname}</Text>
                                 <View style={styles.STCArea}>
-                                    <Text style={styles.STCCount}>{stc}</Text><Text style={styles.STCTxt}>STC</Text>
+                                    <Text style={styles.STCTxt}>일일 </Text><Text style={styles.STCCount}>{stc}</Text><Text style={styles.STCTxt}>STC</Text>
                                 </View>
                                 <Text style={styles.SubTxt}>{story}</Text>
                                 <Text>계기간 : {period} 일간</Text>
@@ -68,11 +72,38 @@ class DetailsScreen extends React.Component {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-                <View style={styles.joinBtnContent} onPress={() => this.OpenModal(true)}>
-                    <TouchableOpacity style={styles.calBtn}>
+                <View style={styles.joinBtnContent}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={showmodal}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                        }}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>총 납입금액 : {period * stc} STC</Text>
+                                <Text style={styles.modalText}>납입 기간 : {period} 일간</Text>
+                                <Text style={styles.modalText}>수익 : {period * stc * 0.02} STC</Text>
+                                <TouchableOpacity
+                                    style={styles.openButton}
+                                    onPress={() => {
+                                        this.setModalVisible(!showmodal);
+                                    }}
+                                >
+                                    <Text style={styles.textStyle}>확인</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
+                    <TouchableOpacity style={styles.calBtn} onPress={() => {
+                        this.setModalVisible(true);
+                    }}>
                         <Image source={require('../assets/images/ico_calculator.png')} style={{ marginRight: 5, width: 15, height: 15, resizeMode: 'contain' }} />
-                        <Text style={styles.Txt}>수익 계산</Text>
+                        <Text style={styles.textStyle}>수익 계산</Text>
                     </TouchableOpacity>
+
                     {
                         flags == 999 ? <View></View> :
                             flags == 0 ? <TouchableOpacity style={styles.joinBtn} onPress={() => this.JoinGroup()}>
@@ -221,7 +252,7 @@ const styles = StyleSheet.create({
     STCArea: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         marginBottom: 5,
     },
     SubTxt: {
@@ -288,6 +319,41 @@ const styles = StyleSheet.create({
         color: '#4C4C4C',
         fontSize: 14,
         fontWeight: '600'
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
+    openButton: {
+        width : width * 0.5,
+        backgroundColor: "#4F79D5",
+        borderRadius: 10,
+        elevation: 2
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
     }
 })
 

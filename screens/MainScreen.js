@@ -19,7 +19,6 @@ class MainScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {
             refreshing: false,
             uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
