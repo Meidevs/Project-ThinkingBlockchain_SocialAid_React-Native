@@ -203,14 +203,14 @@ class AddSocialScreen extends React.Component {
     }
     GetCates = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/getcates', {
+            const response = await fetch('http://localhost:3001/api/getcates', {
                 method: 'GET',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
             let json = await response.json();
+            console.log(json)
             if (response.ok) {
                 this.setState({ cates: json })
             }

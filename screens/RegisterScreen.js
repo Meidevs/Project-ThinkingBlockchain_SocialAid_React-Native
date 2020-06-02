@@ -254,22 +254,28 @@ class RegisterScrenn extends React.Component {
     Register = async () => {
         const { email, name, phonenumber, pText_1, pText_2, pText_3, pText_4, boolean_1, boolean_2 } = this.state;
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
-                method: 'POST',
-                credential: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    name: name,
-                    phonenumber: phonenumber,
-                    password: pText_1,
-                    pin: pText_3,
+            if (pText_1 != pText_2) {
+                alert('비밀번호를 확인해 주세요.')
+            } else if (pText_3 != pText_4) {
+                alert('PIN번호를 확인해 주세요.')
+            } else {
+                const response = await fetch('http://localhost:3000/api/users/register', {
+                    method: 'POST',
+                    credential: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        phonenumber: phonenumber,
+                        password: pText_1,
+                        pin: pText_3,
+                    })
                 })
-            })
-            if (response.ok) {
-                this.props.navigation.navigate('Login')
+                if (response.ok) {
+                    this.props.navigation.navigate('Login')
+                }
             }
         } catch (err) {
             console.log(err)
