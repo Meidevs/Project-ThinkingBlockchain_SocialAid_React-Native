@@ -23,37 +23,43 @@ class AddSocialScreen extends React.Component {
             stc: 0,
             period: 10,
             prcnt: 0.2,
+            scates : null,
+            cates : []
         }
     }
 
     PeriodCallBack = (dataFromChild) => {
-        this.EndCal(this.state.stc, dataFromChild.period, this.state.cates)
+        this.EndCal(this.state.stc, dataFromChild.period, this.state.cates, this.state.scates)
     }
     CateCallBack = (dataFromChild) => {
-        this.EndCal(this.state.stc, this.state.period, dataFromChild.cates)
+        this.EndCal(this.state.stc, this.state.period, this.state.cates, dataFromChild)
     }
     SetSTC = (data) => {
         if (data > 100) {
             data = null;
         }
-        this.EndCal(data, this.state.period, this.state.cates);
+        this.EndCal(data, this.state.period, this.state.cates, this.state.scates);
     }
 
-    EndCal = (stc, period, cates) => {
+    EndCal = (stc, period, cates, scates) => {
         switch (parseInt(period)) {
             case 10:
-                this.setState({ stc: stc, period: period, cates: cates, prcnt: 0.2 });
+                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 0.2 });
                 break;
             case 20:
-                this.setState({ stc: stc, period: period, cates: cates, prcnt: 0.8 })
+                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 0.8 })
                 break;
             case 30:
-                this.setState({ stc: stc, period: period, cates: cates, prcnt: 1.8 })
+                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 1.8 })
                 break;
         }
     }
+
+    componentDidMount () {
+        this.GetCates();
+    }
     render() {
-        const { period, stc, expla, name } = this.state;
+        const { period, stc, expla, name, cates } = this.state;
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -125,7 +131,7 @@ class AddSocialScreen extends React.Component {
                                     borderColor: '#E0E0E0',
                                     backgroundColor: '#FFFFFF',
                                 }}>
-                                    <CatesPicker props={width * 0.94} callback={this.CateCallBack} />
+                                    <CatesPicker data={cates} callback={this.CateCallBack} />
                                 </View>
                             </View>
                             <View style={styles.ContentBox}>
@@ -163,7 +169,7 @@ class AddSocialScreen extends React.Component {
 
     CreateGroup = async () => {
         try {
-            if (this.state.cates == 'cates' || this.state.cates == undefined) {
+            if (this.state.scates == 'cates' || this.state.scates == undefined) {
                 alert('카테고리를 선택해 주세요.')
             } else {
                 let response = await fetch('http://localhost:3000/api/creategroup', {
@@ -173,23 +179,40 @@ class AddSocialScreen extends React.Component {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        story : this.state.expla,
-                        catesid : this.state.cates,
-                        name : this.state.name,
-                        stc : this.state.stc,
-                        period : this.state.period
+                        story: this.state.expla,
+                        catesid: this.state.scates,
+                        name: this.state.name,
+                        stc: this.state.stc,
+                        period: this.state.period
                     })
                 });
                 if (response.ok) {
                     this.setState({
-                        expla : null,
-                        catesid : null,
-                        name : null,
-                        stc :null,
-                        period : null,
+                        expla: null,
+                        catesid: null,
+                        name: null,
+                        stc: null,
+                        period: null,
                     })
                     this.props.navigation.navigate('Main')
                 }
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    GetCates = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/getcates', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({ cates: json })
             }
         } catch (err) {
             console.log(err)
