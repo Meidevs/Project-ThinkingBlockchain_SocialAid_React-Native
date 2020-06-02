@@ -81,15 +81,6 @@ class MyinfoScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.BottomContent}>
-                        <TouchableOpacity style={styles.BottomContentBox}>
-                            <Text style={styles.BottomContentMainTxt}>자동참가 설정</Text>
-                            <View style={styles.BottomContentBtn}>
-                                <Text style={styles.BottomContentTxt}>해제됨</Text>
-                                <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Notice')}>
                             <Text style={styles.BottomContentMainTxt}>공지사항</Text>
                         </TouchableOpacity>

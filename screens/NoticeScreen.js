@@ -20,64 +20,7 @@ class NoticeScreen extends React.Component {
         // Get Notion From Database
         var notion = [
             {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.11', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.12', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
-            },
-            {
-                visible: false, title: '안녕하세요. 소셜에이드 공지사항 게시판입니다.', date: '2020.05.13', wel: '안녕하세요. 소셜에이드입니다.', main: '서비스 품질개선을 위한 교육 및 인력 보강 등의 사유로 고객 경험팀의 고객 응대가 일시적으로 지연될 수 있으니 많은 양해 부탁드립니다.',
-                end: '소셜 에이드를 이용하시는 모든 고객의 서비스 만족을 위해 최선을 다하겠습니다'
+                visible: false, title: null, date: null, wel: null, main: null, end: null
             },
         ];
         this.state = {
@@ -91,7 +34,7 @@ class NoticeScreen extends React.Component {
     }
 
     componentDidMount = () => {
-        this.Paging(this.state.currentPage);
+        this.GetNotice()
     }
     prevPage = (currentPage) => {
         if (currentPage > 1)
@@ -105,7 +48,6 @@ class NoticeScreen extends React.Component {
     }
     Paging = (currentPage) => {
         var dataSet = this.state.notion;
-
         // dataPerPage : Number of Data on a Page
         var dataPerPage = this.state.dataPerPage;
 
@@ -129,19 +71,21 @@ class NoticeScreen extends React.Component {
             currentPage = totalPage;
         }
         var pageGroup = Math.ceil(currentPage / pageCount)
-
         var pageGroupArray = new Array();
         var dataArray = new Array();
-        var last = pageGroup * 3 > totalPage ? totalPage : pageGroup * 3;
-        for (var i = (pageGroup - 1) * 3; i < last; i++) {
-            pageGroupArray.push(i)
-        }
+        var last = pageGroup * 3 >= totalPage ? totalPage : pageGroup * 3;
 
-        // 9 > 8  8 == 8 
-        for (var i = (currentPage - 1) * 3; i < (currentPage * 3); i++) {
+        for (var i = (pageGroup - 1) * 3; i < last; i++) {
+            pageGroupArray.push({ pageNum: i, isSelect: false })
+        }
+        pageGroupArray[((currentPage + 2) % 3)].isSelect = true;
+
+        //0 - 2, 3 - 5, 6 - 8, 9 - 11,
+        var lstdata = totalPage == currentPage ? (totalData) : (currentPage * 3);
+        for (var i = (currentPage - 1) * 3; i < lstdata; i++) {
             dataArray.push(dataSet[i])
         }
-        this.setState({ pageGroup: pageGroupArray, show: dataArray, totalPage : totalPage, currentPage : currentPage })
+        this.setState({ pageGroup: pageGroupArray, show: dataArray, totalPage: totalPage, currentPage: currentPage })
     }
 
     MoreInformation = (data, num) => {
@@ -158,7 +102,9 @@ class NoticeScreen extends React.Component {
             <TouchableOpacity style={styles.NoticeContentForm} onPress={() => this.MoreInformation(item, index)}>
                 <View style={styles.NoticeTextForm}>
                     <Text style={styles.NoticeTextTxt}>{item.title}</Text>
-                    <Image source={require('../assets/images/ico_boardlist_down.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
+                    {
+                        item.visible == true ? <Image source={require('../assets/images/ico_boardlist_up.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} /> : <Image source={require('../assets/images/ico_boardlist_down.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
+                    }
                 </View>
                 <Text style={styles.NoticeUpTxt}>{item.date}</Text>
             </TouchableOpacity>
@@ -174,12 +120,15 @@ class NoticeScreen extends React.Component {
                     </View>
                     <View style={styles.InnerTextForm}>
                         <Text style={styles.TextTxt}>
-                            {item.main}
+                            {item.sentence_1}
+                        </Text>
+                        <Text style={styles.TextTxt}>
+                            {item.sentence_2}
                         </Text>
                     </View>
                     <View style={styles.InnerTextForm}>
                         <Text style={styles.TextTxt}>
-                            {item.end}
+                            {item.bye}
                         </Text>
                     </View>
                 </View>
@@ -189,7 +138,6 @@ class NoticeScreen extends React.Component {
 
     render() {
         const { show, currentPage, pageGroup } = this.state;
-        console.log(currentPage)
         return (
             <SafeAreaView style={styles.Container}>
                 <ScrollView>
@@ -201,24 +149,21 @@ class NoticeScreen extends React.Component {
                             ListHeaderComponent={<></>}
                             data={show}
                             renderItem={({ item, index, separators }) => this._renderItem({ item, index, separators })}
-                            keyExtractor={(item, index) => index.toString()}
+                            keyExtractor={(item) => item.noticeid}
                             ListFooterComponent={<></>}
                         />
                         <View style={styles.PaginationForm}>
-                            <TouchableOpacity style={styles.PaginationItem}>
-                                <Image source={require('../assets/images/ico_arrow_first.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
-                            </TouchableOpacity>
                             <TouchableOpacity style={styles.PaginationItem} onPress={() => this.prevPage(currentPage)}>
                                 <Image source={require('../assets/images/ico_arrow_left.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                             </TouchableOpacity>
                             {
-                                pageGroup.map((a, i) => {
+                                pageGroup.map((data, i) => {
                                     return (
                                         <TouchableOpacity
-                                            onPress={() => this.Paging(a + 1)}
+                                            onPress={() => this.Paging(data.pageNum + 1)}
                                             style={styles.PaginationItem}
                                         >
-                                            <Text>{a + 1}</Text>
+                                            <Text style={data.isSelect == true ? { color: '#4F79D5' } : { color: '#4C4C4C' }}>{data.pageNum + 1}</Text>
                                         </TouchableOpacity>
                                     )
                                 })
@@ -226,15 +171,36 @@ class NoticeScreen extends React.Component {
                             <TouchableOpacity style={styles.PaginationItem} onPress={() => this.nextPage(currentPage)}>
                                 <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.PaginationItem}>
-                                <Image source={require('../assets/images/ico_arrow_last.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
-                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
             </SafeAreaView>
         )
     }
+
+    GetNotice = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/admin/getnotice', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({
+                    notion: json
+                });
+                this.Paging(this.state.currentPage);
+
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 }
 const styles = StyleSheet.create({
     Container: {
