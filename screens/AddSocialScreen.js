@@ -153,7 +153,7 @@ class AddSocialScreen extends React.Component {
                                     </View>
                                     <View style={styles.RewardCal}>
                                         <Text style={styles.InnerTxt}>보상액</Text>
-                                        <Text style={styles.InnerTxt}>{Math.floor(this.state.stc * this.state.prcnt)}</Text>
+                                        <Text style={styles.InnerTxt}>{(this.state.stc * this.state.prcnt).toFixed(2)}</Text>
                                     </View>
                                 </View>
                             </View>

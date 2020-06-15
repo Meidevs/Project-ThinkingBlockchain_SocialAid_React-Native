@@ -65,6 +65,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
         const isFocused = state.index === index;
         const onPress = () => {
+          console.log(route.name)
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,

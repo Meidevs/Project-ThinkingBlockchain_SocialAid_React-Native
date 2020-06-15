@@ -16,7 +16,6 @@ import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
 
 class MainScreen extends React.Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -37,9 +36,14 @@ class MainScreen extends React.Component {
         });
     }
     componentDidMount() {
-        this.GetGroupList()
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.GetGroupList();
+        });
     }
 
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
     render() {
         return (
             <SafeAreaView style={styles.container}>

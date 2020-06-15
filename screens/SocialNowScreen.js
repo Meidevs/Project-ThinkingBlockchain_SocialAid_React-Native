@@ -56,9 +56,15 @@ class SocialNowScreen extends React.Component {
             })
         }
     }
-
     componentDidMount() {
-        this.GetGroupStatus();
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            console.log('Get Group Status')
+            this.GetGroupStatus();
+        });
+    }
+
+    componentWillUnmount() {
+        this._unsubscribe();
     }
     ChooseMonth = (num) => {
         const { monthly, mbarColor } = this.state;

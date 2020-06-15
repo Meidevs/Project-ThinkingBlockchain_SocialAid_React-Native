@@ -23,9 +23,15 @@ class MyinfoScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.GetMyinfo();
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            console.log('Get My Info')
+            this.GetMyinfo();
+        });
     }
 
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
     render() {
         const { wallet, ableSTC, totalSTC, name } = this.state;
         return (
