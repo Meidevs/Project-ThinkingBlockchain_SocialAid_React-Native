@@ -31,7 +31,7 @@ class SocialNowScreen extends React.Component {
             annually: [],
             monthly: [],
             mSTC: 0,
-            month : 0,
+            month: 0,
         }
     }
 
@@ -58,7 +58,6 @@ class SocialNowScreen extends React.Component {
     }
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
-            console.log('Get Group Status')
             this.GetGroupStatus();
         });
     }
@@ -74,7 +73,7 @@ class SocialNowScreen extends React.Component {
             rawArray.push(rawData)
         }
         rawArray[num] = { height: monthly[num].total, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 }
-        this.setState({mbarColor : rawArray, mSTC : monthly[num].total, month : monthly[num].month + 1})
+        this.setState({ mbarColor: rawArray, mSTC: monthly[num].total, month: monthly[num].month + 1 })
     }
 
     ChooseYear = (num) => {
@@ -85,7 +84,7 @@ class SocialNowScreen extends React.Component {
             rawArray.push(rawData)
         }
         rawArray[num] = { height: annually[num].total, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 }
-        this.setState({ybarColor : rawArray, ySTC : annually[num].total, year : annually[num].year})
+        this.setState({ ybarColor: rawArray, ySTC: annually[num].total, year: annually[num].year })
     }
 
     render() {
@@ -208,7 +207,7 @@ class SocialNowScreen extends React.Component {
                                     (
                                         <View style={styles.BottomSubDetailBox}>
                                             <View style={styles.BottomSubDetailInnerBox}>
-                                    <Text style={styles.BottomSubDetailTxt_1}>{month}월 수령액</Text>
+                                                <Text style={styles.BottomSubDetailTxt_1}>{month}월 수령액</Text>
                                                 <Text style={styles.BottomSubDetailTxt_2}>{mSTC} STC</Text>
                                             </View>
                                             <View style={{ flex: 6 }}>
@@ -252,7 +251,7 @@ class SocialNowScreen extends React.Component {
                                                 >
                                                     {annually.map((data, i) => {
                                                         return (
-                                                            <TouchableOpacity key={i.toString()} style={{ flex : 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 10, marginRight: 10, }} onPress={() => this.ChooseYear(i)}>
+                                                            <TouchableOpacity key={i.toString()} style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', marginLeft: 10, marginRight: 10, }} onPress={() => this.ChooseYear(i)}>
                                                                 <View style={ybarColor[i]}>
                                                                 </View>
                                                                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -296,24 +295,23 @@ class SocialNowScreen extends React.Component {
             });
 
             let json = await response.json();
-            var mbarColor = new Array();
-            var ybarColor = new Array();
-            for (var i = 0; i < json.monthly.length; i++) {
-                if (i == 6) {
-                    mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
-                } else {
-                    mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
-                }
-            }
-            for (var i = 0; i < json.annually.length; i++) {
-                if (i == 3) {
-                    ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
-                } else {
-                    ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
-                }
-            }
-            
             if (response.ok) {
+                var mbarColor = new Array();
+                var ybarColor = new Array();
+                for (var i = 0; i < json.monthly.length; i++) {
+                    if (i == 6) {
+                        mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
+                    } else {
+                        mbarColor.push({ height: json.monthly[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
+                    }
+                }
+                for (var i = 0; i < json.annually.length; i++) {
+                    if (i == 3) {
+                        ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 })
+                    } else {
+                        ybarColor.push({ height: json.annually[i].total + 0.1, width: 10, backgroundColor: '#C9C9C9', margin: 8, borderRadius: 10 })
+                    }
+                }
                 this.setState({
                     totalSTC: json.totalSTC,
                     revenue: json.revenue,
@@ -323,12 +321,12 @@ class SocialNowScreen extends React.Component {
                     count: json.count,
                     annually: json.annually,
                     monthly: json.monthly,
-                    ybarColor : ybarColor,
-                    mbarColor : mbarColor,
-                    mSTC : json.monthly[6].total,
-                    month : json.monthly[6].month + 1,
-                    ySTC : json.annually[3].total,
-                    year : json.annually[3].year,
+                    ybarColor: ybarColor,
+                    mbarColor: mbarColor,
+                    mSTC: json.monthly[6].total,
+                    month: json.monthly[6].month + 1,
+                    ySTC: json.annually[3].total,
+                    year: json.annually[3].year,
                 })
             }
         } catch (err) {

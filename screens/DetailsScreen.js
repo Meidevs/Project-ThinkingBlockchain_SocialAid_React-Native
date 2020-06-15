@@ -37,9 +37,6 @@ class DetailsScreen extends React.Component {
     }
     render() {
         const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants} = this.state;
-        console.log(period)
-        console.log(participants)
-
         var range = parseInt(participants) / parseInt(period);
         if (isNaN(range)) {
             range = 1;

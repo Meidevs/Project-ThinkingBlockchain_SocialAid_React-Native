@@ -78,13 +78,13 @@ class MyinfoScreen extends React.Component {
                 </View>
                 <View style={styles.BottomContainer}>
                     <View style={styles.BottomContent}>
-                        <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Alarm')}>
+                        {/* <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Alarm')}>
                             <Text style={styles.BottomContentMainTxt}>계모임 알림</Text>
                             <View style={styles.BottomContentBtn}>
                                 <Text style={styles.BottomContentTxt}>해제됨</Text>
                                 <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                     <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Notice')}>
