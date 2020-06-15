@@ -92,7 +92,7 @@ class MyinfoScreen extends React.Component {
 
     GetMyinfo = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/users/myinfo', {
+            let response = await fetch('http://54.248.0.228:3000/api/users/myinfo', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

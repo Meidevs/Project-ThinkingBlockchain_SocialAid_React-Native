@@ -36,7 +36,14 @@ class DetailsScreen extends React.Component {
         this.setState({ showmodal: showmodal })
     }
     render() {
-        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
+        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants} = this.state;
+        console.log(period)
+        console.log(participants)
+
+        var range = parseInt(participants) / parseInt(period);
+        if (isNaN(range)) {
+            range = 1;
+        }
         return (
             <View style={styles.Container}>
                 <SafeAreaView >
@@ -59,7 +66,7 @@ class DetailsScreen extends React.Component {
                             </View>
                             <View style={styles.ProgressBar}>
                                 <View style={{ width: width * 0.9, backgroundColor: '#E8E8E8', borderRadius: 10, }}>
-                                    <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.9 * participants / 10, height: 6, borderRadius: 10, }} />
+                                    <LinearGradient colors={['#29C1E8', '#907CEC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: width * 0.9 * range, height: 6, borderRadius: 10, }} />
                                 </View>
                                 <View style={{ width: width * 0.9, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Text style={styles.Participants}>현재참여인원</Text>
@@ -124,7 +131,7 @@ class DetailsScreen extends React.Component {
 
     componentDidMount = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/loadgroup', {
+            let response = await fetch('http://54.248.0.228:3000/api/loadgroup', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -153,15 +160,16 @@ class DetailsScreen extends React.Component {
     }
 
     JoinGroup = async () => {
+        const {groupsid} = this.state;
         try {
-            let response = await fetch('http://localhost:3000/api/joingroup', {
+            let response = await fetch('http://54.248.0.228:3000/api/joingroup', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    groupsid: this.state.groupsid,
+                    groupsid: groupsid,
                 })
             })
             if (response.ok) {
@@ -176,7 +184,7 @@ class DetailsScreen extends React.Component {
 
     CancelGroup = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/cancelgroup', {
+            let response = await fetch('http://54.248.0.228:3000/api/cancelgroup', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -196,7 +204,7 @@ class DetailsScreen extends React.Component {
 
     CancelJoin = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/canceljoin', {
+            let response = await fetch('http://54.248.0.228:3000/api/canceljoin', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

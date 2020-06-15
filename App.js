@@ -19,7 +19,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 
 import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
+// import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import AddSocialScreen from './screens/AddSocialScreen';
 import SocialNowScreen from './screens/SocialNowScreen';
@@ -310,7 +310,7 @@ function App() {
       <AuthStack.Navigator
         initialRouteName="Login">
         <AuthStack.Screen name='Login' component={LoginScreen} options={{ title: 'Sign In', headerShown: false }} />
-        <AuthStack.Screen
+        {/* <AuthStack.Screen
           name='Register'
           component={RegisterScreen}
           options={{
@@ -321,7 +321,7 @@ function App() {
               borderBottomWidth: 0,
             },
             headerTitle: null,
-          }} />
+          }} /> */}
         <AuthStack.Screen name='MainTabs' component={MainTabs} options={{ headerShown: false }} />
       </AuthStack.Navigator>
     </NavigationContainer>

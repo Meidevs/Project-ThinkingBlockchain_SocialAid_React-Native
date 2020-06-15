@@ -43,9 +43,8 @@ const { width, height } = Dimensions.get('window');
 //     }
 // }
 
-const CatesPicker = ({ data, callback}) => {
+const CatesPicker = ({ data, props, callback}) => {
     const [code, setValue ] = useState(code)
-
     const onChangeRefresh = (code) => {
         setValue(code)
         callback(code)
@@ -55,7 +54,7 @@ const CatesPicker = ({ data, callback}) => {
             <Picker
                 selectedValue={code}
                 mode='dropdown'
-                style={{ height: width * 0.13, width: width, color: '#4C4C4C' }}
+                style={{ height: width * 0.13, width: props, color: '#4C4C4C' }}
                 onValueChange={(itemValue) => onChangeRefresh(itemValue)
                 }>
                 <Picker.Item label='카테고리' value='cates' />

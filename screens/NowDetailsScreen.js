@@ -143,7 +143,7 @@ class NowDetailsScreen extends React.Component {
 
     GetGroupsWaiting = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/waiting',{
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/waiting',{
                 method : 'GET',
                 credentials : 'include',
                 headers : {
@@ -164,7 +164,7 @@ class NowDetailsScreen extends React.Component {
     }
     GetGroupsOngoing = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/ongoing',{
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/ongoing',{
                 method : 'GET',
                 credentials : 'include',
                 headers : {
@@ -185,7 +185,7 @@ class NowDetailsScreen extends React.Component {
     }
     GetGroupsDone = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/rewards/groupstatus/detail/done',{
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/done',{
                 method : 'GET',
                 credentials : 'include',
                 headers : {

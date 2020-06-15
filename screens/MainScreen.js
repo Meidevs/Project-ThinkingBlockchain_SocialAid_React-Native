@@ -81,7 +81,7 @@ class MainScreen extends React.Component {
 
     GetGroupList = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/grouplist', {
+            let response = await fetch('http://54.248.0.228:3000/api/grouplist', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

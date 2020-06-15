@@ -24,7 +24,9 @@ class SearchScrenn extends React.Component {
         super(props)
         this.state = {
             cnt: 0,
+            scates : null,
             dataSet: [],
+            cates : []
         }
     }
     _renderItem = ({ item, index, separators }) => (
@@ -68,9 +70,11 @@ class SearchScrenn extends React.Component {
         </TouchableOpacity>
     );
     CateCallBack = (dataFromChild) => {
-        this.setState({ cates: dataFromChild.cates });
+        this.setState({ cates : this.state.cates, scates: dataFromChild});
     }
-
+    componentDidMount() {
+        this.GetCates()
+    }
 
     render() {
         const { cates, users, dataSet } = this.state;
@@ -94,7 +98,7 @@ class SearchScrenn extends React.Component {
                     </View>
                     <View style={styles.SearchFrom}>
                         <View style={styles.SearchInnerForm}>
-                            <CatesPicker props={width * 0.8 / 2} callback={this.CateCallBack} />
+                            <CatesPicker data={cates} props={width * 0.94 / 2} callback={this.CateCallBack} />
                             <Text style={{ color: '#E0E0E0', fontSize: 20, }}>|</Text>
                             <View style={styles.TextInputArea}>
                                 <TextInput
@@ -124,7 +128,7 @@ class SearchScrenn extends React.Component {
                     <ScrollView
                         nestedScrollEnabled={true}>
                         {
-                            dataSet[0] == undefined
+                            dataSet == undefined
                                 ? <View></View>
                                 :
                                 <FlatList
@@ -143,14 +147,14 @@ class SearchScrenn extends React.Component {
 
     SearchItems = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/search', {
+            let response = await fetch('http://54.248.0.228:3000/api/search', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    catesid: this.state.cates,
+                    catesid: this.state.scates,
                     name: this.state.name,
                     groupname: this.state.groupname,
                 })
@@ -161,6 +165,23 @@ class SearchScrenn extends React.Component {
                 this.setState({
                     dataSet: json
                 })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    GetCates = async () => {
+        try {
+            const response = await fetch('http://54.248.0.228:3001/api/getcates', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let json = await response.json();
+            if (response.ok) {
+                this.setState({ cates: json })
             }
         } catch (err) {
             console.log(err)

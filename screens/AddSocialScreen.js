@@ -131,7 +131,7 @@ class AddSocialScreen extends React.Component {
                                     borderColor: '#E0E0E0',
                                     backgroundColor: '#FFFFFF',
                                 }}>
-                                    <CatesPicker data={cates} callback={this.CateCallBack} />
+                                    <CatesPicker data={cates} props={width * 0.94} callback={this.CateCallBack} />
                                 </View>
                             </View>
                             <View style={styles.ContentBox}>
@@ -172,7 +172,7 @@ class AddSocialScreen extends React.Component {
             if (this.state.scates == 'cates' || this.state.scates == undefined) {
                 alert('카테고리를 선택해 주세요.')
             } else {
-                let response = await fetch('http://localhost:3000/api/creategroup', {
+                let response = await fetch('http://54.248.0.228:3000/api/creategroup', {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -203,14 +203,13 @@ class AddSocialScreen extends React.Component {
     }
     GetCates = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/getcates', {
+            const response = await fetch('http://54.248.0.228:3001/api/getcates', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
             let json = await response.json();
-            console.log(json)
             if (response.ok) {
                 this.setState({ cates: json })
             }

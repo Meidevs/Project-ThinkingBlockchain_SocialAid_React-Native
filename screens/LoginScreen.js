@@ -79,10 +79,7 @@ class LoginScreen extends React.Component {
                             <Text style={styles.LoginBtnTxt}>로그인</Text>
                         </TouchableOpacity>
                         <View style={styles.RegisterForm}>
-                            <Text style={styles.AskRegiTxt}>아직 회원이 아니신가요?</Text>
-                            <TouchableOpacity style={styles.RegisterBtn} onPress={() => this.props.navigation.push('Register')}>
-                                <Text style={styles.RegiBtnTxt}>회원가입</Text>
-                            </TouchableOpacity>
+                            <Text style={styles.AskRegiTxt}>산타 월렛 아이디로 로그인이 해주세요.</Text>
                         </View>
                     </View>
                 </View>
@@ -93,7 +90,7 @@ class LoginScreen extends React.Component {
     Login = async () => {
         const {email, password} = this.state;
         try {
-            const response = await fetch('http://localhost:3000/api/users/login', {
+            const response = await fetch('http://54.248.0.228:3000/api/users/login', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -251,9 +248,6 @@ const styles = StyleSheet.create({
     },
     AskRegiTxt: {
         color: '#929292'
-    },
-    RegisterBtn: {
-        marginLeft: 10,
     },
     RegiBtnTxt: {
         color: '#4F79D5',

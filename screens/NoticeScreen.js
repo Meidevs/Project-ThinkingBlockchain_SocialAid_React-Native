@@ -180,7 +180,7 @@ class NoticeScreen extends React.Component {
 
     GetNotice = async () => {
         try {
-            let response = await fetch('http://localhost:3001/api/getnotice', {
+            let response = await fetch('http://54.248.0.228:3001/api/getnotice', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

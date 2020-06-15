@@ -281,7 +281,7 @@ class SocialNowScreen extends React.Component {
 
     GetGroupStatus = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/rewards/groupstatus', {
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
