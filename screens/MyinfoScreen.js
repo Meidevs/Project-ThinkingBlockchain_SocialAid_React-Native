@@ -24,7 +24,6 @@ class MyinfoScreen extends React.Component {
 
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
-            console.log('Get My Info')
             this.GetMyinfo();
         });
     }

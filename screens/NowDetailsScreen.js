@@ -32,7 +32,7 @@ class NowDetailsScreen extends React.Component {
             ],
             dataSet: {
             },
-            show : null,
+            show: null,
         }
     }
 
@@ -45,7 +45,7 @@ class NowDetailsScreen extends React.Component {
         this.setState({
             switch: [
                 { isSelected: true },
-                { isSelected: false},
+                { isSelected: false },
                 { isSelected: false },
             ],
         });
@@ -53,7 +53,7 @@ class NowDetailsScreen extends React.Component {
 
 
     selectedCates = (num) => {
-        
+
         if (num == 0) {
             this.GetGroupsWaiting();
             this.state.switch[0].isSelect = true;
@@ -95,7 +95,8 @@ class NowDetailsScreen extends React.Component {
 
     render() {
         const props = this.props.navigation;
-        const { host, join } = this.state;
+        const { host, join, hostlen, joinlen } = this.state;
+        console.log()
         return (
             <View style={styles.Container}>
                 <View style={styles.TopCotainer}>
@@ -108,11 +109,11 @@ class NowDetailsScreen extends React.Component {
                             <Text style={this.state.switch[0].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>진행대기중</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.Switch} onPress={() => this.selectedCates(1)}>
-                            <View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />
+                            <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
                             <Text style={this.state.switch[1].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>진행중</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.Switch} onPress={() => this.selectedCates(2)}>
-                            <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
+                            <View style={{ width: 8, height: 8, backgroundColor: '#B8B8B8', borderRadius: 5, marginRight: 8, }} />
                             <Text style={this.state.switch[2].isSelected ? styles.SelectedTxt : styles.NonSelectedTxt}>종료</Text>
                         </TouchableOpacity>
                     </View>
@@ -120,20 +121,20 @@ class NowDetailsScreen extends React.Component {
                 <View style={styles.BottomContainer}>
                     <View style={styles.MyGroup}>
                         <Text style={styles.MyGroupFont}>내 모임</Text>
-                        <Text style={styles.CountTxt}>총 X 건</Text>
+        <Text style={styles.CountTxt}>총 {!hostlen ? 0 : hostlen} 건</Text>
                     </View>
-                    <SafeAreaView style={{flex : 10}}>
+                    <SafeAreaView style={{ flex: 10 }}>
                         <ScrollView>
                             <StatusListUp data={host} navigation={props} />
                         </ScrollView>
                     </SafeAreaView>
                     <View style={styles.MyGroup}>
                         <Text style={styles.MyGroupFont}>외부 모임</Text>
-                        <Text style={styles.CountTxt}>총 X 건</Text>
+                        <Text style={styles.CountTxt}>총 {!joinlen ? 0 : joinlen} 건</Text>
                     </View>
-                    <SafeAreaView style={{flex : 10}}>
+                    <SafeAreaView style={{ flex: 10 }}>
                         <ScrollView>
-                            <StatusListUp data={join} navigation={this.props.navigation} />
+                            <StatusListUp data={join} navigation={props} />
                         </ScrollView>
                     </SafeAreaView>
                 </View>
@@ -143,19 +144,21 @@ class NowDetailsScreen extends React.Component {
 
     GetGroupsWaiting = async () => {
         try {
-            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/waiting',{
-                method : 'GET',
-                credentials : 'include',
-                headers : {
-                    'Content-Type' : 'application/json'
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/waiting', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             });
 
             let json = await response.json();
             if (response.ok) {
                 this.setState({
-                    host : json.host,
-                    join : json.join
+                    host: json.host,
+                    hostlen : json.host.length,
+                    join: json.join,
+                    joinlen : json.join.length,
                 })
             }
         } catch (err) {
@@ -164,19 +167,22 @@ class NowDetailsScreen extends React.Component {
     }
     GetGroupsOngoing = async () => {
         try {
-            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/ongoing',{
-                method : 'GET',
-                credentials : 'include',
-                headers : {
-                    'Content-Type' : 'application/json'
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/ongoing', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             });
 
             let json = await response.json();
             if (response.ok) {
                 this.setState({
-                    host : json.host,
-                    join : json.join
+                    host: json.host,
+                    hostlen : json.host.length,
+                    join: json.join,
+                    joinlen : json.join.length,
+
                 })
             }
         } catch (err) {
@@ -185,19 +191,21 @@ class NowDetailsScreen extends React.Component {
     }
     GetGroupsDone = async () => {
         try {
-            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/done',{
-                method : 'GET',
-                credentials : 'include',
-                headers : {
-                    'Content-Type' : 'application/json'
+            let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/done', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             });
 
             let json = await response.json();
             if (response.ok) {
                 this.setState({
-                    host : json.host,
-                    join : json.join
+                    host: json.host,
+                    hostlen : json.host.length,
+                    join: json.join,
+                    joinlen : json.join.length,
                 })
             }
         } catch (err) {
@@ -218,18 +226,18 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
     },
     TopTitle: {
-        flex : 1,
-        justifyContent : 'center'
+        flex: 1,
+        justifyContent: 'center'
     },
     TitleTxt: {
         fontSize: 20,
         fontWeight: 'bold',
-        color : '#4C4C4C',
+        color: '#4C4C4C',
     },
     TopCateSwitch: {
-        flex : 1,
+        flex: 1,
         flexDirection: 'row',
-        alignItems : 'center',
+        alignItems: 'center',
     },
     Switch: {
         flexDirection: 'row',
@@ -238,31 +246,31 @@ const styles = StyleSheet.create({
     },
     BottomContainer: {
         flex: 5,
-        paddingRight : 10,
-        paddingLeft : 10,
+        paddingRight: 10,
+        paddingLeft: 10,
     },
     MyGroup: {
         flex: 1,
-        flexDirection : 'row',
-        justifyContent : 'space-between',
-        alignItems : 'center',
-        paddingTop : 10,
-        paddingBottom : 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     MyGroupFont: {
         fontSize: 15,
         fontWeight: '800',
-        color : '#4C4C4C'
+        color: '#4C4C4C'
     },
     CountTxt: {
         fontSize: 12,
         fontWeight: '600',
-        color : '#4C4C4C'
+        color: '#4C4C4C'
     },
     SelectedTxt: {
         fontSize: 14,
         fontWeight: 'bold',
-        color : '#4C4C4C'
+        color: '#4C4C4C'
     },
     NonSelectedTxt: {
         fontSize: 14,

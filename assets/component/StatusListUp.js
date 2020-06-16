@@ -17,10 +17,10 @@ function Item({ data, navigation }) {
                 <View style={styles.TitleForm}>
                     <Text style={styles.TitleTxt}>{data.groupname}</Text>
                     {
-                    data.status == 0 ? 
-                    (<View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} />) :
-                    data.d == 1 ? (<View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />) :
-                    <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
+                        data.status == 0 ?
+                            <View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} /> :
+                            data.status == 1 ? <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} /> : <View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />
+                                
                     }
                 </View>
                 <View style={styles.STCForm}>
@@ -34,20 +34,37 @@ function Item({ data, navigation }) {
                         height: 10,
                     }} />
                 </View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('NowShowDetails', {
-                        data,
-                    })
-                    }
-                    style={styles.DetailsBtnForm}
-                >
-                    <View style={styles.DetailsBtnTextForm}>
-                        <Text style={styles.SubTxt}>계모임 진행 기간</Text>
-                        <Text style={styles.SubTxt}> | </Text>
-                        <Text style={styles.SubTxt}>{data.period} 일</Text>
-                    </View>
-                    <Image source={require('../images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
-                </TouchableOpacity>
+                {data.status == 0 ?
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Details', {
+                            groupsid: data.groupsid,
+                        })
+                        }
+                        style={styles.DetailsBtnForm}
+                    >
+                        <View style={styles.DetailsBtnTextForm}>
+                            <Text style={styles.SubTxt}>계모임 진행 기간</Text>
+                            <Text style={styles.SubTxt}> | </Text>
+                            <Text style={styles.SubTxt}>{data.period} 일</Text>
+                        </View>
+                        <Image source={require('../images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('NowShowDetails', {
+                            groupsid: data.groupsid,
+                        })
+                        }
+                        style={styles.DetailsBtnForm}
+                    >
+                        <View style={styles.DetailsBtnTextForm}>
+                            <Text style={styles.SubTxt}>계모임 진행 기간</Text>
+                            <Text style={styles.SubTxt}> | </Text>
+                            <Text style={styles.SubTxt}>{data.period} 일</Text>
+                        </View>
+                        <Image source={require('../images/ico_arrow_right.png')} style={{ width: 12, height: 12, resizeMode: 'contain' }} />
+                    </TouchableOpacity>
+                }
             </View>
         </View>
     );
@@ -85,15 +102,15 @@ const styles = StyleSheet.create({
     },
     TitleForm: {
         flex: 1,
-        flexDirection : 'row',
-        justifyContent : 'space-between',
-        alignItems : 'center',
-        padding : 3,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 3,
     },
-    TitleTxt : {
-        fontSize : 14,
-        fontWeight : '700',
-        color : '#4C4C4C',
+    TitleTxt: {
+        fontSize: 14,
+        fontWeight: '700',
+        color: '#4C4C4C',
     },
     LineSection: {
         flex: 1,
@@ -103,26 +120,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        padding : 3,
+        padding: 3,
     },
     DetailsBtnForm: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop : 3,
-        paddingRight : 3,
-        paddingLeft : 3,
+        paddingTop: 3,
+        paddingRight: 3,
+        paddingLeft: 3,
     },
-    DetailsBtnTextForm : {
+    DetailsBtnTextForm: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
     SubTxt: {
         fontSize: 14,
-        fontWeight : '600',
-        color : '#929292'
+        fontWeight: '600',
+        color: '#929292'
     }
 })
 export default StatusListUp;

@@ -12,15 +12,24 @@ const { width, height } = Dimensions.get('window');
 class NowShowDetailsScreen extends React.Component {
     constructor(props) {
         super(props)
-        var dataSet = props.route.params.data;
+        var groupsid = props.route.params.groupsid;
         this.state = {
-            status: dataSet.d,
-            stc: dataSet.stc,
-            days: dataSet.days
+            groupsid: groupsid,
+            createdate: null,
+            duedate: null,
+            ratedate: null,
+            creator: null,
+            period: null,
+            stc: null,
+            status: null,
         }
     }
+    componentDidMount() {
+        this.GetRelatedData();
+    }
+
     render() {
-        const { status, stc, days } = this.state;
+        const { createdate, duedate, ratedate, creator, period, stc, status, interval } = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.TopContainer}>
@@ -31,85 +40,119 @@ class NowShowDetailsScreen extends React.Component {
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>계모임 상태</Text>
                             <View style={styles.TopContentFrom}>
-                                <Text style={styles.TopContentTxt}>종료</Text>
+                                <Text style={styles.TopContentTxt}>{status == 1 ? '진행중' : status == 2 ? '종료' : null}</Text>
                                 {
                                     status == 1 ?
-                                        (<View style={{ width: 8, height: 8, backgroundColor: '#293EFF', borderRadius: 5, marginRight: 8, }} />) :
-                                        status == 2 ? (<View style={{ width: 8, height: 8, backgroundColor: '#FF293F', borderRadius: 5, marginRight: 8, }} />) :
+                                        (
                                             <View style={{ width: 8, height: 8, backgroundColor: '#64FF5E', borderRadius: 5, marginRight: 8, }} />
+                                        ) : status == 2 ?
+                                            (
+                                                <View style={{ width: 8, height: 8, backgroundColor: '#B8B8B8', borderRadius: 5, marginRight: 8, }} />
+                                            ) :
+                                            <View />
                                 }
                             </View>
                         </View>
                         <View style={styles.TopContentArea}>
-                            <Text style={styles.TopContentTxt}>계모임 금액</Text>
+                            <Text style={styles.TopContentTxt}>계모임 생성일</Text>
+                            <Text style={styles.TopContentTxt}>{createdate}</Text>
+                        </View>
+                        <View style={styles.TopContentArea}>
+                            <Text style={styles.TopContentTxt}>일일 금액</Text>
                             <Text style={styles.TopContentTxt}>{stc} STC</Text>
                         </View>
                         <View style={styles.TopContentArea}>
-                            <Text style={styles.TopContentTxt}>예상 수익률</Text>
-                            <Text style={styles.TopContentTxt}>{ days == 10 ? 2 : days == 20 ? 4 : 6 }%</Text>
+                            <Text style={styles.TopContentTxt}>예상 수익</Text>
+                            <Text style={styles.TopContentTxt}>{creator == 0 ? period * stc * 0.02 : period * stc * 0.22} STC</Text>
                         </View>
                         <View style={styles.TopContentArea}>
                             <Text style={styles.TopContentTxt}>거치기간</Text>
-                            <Text style={styles.TopContentTxt}>{days}일</Text>
-                        </View>
-                        <View style={styles.TopContentArea}>
-                            <Text style={styles.TopContentTxt}>상환방식</Text>
-                            <Text style={styles.TopContentTxt}>만기상환</Text>
+                            <Text style={styles.TopContentTxt}>{period}일</Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.BottomContainer}>
                     <View style={styles.BottomTitle}>
-                        <Text style={styles.BottomTitleTxt}>상환순서</Text>
+                        <Text style={styles.BottomTitleTxt}>보상 지급일</Text>
+                        <Text style={styles.BottomDateTxt}>{duedate}</Text>
                     </View>
-                    <SafeAreaView style={styles.ScrollArea}>
-                        <ScrollView style={styles.BottomContent} horizontal>
-                            <View style={styles.FirstBottomContent}>
-                                <View style={styles.InnerBottomContent}>
-                                    <View style={styles.InnerBottomContentTitle}>
-                                        <Text style={styles.InnerBottomContentTitleTxt}>지급 회차</Text>
-                                    </View>
-                                    <View style={styles.InnerBottomContentContext}>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                    </View>
-                                    <View style={styles.InnerBottomContentUnder}>
-                                        <Text style={styles.InnerBottomContentContextTxt}>수령액</Text>
-                                    </View>
+                    <View style={styles.BottomContent}>
+                        <View style={styles.FirstBottomContent}>
+                            <View style={styles.InnerBottomFirst}>
+                                <View style={styles.InnerFirstTitle}>
+                                    <Text style={styles.InnerTitleTxt}>지급 회차</Text>
+                                </View>
+                                <View style={styles.InnerFirstContext}>
+                                    <Text style={styles.InnerContextTxt}>상태</Text>
+                                    <Text style={styles.InnerContextTxt}>해제일</Text>
+                                    <Text style={styles.InnerContextTxt}>원금</Text>
+                                    <Text style={styles.InnerContextTxt}>수익</Text>
+                                    <Text style={styles.InnerContextTxt}>손실</Text>
+                                </View>
+                                <View style={styles.InnerUnderFirst}>
+                                    <Text style={styles.InnerContextTxt}>수령액</Text>
                                 </View>
                             </View>
-                            <View style={styles.RestBottomContent}>
-                                <View style={styles.InnerBottomContent}>
-                                    <View style={styles.InnerBottomContentTitle}>
-                                        <Text style={styles.InnerBottomContentTitleTxt}>합계</Text>
-                                    </View>
-                                    <View style={styles.InnerBottomContentContext}>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                        <Text style={styles.InnerBottomContentContextTxt}>상태</Text>
-                                    </View>
-                                    <View style={styles.InnerBottomContentUnder}>
-                                        <Text style={styles.InnerBottomContentContextTxt}>수령액</Text>
-                                    </View>
+                        </View>
+                        <View style={styles.RestBottomContent}>
+                            <View style={styles.InnerBottomSecond}>
+                                <View style={styles.InnerSecondTitle}>
+                            <Text style={styles.InnerTitleTxt}>{interval} / {period}</Text>
+                                </View>
+                                <View style={styles.InnerSecondContext}>
+                                    <Text style={styles.InnerContextTxt}>{status == 1 ? '상환예정' : '상환완료'}</Text>
+                            <Text style={styles.InnerContextTxt}>{ratedate}</Text>
+                                    <Text style={styles.InnerContextTxt}>{period * stc} STC</Text>
+                                    <Text style={styles.InnerContextTxt}>{creator == 0 ? period * stc * 0.02 : period * stc * 0.22} STC</Text>
+                                    <Text style={styles.InnerContextTxt}>0 STC</Text>
+                                </View>
+                                <View style={styles.InnerBottomContentUnder}>
+                            <Text style={styles.InnerContextTxt}>{creator == 1 ? (stc * period * 0.22) + (stc * period) : (stc * period * 0.02) + (stc * period)} STC</Text>
                                 </View>
                             </View>
-                            <View style={styles.RestBottomContent}>
-
-                            </View>
-                            <View style={styles.RestBottomContent}>
-
-                            </View>
-                            <View style={styles.RestBottomContent}>
-
-                            </View>
-                        </ScrollView>
-                    </SafeAreaView>
+                        </View>
+                    </View>
                 </View>
             </View>
         )
+    }
+
+    GetRelatedData = async () => {
+        const { groupsid } = this.state;
+        try {
+            var response = await fetch('http://54.248.0.228:3000/api/rewards/getdetaildatas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ groupsid: groupsid })
+            });
+
+            var json = await response.json();
+            if (response.ok) {
+                var eDate = json.duedate.split('-');
+                var rDate = json.ratedate.split('-');
+
+                var ar1 = new Date(eDate[0], eDate[1], eDate[2]);
+                var ar2 = new Date(rDate[0], rDate[1], rDate[2]);
+
+                var dif = ar1 - ar2;
+                var cDays = 24 * 60 * 60 * 1000;
+                var interval = parseInt(dif / cDays);
+                this.setState({
+                    createdate: json.createdate,
+                    duedate: json.duedate,
+                    ratedate: json.ratedate,
+                    creator: json.creator,
+                    period: json.period,
+                    stc: json.stc,
+                    status: json.status,
+                    interval : json.period - interval,
+                })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
@@ -124,14 +167,14 @@ const styles = StyleSheet.create({
     },
     TopTitle: {
         flex: 1,
-        justifyContent : 'center',
-        alignItems : 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
         width: width * 0.9,
         borderColor: '#929292'
     },
     TopTitleTxt: {
         fontSize: 18,
-        color : '#4C4C4C',
+        color: '#4C4C4C',
         fontWeight: 'bold'
     },
     TopContent: {
@@ -140,10 +183,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     },
-    TopContentFrom : {
-        flexDirection : 'row',
-        justifyContent : 'flex-end',
-        alignItems : 'center'
+    TopContentFrom: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
     TopContentArea: {
         flex: 1,
@@ -155,8 +198,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#929292',
         fontWeight: '700',
-        marginRight : 5,
-        marginLeft : 5,
+        marginRight: 5,
+        marginLeft: 5,
     },
     BottomContainer: {
         flex: 4,
@@ -165,54 +208,95 @@ const styles = StyleSheet.create({
     },
     BottomTitle: {
         flex: 1,
+        flexDirection: 'row',
         width: width * 0.9,
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     BottomTitleTxt: {
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: '800'
     },
-    ScrollArea: {
-        flex: 5,
-        marginLeft: 10,
+    BottomDateTxt: {
+        fontSize: 15,
+        fontWeight: '800',
+        color: '#4F79D5'
     },
     BottomContent: {
-        marginBottom: 60,
+        flex: 5,
+        flexDirection : 'row',
+        justifyContent : 'flex-start',
+        alignItems : 'center',
+        width: width * 0.9,
+        marginBottom : 30,
     },
     FirstBottomContent: {
         width: width * 0.25,
-        borderRadius: 15,
+        borderRadius: 10,
         margin: 10,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         backgroundColor: '#FFFFFF',
+        elevation : 1,
     },
-    InnerBottomContent: {
+    InnerBottomFirst : {
         flex: 1,
-        padding: 5,
+        padding: 10,
         flexDirection: 'column',
+    },
+    InnerBottomSecond: {
+        flex: 1,
+        padding: 10,
+        flexDirection: 'column',
+    },
+    InnerFirstTitle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    InnerSecondTitle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
     },
     InnerBottomContentTitle: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
-    InnerBottomContentTitleTxt: {
+    InnerTitleTxt: {
         fontSize: 12,
         fontWeight: 'bold'
     },
-    InnerBottomContentContext: {
+    InnerFirstContext : {
         flex: 6,
         flexDirection: 'column',
+        alignItems : 'flex-start'
     },
-    InnerBottomContentContextTxt: {
+    InnerSecondContext: {
+        flex: 6,
+        flexDirection: 'column',
+        alignItems : 'flex-end'
+    },
+    InnerContextTxt: {
         marginTop: 5,
         fontSize: 10,
-        fontWeight: '800',
-        color: 'gray'
+        fontWeight: '600',
+        color: '#393939'
+    },
+    InnerUnderFirst : {
+        flex: 2,
+        flexDirection : 'row', 
+        alignItems : 'flex-start',
+        justifyContent : 'flex-start',
+        borderColor: 'gray',
+        borderTopWidth: 1,
     },
     InnerBottomContentUnder: {
         flex: 2,
+        flexDirection : 'row', 
+        alignItems : 'flex-start',
+        justifyContent : 'flex-end',
         borderColor: 'gray',
         borderTopWidth: 1,
     },
@@ -220,7 +304,10 @@ const styles = StyleSheet.create({
         width: width * 0.25,
         borderRadius: 15,
         margin: 10,
-        backgroundColor: '#EEEEEE'
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        backgroundColor: '#EEEEEE',
+        elevation : 1,
     },
 })
 
