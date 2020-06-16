@@ -162,6 +162,7 @@ class NoticeScreen extends React.Component {
                                         <TouchableOpacity
                                             onPress={() => this.Paging(data.pageNum + 1)}
                                             style={styles.PaginationItem}
+                                            key={data.noticeid}
                                         >
                                             <Text style={data.isSelect == true ? { color: '#4F79D5' } : { color: '#4C4C4C' }}>{data.pageNum + 1}</Text>
                                         </TouchableOpacity>

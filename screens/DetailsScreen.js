@@ -36,7 +36,7 @@ class DetailsScreen extends React.Component {
         this.setState({ showmodal: showmodal })
     }
     render() {
-        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants} = this.state;
+        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
         var range = parseInt(participants) / parseInt(period);
         if (isNaN(range)) {
             range = 1;
@@ -157,7 +157,7 @@ class DetailsScreen extends React.Component {
     }
 
     JoinGroup = async () => {
-        const {groupsid} = this.state;
+        const { groupsid } = this.state;
         try {
             let response = await fetch('http://54.248.0.228:3000/api/joingroup', {
                 method: 'POST',
@@ -168,11 +168,17 @@ class DetailsScreen extends React.Component {
                 body: JSON.stringify({
                     groupsid: groupsid,
                 })
-            })
+            });
+            let json = await response.json();
+
             if (response.ok) {
-                this.props.navigation.replace('Details', {
-                    groupsid: this.state.groupsid
-                })
+                if (json.resResult == false) {
+                    alert('참가에 실패하였습니다')
+                } else {
+                    this.props.navigation.replace('Details', {
+                        groupsid: this.state.groupsid
+                    })
+                }
             }
         } catch (err) {
             alert('참가에 실패하였습니다')
@@ -211,6 +217,7 @@ class DetailsScreen extends React.Component {
                     groupsid: this.state.groupsid,
                 })
             })
+            let json = await response.json();
             if (response.ok) {
                 this.props.navigation.replace('Details', {
                     groupsid: this.state.groupsid
@@ -346,7 +353,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     openButton: {
-        width : width * 0.5,
+        width: width * 0.5,
         backgroundColor: "#4F79D5",
         borderRadius: 10,
         elevation: 2
