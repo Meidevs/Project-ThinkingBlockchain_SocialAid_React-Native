@@ -31,7 +31,7 @@ function Item({ data, navigation }) {
                 <View style={styles.RightArea}>
                     <View style={styles.Circle}>
                         {
-                            data.cates == 'C1' ? <Image source={require('../images/pp_luxury.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.cates == 'C2' ? <Image source={require('../images/pp_car.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.cates == 'C3' ? <Image source={require('../images/pp_gold.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : <Image source={require('../images/pp_travel.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+                            data.cates == 'C1' ? <Image source={require('../images/pp_travel.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.cates == 'C2' ? <Image source={require('../images/pp_luxury.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : data.cates == 'C3' ? <Image source={require('../images/pp_gold.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} /> : <Image source={require('../images/pp_car.png')} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
                         }
                     </View>
                 </View>
