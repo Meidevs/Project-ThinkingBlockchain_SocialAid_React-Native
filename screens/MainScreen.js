@@ -7,19 +7,20 @@ import {
     Text,
     SafeAreaView,
     ScrollView,
-    RefreshControl
+    RefreshControl,
 } from 'react-native';
-import Constants from 'expo-constants';
 
 const { width, height } = Dimensions.get('window');
 import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
+import getTime from '../assets/component/Timer';
 
 class MainScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             refreshing: false,
+            count: 0,
             uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
         }
     }
@@ -35,14 +36,32 @@ class MainScreen extends React.Component {
             setTimeout(resolve, timeout);
         });
     }
+
     componentDidMount() {
+        clearInterval(this.intervalid);
+        this.intervalid = setInterval(() => {
+            this.Timer()
+        }, 1000)
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
             this.GetGroupList();
+            this.setState({count : 0})
         });
     }
 
     componentWillUnmount() {
         this._unsubscribe();
+        clearInterval(this.intervalid);
+
+    }
+    Timer = () => {
+        const { count } = this.state;
+        console.log(count)
+        if (count == 120) {
+            clearInterval(this.intervalid);
+            this.logout();
+            this.props.navigation.replace('Login')
+        }
+        this.setState({ count: count + 1 });
     }
     render() {
         return (
@@ -97,6 +116,19 @@ class MainScreen extends React.Component {
             if (response.ok) {
                 this.setState({ data: json })
             }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    logout = async () => {
+        try {
+            await fetch('http://54.248.0.228:3000/api/users/logout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
         } catch (err) {
             console.log(err)
         }
@@ -156,6 +188,41 @@ const styles = StyleSheet.create({
         color: '#4C4C4C'
     },
     bannerImage: {
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
+    openButton: {
+        width: width * 0.5,
+        backgroundColor: "#4F79D5",
+        borderRadius: 10,
+        elevation: 2
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
     }
 })
 

@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -13,13 +13,7 @@ const { width, height } = Dimensions.get('window');
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-
 import LoginScreen from './screens/LoginScreen';
-// import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import AddSocialScreen from './screens/AddSocialScreen';
 import SocialNowScreen from './screens/SocialNowScreen';
@@ -30,8 +24,6 @@ import AlarmSetScreen from './screens/AlarmSetScreen';
 import NowDetailsScreen from './screens/NowDetailsScreen';
 import NowShowDetailsScreen from './screens/NowShowDetailsScreen';
 import NoticeScreen from './screens/NoticeScreen';
-
-// import CustomTabs from './assets/component/CustomTabBar';
 
 const AuthStack = createStackNavigator()
 const Tabs = createBottomTabNavigator();
@@ -309,20 +301,16 @@ function App() {
     <NavigationContainer>
       <AuthStack.Navigator
         initialRouteName="Login">
-        <AuthStack.Screen name='Login' component={LoginScreen} options={{ title: 'Sign In', headerShown: false }} />
-        {/* <AuthStack.Screen
-          name='Register'
-          component={RegisterScreen}
-          options={{
-            headerStyle: {
-              backgroundColor: '#F7F7F7',
-              elevation: 0,
-              shadowOpacity: 0,
-              borderBottomWidth: 0,
-            },
-            headerTitle: null,
-          }} /> */}
-        <AuthStack.Screen name='MainTabs' component={MainTabs} options={{ headerShown: false }} />
+        <AuthStack.Screen
+          name='Login'
+          component={LoginScreen}
+          options={{ title: 'Sign In', headerShown: false }}
+        />
+        <AuthStack.Screen
+          name='MainTabs'
+          component={MainTabs}
+          options={{ headerShown: false }}
+        />
       </AuthStack.Navigator>
     </NavigationContainer>
   );

@@ -90,11 +90,31 @@ class MyinfoScreen extends React.Component {
                             <Text style={styles.BottomContentMainTxt}>공지사항</Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.BottomContent}>
+                        <TouchableOpacity style={styles.BottomContentBox} onPress={this.Logout}>
+                            <Text style={styles.BottomContentMainTxt}>로그아웃</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )
     }
-
+    Logout = async () => {
+        try {
+            var response = await fetch('http://54.248.0.228:3000/api/users/logout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.ok) {
+                this.props.navigation.replace('Login');
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
     GetMyinfo = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/users/myinfo', {

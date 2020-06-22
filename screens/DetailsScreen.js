@@ -12,7 +12,6 @@ import {
     Modal
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import ModalComponent from '../assets/component/ModalComponent';
 const { width, height } = Dimensions.get('window');
 
 class DetailsScreen extends React.Component {

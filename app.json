@@ -23,8 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Meipartners.SocialAid",
-      "buildNumber": "1.0.0"
+      "bundleIdentifier": "com.Meipartners.SocialAid"
     },
     "android": {
       "package": "com.Meipartners.SocialAid",
