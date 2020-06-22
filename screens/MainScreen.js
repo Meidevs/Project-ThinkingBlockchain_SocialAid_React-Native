@@ -51,12 +51,12 @@ class MainScreen extends React.Component {
     componentWillUnmount() {
         this._unsubscribe();
         clearInterval(this.intervalid);
-
     }
+
     Timer = () => {
         const { count } = this.state;
         console.log(count)
-        if (count == 120) {
+        if (count == 600) {
             clearInterval(this.intervalid);
             this.logout();
             this.props.navigation.replace('Login')
