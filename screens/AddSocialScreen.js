@@ -21,45 +21,41 @@ class AddSocialScreen extends React.Component {
         super(props)
         this.state = {
             stc: 0,
-            period: 10,
-            prcnt: 0.2,
-            scates : null,
-            cates : []
+            period: [{ period: 10, label: '10일', periodid: '1' }, { period: 20, label: '20일', periodid: '2' }, { period: 30, label: '30일', periodid: '3' }],
+            cates: [],
+            prcnt: 0.02,
+            scates: null,
+            speriod: null,
         }
     }
 
     PeriodCallBack = (dataFromChild) => {
-        this.EndCal(this.state.stc, dataFromChild.period, this.state.cates, this.state.scates)
+        this.setState({ speriod: parseInt(dataFromChild) })
     }
     CateCallBack = (dataFromChild) => {
-        this.EndCal(this.state.stc, this.state.period, this.state.cates, dataFromChild)
+        this.setState({ scates: dataFromChild })
     }
     SetSTC = (data) => {
         if (data > 100) {
-            data = null;
+            data = 0;
         }
-        this.EndCal(data, this.state.period, this.state.cates, this.state.scates);
+        this.setState({ stc: data })
     }
 
-    EndCal = (stc, period, cates, scates) => {
-        switch (parseInt(period)) {
-            case 10:
-                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 0.2 });
-                break;
-            case 20:
-                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 0.8 })
-                break;
-            case 30:
-                this.setState({ stc: stc, period: period, cates: cates, scates : scates, prcnt: 1.8 })
-                break;
-        }
-    }
-
-    componentDidMount () {
+    componentDidMount() {
         this.GetCates();
     }
     render() {
-        const { period, stc, expla, name, cates } = this.state;
+        const { speriod, period, stc, expla, name, cates, prcnt } = this.state;
+        var total = speriod * stc;
+        var rewards = speriod * stc * prcnt;
+        if (isNaN(total)) {
+            total = 0;
+        }
+        if (isNaN(rewards)) {
+            rewards = 0;
+        }
+
         return (
             <SafeAreaView style={styles.Container}>
                 <StatusBar
@@ -98,7 +94,7 @@ class AddSocialScreen extends React.Component {
                             <View style={styles.TopContentBox_2}>
                                 <View style={styles.TopContent_2InnerBox}>
                                     <Text style={styles.InnerTxt}>기간 (최소 10일 이상)</Text>
-                                    <PeriodPicker callback={this.PeriodCallBack} />
+                                    <PeriodPicker data={period} props={width * 0.8 / 2} callback={this.PeriodCallBack} />
                                 </View>
                                 <View style={styles.TopContent_2InnerBox}>
                                     <Text style={styles.InnerTxt}>납입금액 (최대 100STC)</Text>
@@ -149,11 +145,11 @@ class AddSocialScreen extends React.Component {
                                 <View style={styles.Reward}>
                                     <View style={styles.RewardCal}>
                                         <Text style={styles.InnerTxt} >총 납입 STC</Text>
-                                        <Text style={styles.InnerTxt}>{this.state.period * this.state.stc}</Text>
+                                        <Text style={styles.InnerTxt}>{total}</Text>
                                     </View>
                                     <View style={styles.RewardCal}>
                                         <Text style={styles.InnerTxt}>보상액</Text>
-                                        <Text style={styles.InnerTxt}>{(this.state.stc * this.state.prcnt).toFixed(2)}</Text>
+                                        <Text style={styles.InnerTxt}>{(rewards).toFixed(2)}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -183,18 +179,31 @@ class AddSocialScreen extends React.Component {
                         catesid: this.state.scates,
                         name: this.state.name,
                         stc: this.state.stc,
-                        period: this.state.period
+                        period: this.state.speriod
                     })
                 });
+                var json = await response.json();
                 if (response.ok) {
                     this.setState({
                         expla: null,
-                        catesid: null,
+                        cates: this.state.cates,
                         name: null,
                         stc: null,
-                        period: null,
+                        period: this.state.period,
                     })
+                    switch (json.flags) {
+                        case 0:
+                            window.alert('잔액이 부족합니다');
+                            break;
+                        case 1:
+                            window.alert('계모임을 생성하였습니다.');
+                            break;
+                        default:
+                            window.alert('계모임 생성에 실패하였습니다');
+                            break;
+                    }
                     this.props.navigation.navigate('Main')
+
                 }
             }
         } catch (err) {
@@ -290,6 +299,7 @@ const styles = StyleSheet.create({
     },
     STCInputBox: {
         marginTop: 5,
+        height: width * 0.13,
         width: width * 0.94 / 2,
         flexDirection: 'row',
         justifyContent: 'flex-start',

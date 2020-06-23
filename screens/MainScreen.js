@@ -13,14 +13,12 @@ import {
 const { width, height } = Dimensions.get('window');
 import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
-import getTime from '../assets/component/Timer';
 
 class MainScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             refreshing: false,
-            count: 0,
             uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
         }
     }
@@ -38,31 +36,15 @@ class MainScreen extends React.Component {
     }
 
     componentDidMount() {
-        clearInterval(this.intervalid);
-        this.intervalid = setInterval(() => {
-            this.Timer()
-        }, 1000)
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
             this.GetGroupList();
-            this.setState({count : 0})
         });
     }
 
     componentWillUnmount() {
         this._unsubscribe();
-        clearInterval(this.intervalid);
     }
 
-    Timer = () => {
-        const { count } = this.state;
-        console.log(count)
-        if (count == 600) {
-            clearInterval(this.intervalid);
-            this.logout();
-            this.props.navigation.replace('Login')
-        }
-        this.setState({ count: count + 1 });
-    }
     render() {
         return (
             <SafeAreaView style={styles.container}>

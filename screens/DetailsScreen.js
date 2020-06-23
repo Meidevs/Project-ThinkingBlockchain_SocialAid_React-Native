@@ -171,9 +171,12 @@ class DetailsScreen extends React.Component {
             let json = await response.json();
 
             if (response.ok) {
-                if (json.resResult == false) {
-                    alert('참가에 실패하였습니다')
+                if (json.flags == 1) {
+                    window.alert('잔액이 부족합니다')
+                } else if (json.flags == 0) {
+                    window.alert('계모임에 참가에 실패하였습니다')
                 } else {
+                    window.alert('계모임에 참가하였습니다')
                     this.props.navigation.replace('Details', {
                         groupsid: this.state.groupsid
                     })
