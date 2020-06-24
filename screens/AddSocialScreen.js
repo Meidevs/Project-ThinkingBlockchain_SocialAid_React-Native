@@ -289,7 +289,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
     },
     TopContent_2InnerBox: {
         flex: 1,
