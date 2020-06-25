@@ -25,13 +25,15 @@ class SwiperComponent extends React.Component {
 
     render() {
         const { img, link } = this.state;
-        console.log(img)
         return (
             <Swiper>
                 <View style={styles.slide1}>
-                    <TouchableOpacity onPress={() => Linking.openURL(link)}>
+                    {link == false ? <View>
                         <Image source={{ uri: img, cache: 'only-if-cached' }} style={{ height: width * 0.3, width: width * 0.9, resizeMode: 'contain', borderRadius: 5 }} />
-                    </TouchableOpacity>
+                    </View> : <TouchableOpacity onPress={() => Linking.openURL(link)}>
+                            <Image source={{ uri: img, cache: 'only-if-cached' }} style={{ height: width * 0.3, width: width * 0.9, resizeMode: 'contain', borderRadius: 5 }} />
+                        </TouchableOpacity>}
+
                 </View>
             </Swiper>
         )
@@ -39,25 +41,33 @@ class SwiperComponent extends React.Component {
     GetImages = async () => {
         try {
             var timer = 0;
-            const uri = [{ uri: 'http://localhost:3001/images/1593051842697.png', link: 'https://www.naver.com/' }, { uri: 'http://localhost:3001/images/1593051848880.png', link: 'https://www.google.co.kr/' }]
-            setInterval(() => {
-                if (timer < uri.length - 1) {
-                    this.setState({
-                        img: uri[timer].uri,
-                        link: uri[timer].link
-                    })
-                } else if (timer == uri.length - 1) {
-                    this.setState({
-                        img: uri[timer].uri,
-                        link: uri[timer].link
-                    })
-                }
-                if (timer != uri.length - 1) {
-                    timer++;
-                } else {
-                    timer = 0;
-                }
-            }, 3000)
+            let response = await fetch('http://54.248.0.228:3001/api/image/load', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            let json = await response.json();
+            if (response.ok) {
+                setInterval(() => {
+                    if (timer < json.length - 1) {
+                        this.setState({
+                            img: json[timer].uri,
+                            link: json[timer].link
+                        })
+                    } else if (timer == json.length - 1) {
+                        this.setState({
+                            img: json[timer].uri,
+                            link: json[timer].link
+                        })
+                    }
+                    if (timer != json.length - 1) {
+                        timer++;
+                    } else {
+                        timer = 0;
+                    }
+                }, 3000)
+            }
         } catch (err) {
             console.log(err)
         }
