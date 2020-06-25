@@ -33,10 +33,15 @@ const MyinfoStack = createStackNavigator();
 
 
 function MyTabBar({ state, descriptors, navigation }) {
+  const focusedOptions = descriptors[state.routes[state.index].key].options;
+  if (focusedOptions.tabBarVisible === false) {
+    return null;
+  }
   //state : Array [Name, Params of BottomTabNavigation Component]
   //descriptor : navigation.Functions, Options, render(?) What is Render?
   return (
     <View style={{ flexDirection: 'row' }}>
+      {/* state.routes[state.index].state.index == 0  */}
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         // Label is the Way to Put Name on BottomTabNavigator using Route Name

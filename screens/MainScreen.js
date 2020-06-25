@@ -19,7 +19,6 @@ class MainScreen extends React.Component {
         super(props)
         this.state = {
             refreshing: false,
-            uri: [require("../assets/images/main_banner_testimg1.png"), require("../assets/images/main_banner_testimg2.png")],
         }
     }
     _onRefresh = () => {
@@ -70,7 +69,7 @@ class MainScreen extends React.Component {
                             <Text style={styles.titletxt}>계모임</Text>
                         </View>
                         <View style={styles.banner}>
-                            <SwiperComponent {...this.state} />
+                            <SwiperComponent />
                         </View>
                     </View>
                     <View style={styles.BottomContainer}>

@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     VirtualizedList
 } from 'react-native'
+import { unmountComponentAtNode } from 'react-dom';
 const { width, height } = Dimensions.get('window');
 
 //https://stackoverflow.com/questions/58243680/react-native-another-virtualizedlist-backed-container

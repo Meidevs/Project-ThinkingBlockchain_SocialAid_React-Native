@@ -1,51 +1,69 @@
 import React, { Component } from 'react'
-import { 
-    StyleSheet, 
-    Text, 
+import {
+    StyleSheet,
+    Text,
     View,
     Image,
-    Dimensions
+    Dimensions,
+    Linking
 } from 'react-native'
 const { width, height } = Dimensions.get('window');
 
 import Swiper from 'react-native-swiper'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class SwiperComponent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            uri : props.uri,
-            timer: 0,
-            img : props.uri[0]
+            img: null,
         }
     }
-
-    componentDidMount () {
-        this.interval = setInterval(() => {
-            const { timer, uri } = this.state;
-            if ( timer < uri.length - 1 ) {
-                this.setState(({timer}) => ({
-                    timer : timer + 1,
-                    img : this.state.uri[timer]
-                }))
-            }
-            if (timer === uri.length - 1) {
-                this.setState({timer : 0, img : this.state.uri[uri.length - 1]})
-            } 
-        }, 2000)
+    componentDidMount() {
+        this.GetImages();
     }
 
     render() {
-        const { timer, uri, img } = this.state;
+        const { img, link } = this.state;
+        console.log(img)
         return (
             <Swiper>
                 <View style={styles.slide1}>
-                    <Image source={img} style={{width : width * 0.9, resizeMode : 'contain', borderRadius : 5}} />
+                    <TouchableOpacity onPress={() => Linking.openURL(link)}>
+                        <Image source={{ uri: img, cache: 'only-if-cached' }} style={{ height: width * 0.3, width: width * 0.9, resizeMode: 'contain', borderRadius: 5 }} />
+                    </TouchableOpacity>
                 </View>
             </Swiper>
         )
     }
+    GetImages = async () => {
+        try {
+            var timer = 0;
+            const uri = [{ uri: 'http://localhost:3001/images/1593051842697.png', link: 'https://www.naver.com/' }, { uri: 'http://localhost:3001/images/1593051848880.png', link: 'https://www.google.co.kr/' }]
+            setInterval(() => {
+                if (timer < uri.length - 1) {
+                    this.setState({
+                        img: uri[timer].uri,
+                        link: uri[timer].link
+                    })
+                } else if (timer == uri.length - 1) {
+                    this.setState({
+                        img: uri[timer].uri,
+                        link: uri[timer].link
+                    })
+                }
+                if (timer != uri.length - 1) {
+                    timer++;
+                } else {
+                    timer = 0;
+                }
+            }, 3000)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
+
 const styles = StyleSheet.create({
     slide1: {
         flex: 1,
