@@ -96,7 +96,6 @@ class NowDetailsScreen extends React.Component {
     render() {
         const props = this.props.navigation;
         const { host, join, hostlen, joinlen } = this.state;
-        console.log()
         return (
             <View style={styles.Container}>
                 <View style={styles.TopCotainer}>

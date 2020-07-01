@@ -7,8 +7,10 @@ import {
     Dimensions,
     StyleSheet,
     StatusBar,
+    Linking,
     Clipboard
 } from 'react-native';
+// import Clipboard from '@react-native-community/clipboard'
 const { width, height } = Dimensions.get('window');
 
 class MyinfoScreen extends React.Component {
@@ -55,7 +57,9 @@ class MyinfoScreen extends React.Component {
                             <Text style={styles.WalletTxt}>{name}님의 산타 월렛 계좌</Text>
                             <View style={styles.WalletAddrBox}>
                                 <Text style={styles.WalletAddrTxt}>{wallet}</Text>
-                                <Image source={require('../assets/images/ico_copy.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
+                                <TouchableOpacity onPress={this.CopyToClipboard}>
+                                    <Image source={require('../assets/images/ico_copy.png')} style={{ width: 20, height: 20, resizeMode: 'contain' }} />
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.LineSection}>
@@ -77,17 +81,15 @@ class MyinfoScreen extends React.Component {
                 </View>
                 <View style={styles.BottomContainer}>
                     <View style={styles.BottomContent}>
-                        {/* <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Alarm')}>
-                            <Text style={styles.BottomContentMainTxt}>계모임 알림</Text>
-                            <View style={styles.BottomContentBtn}>
-                                <Text style={styles.BottomContentTxt}>해제됨</Text>
-                                <Image source={require('../assets/images/ico_arrow_right.png')} style={{ width: 10, height: 10, resizeMode: 'center' }} />
-                            </View>
-                        </TouchableOpacity> */}
                     </View>
                     <View style={styles.BottomContent}>
                         <TouchableOpacity style={styles.BottomContentBox} onPress={() => this.props.navigation.navigate('Notice')}>
                             <Text style={styles.BottomContentMainTxt}>공지사항</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.BottomContent}>
+                        <TouchableOpacity style={styles.BottomContentBox} onPress={() => Linking.openURL('http://54.248.0.228:3000/otc/main')}>
+                            <Text style={styles.BottomContentMainTxt}>OTC 마켓</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.BottomContent}>
@@ -115,6 +117,12 @@ class MyinfoScreen extends React.Component {
             console.log(err)
         }
     }
+
+    CopyToClipboard = () => {
+        alert('복사되었습니다');
+        Clipboard.setString(this.state.wallet);
+    }
+
     GetMyinfo = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/users/myinfo', {

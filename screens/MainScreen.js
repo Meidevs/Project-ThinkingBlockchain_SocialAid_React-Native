@@ -13,6 +13,7 @@ import {
 const { width, height } = Dimensions.get('window');
 import SwiperComponent from '../assets/component/SwiperComponent';
 import ListUp from '../assets/component/ListUp';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class MainScreen extends React.Component {
     constructor(props) {

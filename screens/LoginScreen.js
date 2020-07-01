@@ -102,7 +102,6 @@ class LoginScreen extends React.Component {
                 })
             })
             let json = await response.json();
-            console.log(json)
             if (json.flag == 1)  {
                 alert('아이디를 확인해 주세요.');
             } else if (json.flag == 2) {
