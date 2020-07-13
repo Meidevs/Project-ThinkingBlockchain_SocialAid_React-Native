@@ -53,7 +53,8 @@ class DetailsScreen extends React.Component {
                         </ImageBackground>
                         <View style={styles.TopContainer}>
                             <View style={styles.TopContent}>
-                                <Text style={styles.Title}>{groupname}</Text>
+                                <Text style={styles.Title}>계모임 명 : {groupname}</Text>
+                                <Text style={styles.Title}>계주명 : {host}</Text>
                                 <View style={styles.STCArea}>
                                     <Text style={styles.STCTxt}>일일 </Text><Text style={styles.STCCount}>{stc}</Text><Text style={styles.STCTxt}>STC</Text>
                                 </View>

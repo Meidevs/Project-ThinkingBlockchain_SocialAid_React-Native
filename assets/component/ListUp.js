@@ -27,6 +27,7 @@ function Item({ data, navigation }) {
             <View style={styles.UpperSection}>
                 <View style={styles.LeftArea}>
                     <Text style={styles.ItemName}>{data.groupname.length > 22 ? data.groupname.substring(0, 22) + '...' : data.groupname}</Text>
+                    <Text style={styles.ItemHost}>{data.host}</Text>
                     <Text style={styles.ItemExpla}>{data.story.length > 30 ? data.story.substring(0, 30) + '...' : data.story}</Text>
                 </View>
                 <View style={styles.RightArea}>
@@ -89,6 +90,11 @@ const styles = StyleSheet.create({
         flex: 4
     },
     ItemName: {
+        fontSize: 14,
+        color: '#4C4C4C',
+        fontWeight: 'bold'
+    },
+    ItemHost: {
         fontSize: 12,
         color: '#4C4C4C',
         fontWeight: 'bold'

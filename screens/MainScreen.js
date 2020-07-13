@@ -102,19 +102,6 @@ class MainScreen extends React.Component {
             console.log(err)
         }
     }
-    logout = async () => {
-        try {
-            await fetch('http://54.248.0.228:3000/api/users/logout', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        } catch (err) {
-            console.log(err)
-        }
-    }
 }
 
 const styles = StyleSheet.create({
