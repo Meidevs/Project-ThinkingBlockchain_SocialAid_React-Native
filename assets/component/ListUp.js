@@ -46,8 +46,11 @@ function Item({ data, navigation }) {
                 }} />
             </View>
             <View style={styles.DownerSection}>
-                <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
-                <Text style={styles.ItemPeriod}>{data.period == 10 ? '투자기간이 짧은 상품입니다.' : data.period == 20 ? '투자기간이 보통인 상품입니다' : '투자기간이 긴 상품입니다.'}</Text>
+                <View style={styles.SimplePeriod}>
+                    <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
+                    <Text style={styles.ItemPeriod}>{data.period == 10 ? '투자기간이 짧은 상품입니다.' : data.period == 20 ? '투자기간이 보통인 상품입니다' : '투자기간이 긴 상품입니다.'}</Text>
+                </View>
+                <Text style={styles.ItemPeriod}>등록 일자 : {data.date}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -118,7 +121,13 @@ const styles = StyleSheet.create({
     DownerSection: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent : 'space-between'
+    },
+    SimplePeriod : {
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : 'flex-start'
     },
     ItemPeriod: {
         fontSize: 12,

@@ -25,6 +25,7 @@ class DetailsScreen extends React.Component {
             cates: null,
             story: null,
             groupname: null,
+            date: null,
             stc: 0,
             period: 0,
             participants: 0,
@@ -35,7 +36,7 @@ class DetailsScreen extends React.Component {
         this.setState({ showmodal: showmodal })
     }
     render() {
-        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants } = this.state;
+        const { showmodal, flags, groupsid, host, cates, story, groupname, stc, period, participants, date } = this.state;
         var range = parseInt(participants) / parseInt(period);
         if (isNaN(range)) {
             range = 1;
@@ -59,7 +60,10 @@ class DetailsScreen extends React.Component {
                                     <Text style={styles.STCTxt}>일일 </Text><Text style={styles.STCCount}>{stc}</Text><Text style={styles.STCTxt}>STC</Text>
                                 </View>
                                 <Text style={styles.SubTxt}>{story}</Text>
-                                <Text>계기간 : {period} 일간</Text>
+                                <View style={styles.SpaceArea}>
+                                    <Text style={styles.SubTxt}>계기간 : {period} 일간</Text>
+                                    <Text style={styles.SubTxt}>등록 일자 : {JSON.stringify(date).substring(1, 5) + '-' + JSON.stringify(date).substring(5, 7) + '-' + JSON.stringify(date).substring(7, 9)}</Text>
+                                </View>
                             </View>
                             <View style={styles.ProgressBar}>
                                 <View style={{ width: width * 0.9, backgroundColor: '#E8E8E8', borderRadius: 10, }}>
@@ -147,6 +151,7 @@ class DetailsScreen extends React.Component {
                     story: json.story,
                     groupname: json.groupname,
                     stc: json.stc,
+                    date: json.date,
                     period: json.period,
                     participants: json.participants,
                 })
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.4)',
     },
     TopContainer: {
-        height: 200,
+        height: 250,
         flexDirection: 'column',
         alignItems: 'center',
     },
@@ -260,8 +265,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    SpaceArea: {
+        margin : 5,
+        width: width * 0.7,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
     Title: {
         margin: 5,
+        fontSize : 16,
         color: '#4C4C4C'
     },
     STCArea: {
