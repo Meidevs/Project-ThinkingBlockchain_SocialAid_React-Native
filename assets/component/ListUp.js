@@ -50,7 +50,7 @@ function Item({ data, navigation }) {
                     <Image source={require('../images/ico_exmark.png')} style={{ width: width * 0.04, height: width * 0.04, marginTop: 5, marginRight: 5 }} />
                     <Text style={styles.ItemPeriod}>{data.period == 10 ? '투자기간이 짧은 상품입니다.' : data.period == 20 ? '투자기간이 보통인 상품입니다' : '투자기간이 긴 상품입니다.'}</Text>
                 </View>
-                <Text style={styles.ItemPeriod}>등록 일자 : {data.date}</Text>
+                <Text style={styles.ItemPeriod}>등록 일자 : {data.date.substring(0,4) + '-' + data.date.substring(4,6) + '-' + data.date.substring(6,8)}</Text>
             </View>
         </TouchableOpacity>
     )
