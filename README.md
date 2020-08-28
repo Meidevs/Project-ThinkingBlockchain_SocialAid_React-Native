@@ -1,6 +1,6 @@
 # Project-ThinkingBlockChain_Socialaid_React-Native
 산타 월렛의 STC를 활용한 소셜 계모임 앱
-<img src="https://user-images.githubusercontent.com/52062612/80167248-e061d100-861a-11ea-951a-483d862a3448.png" title="Trucker" alt="Trucker-Title"></a>
+<img src="https://user-images.githubusercontent.com/52062612/91524717-d9d1c600-e93a-11ea-9655-b31e87c6de88.png" title="SocialAid" alt="SocialAid-Title"></a>
 
 # 소셜에이드 계모임 앱 : (주)씽킹블록체인의 산타 월렛 API를 활용한 계모임 어플리케이션 (2020/05/10 - 2019/06/10)
 
