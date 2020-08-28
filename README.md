@@ -23,6 +23,10 @@
 
 
 ---
+## Database Structure
+> 데이터 베이스는 Mariadb를 활용하였습니다.
+<img src="https://user-images.githubusercontent.com/52062612/91524558-78a9f280-e93a-11ea-9a21-545706ab23ae.jpg" title="Trucker" alt="Trucker-Title"></a>
+---
 
 ## Team
 
