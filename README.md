@@ -24,7 +24,7 @@
 
 ---
 ## Database Structure
-> 데이터 베이스는 Mariadb를 활용하였습니다. 사용자 데이터는 보안상의 이유로 소셜에이드 서버에서 직접 연결하여 사용하였습니다.
+> 데이터 베이스는 Mariadb를 활용하였습니다. 사용자 데이터는 보안상의 이유로 소셜에이드 서버에서 산타 월렛 유저 데이터 베이스에 직접 연결하여 사용하였습니다.
 
 <img src="https://user-images.githubusercontent.com/52062612/91524558-78a9f280-e93a-11ea-9a21-545706ab23ae.jpg" title="Trucker" alt="Trucker-Title"></a>
 ---
