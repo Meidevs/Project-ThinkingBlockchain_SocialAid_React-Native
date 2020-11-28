@@ -69,13 +69,15 @@ class SearchScrenn extends React.Component {
             </View>
         </TouchableOpacity>
     );
+    
+    // CateCallBack function receive variable from childComponent and set cates, scates variables;
     CateCallBack = (dataFromChild) => {
         this.setState({ cates : this.state.cates, scates: dataFromChild});
     }
     componentDidMount() {
         this.GetCates()
     }
-
+    // CatePicker makes a view of category picker;
     render() {
         const { cates, users, dataSet } = this.state;
         return (
@@ -145,6 +147,8 @@ class SearchScrenn extends React.Component {
         )
     }
 
+    // The SearchItems function retrieves a list of groups by passing parameters to the REST endpoint;
+    // Set responses as a dataSet array;
     SearchItems = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/search', {
@@ -170,7 +174,8 @@ class SearchScrenn extends React.Component {
             console.log(err)
         }
     }
-
+    // GetCates function retrieves categories from REST End-point;
+    // And Set responses as a cates array;
     GetCates = async () => {
         try {
             const response = await fetch('http://54.248.0.228:3001/api/getcates', {

@@ -32,6 +32,8 @@ class DetailsScreen extends React.Component {
             showmodal: false,
         }
     }
+
+    // setModalVisible function works to show modal view when the user presses the pop up button.
     setModalVisible = (showmodal) => {
         this.setState({ showmodal: showmodal })
     }
@@ -129,7 +131,9 @@ class DetailsScreen extends React.Component {
 
         )
     }
-
+    // When React DOM is Created, componentDidMount is activated;
+    // It request details of group information from REST End-point by passing groupsid;
+    // Response hav flags to change the button type,such as can join, join already , delete group, etc...; 
     componentDidMount = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/loadgroup', {
@@ -161,6 +165,8 @@ class DetailsScreen extends React.Component {
         }
     }
 
+    // When the user presses the join button, JoinGroup Function works;
+    // It passes groupsid to the REST End-point and gets response about the result of process;
     JoinGroup = async () => {
         const { groupsid } = this.state;
         try {
@@ -192,7 +198,8 @@ class DetailsScreen extends React.Component {
             alert('참가에 실패하였습니다')
         }
     }
-
+    // When the user presses the join button, CancelGroup Function works;
+    // It passes groupsid to the REST End-point and gets response about the result of process;
     CancelGroup = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/cancelgroup', {
@@ -212,7 +219,8 @@ class DetailsScreen extends React.Component {
             alert('계모임 삭제에 실패하였습니다.')
         }
     }
-
+    // When the user presses the join button, CancelJoin Function works;
+    // It passes groupsid to the REST End-point and gets response about the result of process;
     CancelJoin = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/canceljoin', {
@@ -266,7 +274,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     SpaceArea: {
-        margin : 5,
+        margin: 5,
         width: width * 0.7,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -274,7 +282,7 @@ const styles = StyleSheet.create({
     },
     Title: {
         margin: 5,
-        fontSize : 16,
+        fontSize: 16,
         color: '#4C4C4C'
     },
     STCArea: {

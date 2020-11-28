@@ -23,13 +23,13 @@ class MyinfoScreen extends React.Component {
             name: null
         }
     }
-
+    // When the current view is focused, request a my information;
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
             this.GetMyinfo();
         });
     }
-
+    // Life-Cycle of Rendering Page to avoid memory leakage;
     componentWillUnmount() {
         this._unsubscribe();
     }
@@ -101,6 +101,9 @@ class MyinfoScreen extends React.Component {
             </View>
         )
     }
+
+    // Logout requests REST End-point to clear the user session information;
+    // If the user successfully logged out, the user will be returned to LoginScreen;
     Logout = async () => {
         try {
             var response = await fetch('http://54.248.0.228:3000/api/users/logout', {
@@ -117,12 +120,14 @@ class MyinfoScreen extends React.Component {
             console.log(err)
         }
     }
-
+    // CopyToClipboard function stores information in your application;
+    // It copies the user wallet address;
     CopyToClipboard = () => {
         alert('복사되었습니다');
         Clipboard.setString(this.state.wallet);
     }
 
+    // GetMyinfo function retrieves the user information from REST End-point;
     GetMyinfo = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/users/myinfo', {

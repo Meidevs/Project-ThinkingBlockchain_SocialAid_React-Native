@@ -22,7 +22,6 @@ class SwiperComponent extends React.Component {
     componentDidMount() {
         this.GetImages();
     }
-
     render() {
         const { img, link } = this.state;
         return (
@@ -38,6 +37,9 @@ class SwiperComponent extends React.Component {
             </Swiper>
         )
     }
+
+    // The GetImages function request advertisement images from REST End-point;
+    // Set timer to make SwiperComponent;
     GetImages = async () => {
         try {
             var timer = 0;
@@ -49,6 +51,11 @@ class SwiperComponent extends React.Component {
             })
             let json = await response.json();
             if (response.ok) {
+                // Set Interval using response from REST End-point;
+                // "json.length" means number of ads;
+                // Every 3s setInterval function compare timer with json.length - 1;
+                // And, increments timer if timer is not equal to json.length - 1;
+                // Then, if timer is equal to json.length -1, go back to 0;
                 setInterval(() => {
                     if (timer < json.length - 1) {
                         this.setState({
@@ -61,6 +68,7 @@ class SwiperComponent extends React.Component {
                             link: json[timer].link
                         })
                     }
+
                     if (timer != json.length - 1) {
                         timer++;
                     } else {

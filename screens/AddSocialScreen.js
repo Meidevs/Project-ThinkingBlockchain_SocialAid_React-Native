@@ -28,13 +28,15 @@ class AddSocialScreen extends React.Component {
             speriod: null,
         }
     }
-
+    // PeriodCallBack function receive variable from childComponent and set speriod variables;
     PeriodCallBack = (dataFromChild) => {
         this.setState({ speriod: parseInt(dataFromChild) })
     }
+    // CateCallBack function receive variable from childComponent and set scates variables;
     CateCallBack = (dataFromChild) => {
         this.setState({ scates: dataFromChild })
     }
+    // SetSTC function takes the amount of stc and sets stc to 0 when the amount of stc exceeds 100;
     SetSTC = (data) => {
         if (data > 100) {
             data = 0;
@@ -49,9 +51,12 @@ class AddSocialScreen extends React.Component {
         const { speriod, period, stc, expla, name, cates, prcnt } = this.state;
         var total = speriod * stc;
         var rewards = speriod * stc * prcnt;
+
+        // Whether the total count is NaN;
         if (isNaN(total)) {
             total = 0;
         }
+        // Whether the rewards is NaN;
         if (isNaN(rewards)) {
             rewards = 0;
         }
@@ -162,7 +167,9 @@ class AddSocialScreen extends React.Component {
             </SafeAreaView>
         )
     }
-
+    // CreateGroup function creates a group by requesting a REST End-point;
+    // It passes parameters to the REST End-point. Also, Check presence of scates;
+    // Depending on Resposne, alert creation success. If group creation is successful, you will be returned to the MainScreen;
     CreateGroup = async () => {
         try {
             if (this.state.scates == 'cates' || this.state.scates == undefined) {
@@ -210,6 +217,8 @@ class AddSocialScreen extends React.Component {
             console.log(err)
         }
     }
+    // GetCates function retrieves categories from REST End-point;
+    // And Set responses as a cates array;
     GetCates = async () => {
         try {
             const response = await fetch('http://54.248.0.228:3001/api/getcates', {

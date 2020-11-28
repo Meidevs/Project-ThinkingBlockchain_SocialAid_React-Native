@@ -56,6 +56,7 @@ function Item({ data, navigation }) {
     )
 };
 
+// ListUp function receive data, navigation information from MainScreen;
 const ListUp = ({ data, navigation }) => {
     return (
         <View>

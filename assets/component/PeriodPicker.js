@@ -8,8 +8,10 @@ import { Picker } from '@react-native-community/picker';
 
 const { width, height } = Dimensions.get('window');
 
+// PeriodPicker receive data, props, callback (function) from parentScreen;
 const PeriodPicker = ({ data, props, callback }) => {
     const [code, setValue] = useState(code)
+    // onChangeRefresh function sets the selected value & passes the selected value to the parentComponent using a callback function;
     const onChangeRefresh = (code) => {
         setValue(code)
         callback(code)
