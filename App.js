@@ -31,7 +31,6 @@ const MainStack = createStackNavigator();
 const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
-
 function MyTabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   if (focusedOptions.tabBarVisible === false) {
