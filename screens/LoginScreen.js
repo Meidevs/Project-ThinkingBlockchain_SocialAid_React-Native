@@ -18,6 +18,8 @@ class LoginScreen extends React.Component {
             isSelected: false,
         }
     }
+    // When the user presses the check button, application remembers current user's user ID;
+    // But, Remember Function has not been implemented. After, using AsyncStorage to store the user ID in the user's application;
     CheckBtn = () => {
         this.state.isSelected = this.state.isSelected ? false : true;
         this.setState({ isSelect: this.state.isSelected })
@@ -86,7 +88,9 @@ class LoginScreen extends React.Component {
             </View>
         )
     }
-
+    // Login function communicate with REST End-point;
+    // it passes user email & user password;
+    // Login function works diffrently depending on the response of REST End-point;
     Login = async () => {
         const {email, password} = this.state;
         try {

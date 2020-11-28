@@ -32,20 +32,24 @@ class NoticeScreen extends React.Component {
             pageGroup: [],
         }
     }
-
+    // After React DOM is creaeted, application runs GetNotice function;
     componentDidMount = () => {
         this.GetNotice()
     }
+    // go to prev page;
     prevPage = (currentPage) => {
         if (currentPage > 1)
             currentPage--;
         this.Paging(currentPage)
     }
+    // go to next page
     nextPage = (currentPage) => {
         if (currentPage < this.state.totalPage)
             currentPage++;
         this.Paging(currentPage)
     }
+
+    // Pagination function
     Paging = (currentPage) => {
         var dataSet = this.state.notion;
         // dataPerPage : Number of Data on a Page
@@ -88,6 +92,7 @@ class NoticeScreen extends React.Component {
         this.setState({ pageGroup: pageGroupArray, show: dataArray, totalPage: totalPage, currentPage: currentPage })
     }
 
+    // When the user presses the title of announcement, details of announcement are dropped down; 
     MoreInformation = (data, num) => {
         data.visible = !data.visible;
         var show = this.state.show;
@@ -178,7 +183,8 @@ class NoticeScreen extends React.Component {
             </SafeAreaView>
         )
     }
-
+    // GetNotice function retrieves official announcement lists from REST End-point;
+    // Pass announcement lists to Paging function to create paginated view; 
     GetNotice = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3001/api/getnotice', {

@@ -22,6 +22,10 @@ class MainScreen extends React.Component {
             refreshing: false,
         }
     }
+    // _onRefresh function reloads the group lists;
+    // It takes 2s to reloads the group lists because of wait function;
+    // Use the GetGroupList function to request a list of groups from a REST End-point;
+    // Set refreshing true to false;
     _onRefresh = () => {
         this.setState({ refreshing: true });
         this.wait(2000).then(() => {
@@ -29,22 +33,26 @@ class MainScreen extends React.Component {
             this.setState({ refreshing: false, })
         })
     }
+    // wait function set 2s;
     wait = (timeout) => {
         return new Promise(resolve => {
             setTimeout(resolve, timeout);
         });
     }
 
+    // When the current view is focused, request a new group lists;
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
             this.GetGroupList();
         });
     }
-
+    // Life-Cycle of Rendering Page to avoid memory leakage;
     componentWillUnmount() {
         this._unsubscribe();
     }
 
+    // The SwiperComponent makes a view of advertisements;
+    // The ListUp makes a view of group lists;
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -83,7 +91,7 @@ class MainScreen extends React.Component {
             </SafeAreaView>
         )
     }
-
+    // the GetGroupList function request a new group lists from REST End-point;
     GetGroupList = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/grouplist', {

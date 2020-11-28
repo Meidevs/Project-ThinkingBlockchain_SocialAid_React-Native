@@ -53,7 +53,6 @@ class NowDetailsScreen extends React.Component {
 
 
     selectedCates = (num) => {
-
         if (num == 0) {
             this.GetGroupsWaiting();
             this.state.switch[0].isSelect = true;
@@ -120,7 +119,7 @@ class NowDetailsScreen extends React.Component {
                 <View style={styles.BottomContainer}>
                     <View style={styles.MyGroup}>
                         <Text style={styles.MyGroupFont}>내 모임</Text>
-        <Text style={styles.CountTxt}>총 {!hostlen ? 0 : hostlen} 건</Text>
+                        <Text style={styles.CountTxt}>총 {!hostlen ? 0 : hostlen} 건</Text>
                     </View>
                     <SafeAreaView style={{ flex: 10 }}>
                         <ScrollView>
@@ -155,9 +154,9 @@ class NowDetailsScreen extends React.Component {
             if (response.ok) {
                 this.setState({
                     host: json.host,
-                    hostlen : json.host.length,
+                    hostlen: json.host.length,
                     join: json.join,
-                    joinlen : json.join.length,
+                    joinlen: json.join.length,
                 })
             }
         } catch (err) {
@@ -178,9 +177,9 @@ class NowDetailsScreen extends React.Component {
             if (response.ok) {
                 this.setState({
                     host: json.host,
-                    hostlen : json.host.length,
+                    hostlen: json.host.length,
                     join: json.join,
-                    joinlen : json.join.length,
+                    joinlen: json.join.length,
 
                 })
             }
@@ -202,9 +201,9 @@ class NowDetailsScreen extends React.Component {
             if (response.ok) {
                 this.setState({
                     host: json.host,
-                    hostlen : json.host.length,
+                    hostlen: json.host.length,
                     join: json.join,
-                    joinlen : json.join.length,
+                    joinlen: json.join.length,
                 })
             }
         } catch (err) {

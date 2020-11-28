@@ -31,6 +31,8 @@ const MainStack = createStackNavigator();
 const NowStack = createStackNavigator();
 const MyinfoStack = createStackNavigator();
 
+
+// When the user pushes a tab, the pushed tab passes parameters to MyTabBar via MainTabs.Tabs.Navigator.tabBar(props).;
 function MyTabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   if (focusedOptions.tabBarVisible === false) {
@@ -50,6 +52,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             : options.title !== undefined
               ? options.title
               : route.name;
+        // change icons on/off
         const icons =
           options.tabBarLabel == '계모임'
             ? [require('./assets/images/ico_botNav_home.png'), require('./assets/images/ico_botNav_home_on.png')]
@@ -58,7 +61,8 @@ function MyTabBar({ state, descriptors, navigation }) {
               : options.tabBarLabel == '모임현황'
                 ? [require('./assets/images/ico_botNav_state.png'), require('./assets/images/ico_botNav_current_on.png')]
                 : [require('./assets/images/ico_botNav_more.png'), require('./assets/images/ico_botNav_more_on.png')]
-
+        
+        // "isFocused : true" means do nothing when the user presses the same tab button;
         const isFocused = state.index === index;
         const onPress = () => {
           const event = navigation.emit({
@@ -77,7 +81,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             target: route.key,
           });
         };
-
+        // icon and text render area;
         return (
           <TouchableOpacity
             accessibilityRole="button"
@@ -109,6 +113,11 @@ function getTabBarVisible(route) {
     return true;
   }
 }
+
+// MyinfoStackScreen has a MyinfoScreen that shows information of user;
+// AlarmSetScreen shows the lists of alarms that the user has earned;
+// NoticeScreen shows a list of official announcements;
+
 const MyinfoStackScreen = () => {
   return (
     <MyinfoStack.Navigator>
@@ -162,6 +171,10 @@ const MyinfoStackScreen = () => {
   )
 }
 
+// NowStackScreen has a SocialNowScreen that shows information of user such as total engaged token count, revenue, etc..;
+// NowDetailsScreen shows a list of the groups that have joined;
+// NowShowDetailsScreen shows the details of the groups the user has joined;
+
 const NowStackScreen = () => {
   return (
     <NowStack.Navigator>
@@ -214,6 +227,12 @@ const NowStackScreen = () => {
     </NowStack.Navigator>
   )
 }
+
+// MainStackScreen has a MainScreen that shows a list of groups;
+// SearchScreen shows what the user has searched for;
+// DetailScreen shows the details of the groups the user wants to join;
+// In the options variable of MainStack.Screen, it define MainScreen's header styles;
+
 const MainStackScreen = () => {
   return (
     <MainStack.Navigator>
@@ -263,6 +282,12 @@ const MainStackScreen = () => {
   )
 }
 
+// MainTabs uses BottomTabNavigator which is supported by library of RN;
+// Details of BottomTabElement is at the MyTabBar Element;
+// If User active each tabs, MyTabBar get related parameter like routeName, index, etc..;
+// MainTabs has MainStackScreen, AddSocialScreen, NowStackScreen, MyinfoStackScreen;
+// getTabBarVisible function finds whether index number is 1 or not; 
+
 function MainTabs() {
   return (
     <Tabs.Navigator
@@ -299,6 +324,8 @@ function MainTabs() {
     </Tabs.Navigator>
   )
 }
+
+// App function has AuthStack. AuthStack consists of two Screen, one is LoginScreen and the other is MainTabs;
 
 function App() {
   return (
