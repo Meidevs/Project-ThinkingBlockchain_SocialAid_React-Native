@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 const { width, height } = Dimensions.get('window');
 
+
+// The item function makes a each of component that is integrated into StatusListUp function;
 function Item({ data, navigation }) {
     return (
         <View style={styles.BtnFrame} >
@@ -70,6 +72,8 @@ function Item({ data, navigation }) {
     );
 }
 
+// StatusListUp function gets data & navigation parameter from the parentComponent;
+// The data has groupname, groupsid, etc..;
 const StatusListUp = ({ data, navigation }) => {
     return (
         <View>

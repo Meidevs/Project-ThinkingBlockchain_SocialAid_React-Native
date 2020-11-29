@@ -51,7 +51,7 @@ class NowDetailsScreen extends React.Component {
         });
     }
 
-
+    // When the user selects one of buttons such as waiting for start, in preogress, end, the selectedCates function finds the selected button and changes the style of the button;
     selectedCates = (num) => {
         if (num == 0) {
             this.GetGroupsWaiting();
@@ -139,7 +139,7 @@ class NowDetailsScreen extends React.Component {
             </View>
         )
     }
-
+    // the GetGroupsWaiting function request a list of groups that is waiting for starting from REST End-point;
     GetGroupsWaiting = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/waiting', {
@@ -163,6 +163,7 @@ class NowDetailsScreen extends React.Component {
             console.log(err)
         }
     }
+    // the GetGroupsOngoing function request a list of groups in progress from REST End-point
     GetGroupsOngoing = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/ongoing', {
@@ -187,6 +188,7 @@ class NowDetailsScreen extends React.Component {
             console.log(err)
         }
     }
+    // the GetGroupsDone function request a list of groups that have been terminated from REST End-point
     GetGroupsDone = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus/detail/done', {
