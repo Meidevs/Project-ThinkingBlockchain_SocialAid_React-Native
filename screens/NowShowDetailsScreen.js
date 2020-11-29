@@ -24,6 +24,7 @@ class NowShowDetailsScreen extends React.Component {
             status: null,
         }
     }
+    // After React DOM is created, componentDidMount is started; 
     componentDidMount() {
         this.GetRelatedData();
     }
@@ -116,7 +117,8 @@ class NowShowDetailsScreen extends React.Component {
             </View>
         )
     }
-
+    // the GetRelatedData function request details of group from REST End-point;
+    // And, calculate the period until due-date;
     GetRelatedData = async () => {
         const { groupsid } = this.state;
         try {

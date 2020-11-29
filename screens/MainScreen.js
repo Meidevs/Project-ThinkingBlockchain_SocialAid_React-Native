@@ -40,6 +40,7 @@ class MainScreen extends React.Component {
         });
     }
 
+    // After React DOM is created, componentDidMount is started; 
     // When the current view is focused, request a new group lists;
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {

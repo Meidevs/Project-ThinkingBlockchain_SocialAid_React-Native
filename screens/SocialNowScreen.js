@@ -35,6 +35,7 @@ class SocialNowScreen extends React.Component {
         }
     }
 
+    // Pressing the switchBtn function switches monthly and yearly data types;
     switchBtn = (num) => {
         if (num == 0) {
             this.state.styles[0].isSelect = true;
@@ -56,15 +57,19 @@ class SocialNowScreen extends React.Component {
             })
         }
     }
+    // After React DOM is creaeted, application runs GetGroupStatus function;
+    // When the current view is focused, request a group status;
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
             this.GetGroupStatus();
         });
     }
-
+    // Life-Cycle of Rendering Page to avoid memory leakage;
     componentWillUnmount() {
         this._unsubscribe();
     }
+
+    // The ChooseMonth function changes style of the monthly bar;
     ChooseMonth = (num) => {
         const { monthly, mbarColor } = this.state;
         var rawArray = new Array();
@@ -75,7 +80,7 @@ class SocialNowScreen extends React.Component {
         rawArray[num] = { height: monthly[num].total, width: 10, backgroundColor: '#4F79D5', margin: 8, borderRadius: 10 }
         this.setState({ mbarColor: rawArray, mSTC: monthly[num].total, month: monthly[num].month + 1 })
     }
-
+    // The ChooseYear function changes style of the monthly bar;
     ChooseYear = (num) => {
         const { annually, ybarColor } = this.state;
         var rawArray = new Array();
@@ -283,7 +288,8 @@ class SocialNowScreen extends React.Component {
             </SafeAreaView >
         )
     }
-
+    // The GetGroupStatus function gets monthly and yearly data about the items what the user has been participated in;
+    // Change the current month and year style for monthly and yearly bars;
     GetGroupStatus = async () => {
         try {
             let response = await fetch('http://54.248.0.228:3000/api/rewards/groupstatus', {
